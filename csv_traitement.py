@@ -7,7 +7,7 @@ df = pd.read_csv("communes-france-2025 (1).csv")
 colonnes_a_garder = [
     "code_insee", "nom_standard", "dep_nom", "reg_nom",
     "population", "superficie_km2", "grille_densite_texte",
-    "code_postal", "url_wikipedia"
+    "code_postal", "url_wikipedia","latitude_centre","longitude_centre"
 ]
 
 # Filtrage des colonnes
