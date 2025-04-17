@@ -1,7 +1,16 @@
 import streamlit as st
 import pandas as pd
 import requests
+import locale
 
+# Forcer l'affichage en français
+try:
+    locale.setlocale(locale.LC_TIME, 'fr_FR.UTF-8')
+except:
+    try:
+        locale.setlocale(locale.LC_TIME, 'fr_FR')
+    except:
+        st.warning("⚠️ Impossible de définir la langue française pour les jours.")
 # Configuration de la page en mode "wide"
 st.set_page_config(page_title="Comparateur de Communes", layout="wide")
 
@@ -153,9 +162,40 @@ def get_climate_data(latitude, longitude):
 
     return None  # Si aucune station avec data
 
+@st.cache_data
+def load_loyer_data():
+    df_loyer = pd.read_csv("pred-app-mef-dhup.csv", encoding="latin1", sep=";")
+    df_loyer.columns = df_loyer.columns.str.strip()
+    df_loyer["INSEE_C"] = df_loyer["INSEE_C"].astype(str).str.strip()
+
+    for col in ["loypredm2", "lwr.IPm2", "upr.IPm2"]:
+        df_loyer[col] = df_loyer[col].astype(str).str.replace(",", ".")
+        df_loyer[col] = pd.to_numeric(df_loyer[col], errors="coerce")
+
+    return df_loyer
+
+
+
+
+@st.cache_data
+def get_loyer_info(insee_code, df_loyer):
+    infos = df_loyer[df_loyer["INSEE_C"] == str(insee_code)]
+    if infos.empty:
+        return None
+    else:
+        row = infos.iloc[0]
+        return {
+            "loypredm2": round(row["loypredm2"], 2),
+            "lwr": round(row["lwr.IPm2"], 2),
+            "upr": round(row["upr.IPm2"], 2),
+            "nbobs": int(row["nbobs_com"])
+        }
+
+
 
 # Chargement du DataFrame
 df = load_data()
+df_loyer = load_loyer_data()
 
 # Vérification de la présence de la colonne contenant le nom de la commune
 if "nom_standard" not in df.columns:
@@ -209,15 +249,23 @@ else:
             forecast_left = get_weather_forecast(code_insee_left)
             if forecast_left:
                 st.subheader("Prévisions météo (prochains jours)")
-                for day in forecast_left:
-                    st.write(f"📅 {day['date']}")
-                    st.write(f"🌦️ {day['weather']}")
-                    st.write(f"🌡️ {day['tmin']}°C → {day['tmax']}°C")
-                    st.write(f"🌬️ Vent moyen : {day['wind']} km/h")
-                    st.write(f"☀️ Ensoleillement : {day['sun_hours']} h")
-                    st.markdown("---")
+                df_meteo_left = pd.DataFrame(forecast_left)
+                df_meteo_left = df_meteo_left.rename(columns={
+                    "date": "Date",
+                    "weather": "Météo",
+                    "tmin": "Min (°C)",
+                    "tmax": "Max (°C)",
+                    "wind": "Vent (km/h)",
+                    "sun_hours": "Ensoleillement (h)"
+                })
+                # 🆕 Reformater la colonne Date
+                df_meteo_left["Date"] = pd.to_datetime(df_meteo_left["Date"]).dt.strftime('%A')
+                df_meteo_left.loc[0, "Date"] = "Aujourd'hui"
+                st.table(df_meteo_left)
             else:
                 st.warning("Pas de données météo disponibles.")
+
+
 
         # Récupération climat
         latitude_left = row["latitude_centre"]
@@ -228,15 +276,31 @@ else:
                 climat_left = get_climate_data(latitude_left, longitude_left)
                 if climat_left:
                     st.subheader("Climat (1981–2010)")
-                    st.write(f"🌡️ Hiver : {climat_left['hiver']} °C")
-                    st.write(f"🌡️ Printemps : {climat_left['printemps']} °C")
-                    st.write(f"🌡️ Été : {climat_left['ete']} °C")
-                    st.write(f"🌡️ Automne : {climat_left['automne']} °C")
-                    st.write(f"🌧️ Précipitations moyennes : {climat_left['prcp']} mm/mois")
-                    st.write(f"🌤️ Ensoleillement moyen : {round(climat_left['tsun']/60, 1)} h/jour")
+                    st.write(f"🌡️ Hiver : {climat_left['hiver']} °C" if climat_left and climat_left['hiver'] is not None else "🌡️ Hiver : Donnée indisponible")
+                    st.write(f"🌡️ Printemps : {climat_left['printemps']} °C" if climat_left and climat_left['printemps'] is not None else "🌡️ Printemps : Donnée indisponible")
+                    st.write(f"🌡️ Été : {climat_left['ete']} °C" if climat_left and climat_left['ete'] is not None else "🌡️ Été : Donnée indisponible")
+                    st.write(f"🌡️ Automne : {climat_left['automne']} °C" if climat_left and climat_left['automne'] is not None else "🌡️ Automne : Donnée indisponible")
+                    st.write(f"🌧️ Précipitations moyennes : {climat_left['prcp']} mm/mois" if climat_left and climat_left['prcp'] is not None else "🌧️ Précipitations moyennes : Donnée indisponible")
+                    st.write(f"🌤️ Ensoleillement moyen : {round(climat_left['tsun']/60, 1)} h/mois" if climat_left and climat_left['tsun'] is not None else "🌤️ Ensoleillement moyen : Donnée indisponible")
                 else:
                     st.warning("Pas de données climatiques disponibles.")
+        # Affichage des données logement
+        loyer_left = get_loyer_info(code_insee_left, df_loyer)
+        if loyer_left:
+            st.subheader("Loyer moyen (T3 2023)")
+            st.write(f"🏠 Prix moyen au m² : {loyer_left['loypredm2']} €/m²")
+            st.write(f"📏 Intervalle estimé : {loyer_left['lwr']} € - {loyer_left['upr']} € /m²")
+            st.write(f"📈 Nombre d'annonces analysées : {loyer_left['nbobs']}")
+            if loyer_left['nbobs'] < 30:
+                st.warning("⚠️ Fiabilité faible : moins de 30 observations.")
+        else:
+            st.warning("Pas de données de loyer disponibles pour cette commune.")
 
+
+
+######################################################################################################################################
+######################################################################################################################################
+######################################################################################################################################
 
     # Détails pour la commune de droite
     with col_detail_right:
@@ -262,33 +326,51 @@ else:
             st.write("Aucune donnée disponible.")
         # Récupération météo
         with st.spinner("Recherche de la météo..."):
-            forecast_left = get_weather_forecast(code_insee_left)
-            if forecast_left:
+            forecast_right = get_weather_forecast(code_insee_right)
+            if forecast_right:
                 st.subheader("Prévisions météo (prochains jours)")
-                for day in forecast_left:
-                    st.write(f"📅 {day['date']}")
-                    st.write(f"🌦️ {day['weather']}")
-                    st.write(f"🌡️ {day['tmin']}°C → {day['tmax']}°C")
-                    st.write(f"🌬️ Vent moyen : {day['wind']} km/h")
-                    st.write(f"☀️ Ensoleillement : {day['sun_hours']} h")
-                    st.markdown("---")
+                df_meteo_right = pd.DataFrame(forecast_right)
+                df_meteo_right = df_meteo_right.rename(columns={
+                    "date": "Date",
+                    "weather": "Météo",
+                    "tmin": "Min (°C)",
+                    "tmax": "Max (°C)",
+                    "wind": "Vent (km/h)",
+                    "sun_hours": "Ensoleillement (h)"
+                })
+                # 🆕 Reformater la colonne Date
+                df_meteo_right["Date"] = pd.to_datetime(df_meteo_right["Date"]).dt.strftime('%A')
+                df_meteo_right.loc[0, "Date"] = "Aujourd'hui"
+                st.table(df_meteo_right)
             else:
                 st.warning("Pas de données météo disponibles.")
 
         # Récupération climat
-        latitude_left = row["latitude_centre"]
-        longitude_left = row["longitude_centre"]
+        latitude_right = row["latitude_centre"]
+        longitude_right = row["longitude_centre"]
 
-        if pd.notna(latitude_left) and pd.notna(longitude_left):
+        if pd.notna(latitude_right) and pd.notna(longitude_right):
             with st.spinner("Recherche du climat..."):
-                climat_left = get_climate_data(latitude_left, longitude_left)
-                if climat_left:
+                climat_right = get_climate_data(latitude_right, longitude_right)
+                if climat_right:
                     st.subheader("Climat (1981–2010)")
-                    st.write(f"🌡️ Hiver : {climat_left['hiver']} °C")
-                    st.write(f"🌡️ Printemps : {climat_left['printemps']} °C")
-                    st.write(f"🌡️ Été : {climat_left['ete']} °C")
-                    st.write(f"🌡️ Automne : {climat_left['automne']} °C")
-                    st.write(f"🌧️ Précipitations moyennes : {climat_left['prcp']} mm/mois")
-                    st.write(f"🌤️ Ensoleillement moyen : {round(climat_left['tsun']/60, 1)} h/jour")
+                    st.write(f"🌡️ Hiver : {climat_right['hiver']} °C" if climat_right and climat_right['hiver'] is not None else "🌡️ Hiver : Donnée indisponible")
+                    st.write(f"🌡️ Printemps : {climat_right['printemps']} °C" if climat_right and climat_right['printemps'] is not None else "🌡️ Printemps : Donnée indisponible")
+                    st.write(f"🌡️ Été : {climat_right['ete']} °C" if climat_right and climat_right['ete'] is not None else "🌡️ Été : Donnée indisponible")
+                    st.write(f"🌡️ Automne : {climat_right['automne']} °C" if climat_right and climat_right['automne'] is not None else "🌡️ Automne : Donnée indisponible")
+                    st.write(f"🌧️ Précipitations moyennes : {climat_right['prcp']} mm/mois" if climat_right and climat_right['prcp'] is not None else "🌧️ Précipitations moyennes : Donnée indisponible")
+                    st.write(f"🌤️ Ensoleillement moyen : {round(climat_right['tsun']/60, 1)} h/mois" if climat_right and climat_right['tsun'] is not None else "🌤️ Ensoleillement moyen : Donnée indisponible")
                 else:
                     st.warning("Pas de données climatiques disponibles.")
+
+        loyer_right = get_loyer_info(code_insee_right, df_loyer)
+        if loyer_right:
+            st.subheader("Loyer moyen (T3 2023)")
+            st.write(f"🏠 Prix moyen au m² : {loyer_right['loypredm2']} €/m²")
+            st.write(f"📏 Intervalle estimé : {loyer_right['lwr']} € - {loyer_right['upr']} € /m²")
+            st.write(f"📈 Nombre d'annonces analysées : {loyer_right['nbobs']}")
+            if loyer_right['nbobs'] < 30:
+                st.warning("⚠️ Fiabilité faible : moins de 30 observations.")
+        else:
+            st.warning("Pas de données de loyer disponibles pour cette commune.")
+
