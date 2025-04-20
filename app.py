@@ -205,7 +205,7 @@ else:
     communes = sorted(df["nom_standard"].unique())
 
     st.title("Comparateur de Communes")
-    st.markdown("Sélectionnez une commune à gauche et une à droite pour comparer leurs informations et images.")
+    st.markdown("Sélectionnez une commune à gauche et une à droite pour comparer leurs informations.")
 
     # Sélection des communes dans deux colonnes (selectbox intégrée avec saisie possible pour filtrer)
     col_select_left, col_select_right = st.columns(2)
@@ -221,17 +221,51 @@ else:
 
     # Détails pour la commune de gauche
     with col_detail_left:
-        st.header(f"Détails de {commune_gauche}")
+        st.header(f"🏙️ Détails de {commune_gauche}")
         details_gauche = df[df["nom_standard"] == commune_gauche]
+
         if not details_gauche.empty:
             row = details_gauche.iloc[0]
-            # Affichage de chaque information issue du CSV
-            for col_name in details_gauche.columns:
-                st.markdown(f"**{col_name}** : {row[col_name]}")
-            # Récupérer et afficher l'image via Wikipédia à partir du code INSEE
+
+            # Deux colonnes pour présentation
+            col1, col2 = st.columns(2)
+
+            with col1:
+                st.subheader("📍 Informations générales")
+                st.markdown(f"**Nom** : {row['nom_standard']}")
+                st.markdown(f"**Code postal** : {int(row['code_postal']) if not pd.isna(row['code_postal']) else 'Non disponible'}")
+                st.markdown(f"**Département** : {row['dep_nom']}")
+                st.markdown(f"**Région** : {row['reg_nom']}")
+
+            with col2:
+                st.subheader("👥 Démographie")
+                st.markdown(f"**Population** : {row['population']:,} habitants")
+                st.markdown(f"**Superficie** : {row['superficie_km2']} km²")
+                st.markdown(f"**Densité** : {row['grille_densite_texte']}")
+
+            st.markdown("---")
+
+            # Carte de localisation
+            st.subheader("🗺️ Localisation sur la carte")
+            df_map = pd.DataFrame({
+                'lat': [row['latitude_centre']],
+                'lon': [row['longitude_centre']]
+            })
+            col1, col2 = st.columns(2)
+
+            with col1:
+                st.map(df_map, zoom=6)
+
+            st.markdown("---")
+
+            # Lien Wikipedia si disponible
+            if pd.notna(row['url_wikipedia']):
+                st.markdown(f"[🔗 Voir sur Wikipédia]({row['url_wikipedia']})")
+
+            # Image de la ville
             code_insee_left = row["code_insee"]
             if code_insee_left:
-                with st.spinner("Recherche de l'image..."):
+                with st.spinner("🔎 Recherche de l'image..."):
                     title_wiki = get_wikipedia_title_from_insee(code_insee_left)
                     if title_wiki:
                         image_url, city_name, _ = get_wikipedia_thumbnail(title_wiki)
@@ -242,7 +276,9 @@ else:
                     else:
                         st.error("Aucune page Wikipédia trouvée pour ce code INSEE.")
         else:
-            st.write("Aucune donnée disponible.")
+            st.write("Aucune donnée disponible pour cette commune.")
+
+
 
         # Récupération météo
         with st.spinner("Recherche de la météo..."):
@@ -304,15 +340,52 @@ else:
 
     # Détails pour la commune de droite
     with col_detail_right:
-        st.header(f"Détails de {commune_droite}")
+        st.header(f"🏙️ Détails de {commune_droite}")
         details_droite = df[df["nom_standard"] == commune_droite]
+
         if not details_droite.empty:
             row = details_droite.iloc[0]
-            for col_name in details_droite.columns:
-                st.markdown(f"**{col_name}** : {row[col_name]}")
+
+            # Deux colonnes pour présentation
+            col1, col2 = st.columns(2)
+
+            with col1:
+                st.subheader("📍 Informations générales")
+                st.markdown(f"**Nom** : {row['nom_standard']}")
+                st.markdown(f"**Code postal** : {int(row['code_postal']) if not pd.isna(row['code_postal']) else 'Non disponible'}")
+                st.markdown(f"**Département** : {row['dep_nom']}")
+                st.markdown(f"**Région** : {row['reg_nom']}")
+
+            with col2:
+                st.subheader("👥 Démographie")
+                st.markdown(f"**Population** : {row['population']:,} habitants")
+                st.markdown(f"**Superficie** : {row['superficie_km2']} km²")
+                st.markdown(f"**Densité** : {row['grille_densite_texte']}")
+
+            st.markdown("---")
+
+            # Carte de localisation
+            st.subheader("🗺️ Localisation sur la carte")
+            df_map = pd.DataFrame({
+                'lat': [row['latitude_centre']],
+                'lon': [row['longitude_centre']]
+            })
+            col1, col2 = st.columns(2)
+
+            with col1:
+                st.map(df_map, zoom=6)
+
+
+            st.markdown("---")
+
+            # Lien Wikipedia si disponible
+            if pd.notna(row['url_wikipedia']):
+                st.markdown(f"[🔗 Voir sur Wikipédia]({row['url_wikipedia']})")
+
+            # Image de la ville
             code_insee_right = row["code_insee"]
             if code_insee_right:
-                with st.spinner("Recherche de l'image..."):
+                with st.spinner("🔎 Recherche de l'image..."):
                     title_wiki = get_wikipedia_title_from_insee(code_insee_right)
                     if title_wiki:
                         image_url, city_name, _ = get_wikipedia_thumbnail(title_wiki)
@@ -323,7 +396,9 @@ else:
                     else:
                         st.error("Aucune page Wikipédia trouvée pour ce code INSEE.")
         else:
-            st.write("Aucune donnée disponible.")
+            st.write("Aucune donnée disponible pour cette commune.")
+
+
         # Récupération météo
         with st.spinner("Recherche de la météo..."):
             forecast_right = get_weather_forecast(code_insee_right)
