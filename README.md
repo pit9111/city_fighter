@@ -1,12 +1,12 @@
 # City Fighter - Comparaison entre deux villes
 
-## Project Objectives
+## Présentation
 
 L'objectif de ce projet est de comparer deux villes selon plusieurs critères (démographie, emploi, logement, météo, culture) en utilisant des données ouvertes (APIs publiques et bases de données nationales).  
 L'application permet à l'utilisateur de sélectionner deux villes et d'obtenir des comparaisons interactives à l'aide de visualisations modernes.
 
 Lien de l'application : 
-## Project Structure
+## Structure du projet
 ```sh
 CITY/
 ├── app.py
