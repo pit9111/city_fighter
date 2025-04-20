@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Chargement du fichier CSV
-df = pd.read_csv("communes-france-2025 (1).csv")
+df = pd.read_csv("data/communes-france-2025 (1).csv")
 
 # Colonnes à conserver
 colonnes_a_garder = [
@@ -17,4 +17,4 @@ df_filtre = df[colonnes_a_garder]
 df_filtre = df_filtre[df_filtre["population"] > 20000]
 
 # Sauvegarde du nouveau CSV
-df_filtre.to_csv("communes_synthetique.csv", index=False)
+df_filtre.to_csv("data/communes_synthetique.csv", index=False)

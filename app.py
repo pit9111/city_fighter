@@ -17,7 +17,7 @@ st.set_page_config(page_title="Comparateur de Communes", layout="wide")
 # Chargement des données depuis le CSV avec mise en cache
 @st.cache_data
 def load_data():
-    df = pd.read_csv("communes_synthetique.csv")
+    df = pd.read_csv("data/communes_synthetique.csv")
     return df
 
 # Requête SPARQL : récupérer l'URL de l'article Wikipédia correspondant à un code INSEE
@@ -164,7 +164,7 @@ def get_climate_data(latitude, longitude):
 
 @st.cache_data
 def load_loyer_data():
-    df_loyer = pd.read_csv("pred-app-mef-dhup.csv", encoding="latin1", sep=";")
+    df_loyer = pd.read_csv("data/pred-app-mef-dhup.csv", encoding="latin1", sep=";")
     df_loyer.columns = df_loyer.columns.str.strip()
     df_loyer["INSEE_C"] = df_loyer["INSEE_C"].astype(str).str.strip()
 
