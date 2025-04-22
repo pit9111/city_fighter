@@ -1,18 +1,12 @@
 import streamlit as st
 import pandas as pd
 import requests
-import locale
+
 import requests
+from datetime import datetime
 # Configuration de la page en mode "wide"
 st.set_page_config(page_title="Comparateur de Communes", layout="wide")
-# Forcer l'affichage en français
-try:
-    locale.setlocale(locale.LC_TIME, 'fr_FR.UTF-8')
-except:
-    try:
-        locale.setlocale(locale.LC_TIME, 'fr_FR')
-    except:
-        st.warning("⚠️ Impossible de définir la langue française pour les jours.")
+
 
 # 🔐 Authentification OAuth2
 @st.cache_data
@@ -115,9 +109,27 @@ def get_weather_forecast(insee_code):
     if response.status_code == 200:
         data = response.json()
         forecasts = []
+        
+
+        # Dictionnaires français (comme avant)
+        mois_francais = {
+            1: "janvier", 2: "février", 3: "mars", 4: "avril",
+            5: "mai", 6: "juin", 7: "juillet", 8: "août",
+            9: "septembre", 10: "octobre", 11: "novembre", 12: "décembre"
+        }
+        jours_francais = {
+            0: "lundi", 1: "mardi", 2: "mercredi", 3: "jeudi",
+            4: "vendredi", 5: "samedi", 6: "dimanche"
+        }
+
+        
+
         for item in data['forecast'][:4]:  # Prochains 4 jours
+            date_obj = datetime.strptime(item['datetime'][:10], "%Y-%m-%d")
+            # Format français
+            date_fr = f"{jours_francais[date_obj.weekday()]} {date_obj.day} {mois_francais[date_obj.month]} {date_obj.year}"
             forecasts.append({
-                "date": item['datetime'][:10],
+                "date": date_fr,
                 "weather": weather_codes.get(item['weather'], f"Code {item['weather']}"),
                 "tmin": item['tmin'],
                 "tmax": item['tmax'],
@@ -410,7 +422,7 @@ else:
                     "sun_hours": "Ensoleillement (h)"
                 })
                 # 🆕 Reformater la colonne Date
-                df_meteo_left["Date"] = pd.to_datetime(df_meteo_left["Date"]).dt.strftime('%A')
+                
                 df_meteo_left.loc[0, "Date"] = "Aujourd'hui"
                 st.table(df_meteo_left)
             else:
@@ -585,7 +597,6 @@ else:
                     "sun_hours": "Ensoleillement (h)"
                 })
                 # 🆕 Reformater la colonne Date
-                df_meteo_right["Date"] = pd.to_datetime(df_meteo_right["Date"]).dt.strftime('%A')
                 df_meteo_right.loc[0, "Date"] = "Aujourd'hui"
                 st.table(df_meteo_right)
             else:
