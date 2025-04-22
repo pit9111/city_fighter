@@ -2,6 +2,40 @@ import streamlit as st
 import pandas as pd
 import requests
 import locale
+import requests
+
+# 🔐 Authentification OAuth2
+@st.cache_data
+def get_pe_token():
+    url = "https://entreprise.pole-emploi.fr/connexion/oauth2/access_token?realm=/partenaire"
+    data = {
+        "grant_type": "client_credentials",
+        "client_id": "PAR_comparateurdecommunes_d44d672332727b5c715e2e24ef11865c5ab443fc86b3a073d38e251020046855",
+        "client_secret": "885aa9f7ed46b4b9396b013b21f54877f7cbcc8a1c974bad376ec14c6d28416a",
+        "scope": "api_offresdemploiv2 o2dsoffre"
+    }
+    response = requests.post(url, data=data)
+    if response.status_code == 200:
+        return response.json()["access_token"]
+    else:
+        st.error("Échec de l'authentification auprès de l'API Pôle Emploi.")
+        return None
+
+# 📦 Requête d'offres d'emploi via code postal
+@st.cache_data
+def get_job_offers(insee_code, token, rayon=10):
+    url = "https://api.pole-emploi.io/partenaire/offresdemploi/v2/offres/search"
+    headers = {"Authorization": f"Bearer {token}"}
+    params = {
+        "commune": insee_code,  # utilise code INSEE ici
+        "rayon": rayon,
+        "range": "0-5",
+    }
+    response = requests.get(url, headers=headers, params=params)
+    return response.json().get("resultats", [])
+
+
+
 
 # Forcer l'affichage en français
 try:
@@ -191,6 +225,57 @@ def get_loyer_info(insee_code, df_loyer):
             "nbobs": int(row["nbobs_com"])
         }
 
+# Chargement des données d'emploi
+@st.cache_data
+def load_employment_data():
+    # Lecture du fichier CSV avec le bon séparateur
+    df_emploi = pd.read_csv("data/data.csv", sep=";")
+    # Nettoyage des noms de colonnes
+    df_emploi.columns = df_emploi.columns.str.strip()
+    # Suppression des lignes vides ou de métadonnées
+    df_emploi = df_emploi.dropna(subset=['Code'])
+    # Conversion des codes en string pour éviter les problèmes de comparaison
+    df_emploi['Code'] = df_emploi['Code'].astype(str).str.strip()
+    return df_emploi
+
+# Requête SPARQL : récupérer l'URL de l'article Wikipédia correspondant à un code INSEE
+@st.cache_data
+def get_wikipedia_title_from_insee(insee_code):
+    query = f"""
+    SELECT ?article WHERE {{
+      ?ville wdt:P374 "{insee_code}".
+      ?article schema:about ?ville;
+               schema:inLanguage "fr";
+               schema:isPartOf <https://fr.wikipedia.org/>.
+    }}
+    """
+    url = "https://query.wikidata.org/sparql"
+    headers = {"Accept": "application/sparql-results+json"}
+    response = requests.get(url, params={'query': query, 'format': 'json'}, headers=headers)
+    if response.status_code != 200:
+        return None
+    data = response.json()
+    results = data.get("results", {}).get("bindings", [])
+    if results:
+        full_url = results[0]["article"]["value"]
+        # Extraction du titre à partir de l'URL (la partie après "/wiki/")
+        title = full_url.split("/wiki/")[-1]
+        return title
+    return None
+
+# Récupération de l'image via l'API REST de Wikipédia
+@st.cache_data
+def get_wikipedia_thumbnail(title):
+    url = f"https://fr.wikipedia.org/api/rest_v1/page/summary/{title}"
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        image_url = data.get("thumbnail", {}).get("source", None)
+        city_name = data.get("title", None)
+        extract = data.get("extract", None)
+        return image_url, city_name, extract
+    return None, None, None
+
 
 
 # Chargement du DataFrame
@@ -332,6 +417,48 @@ else:
         else:
             st.warning("Pas de données de loyer disponibles pour cette commune.")
 
+        # Offres d'emploi récentes
+        token_pe = get_pe_token()
+        if token_pe and pd.notna(row['code_postal']):
+            st.subheader("🧳 Offres d'emploi récentes")
+            code_insee = row["code_insee"]
+            offres = get_job_offers(code_insee, token_pe)
+            if offres:
+                for offre in offres:
+                    st.markdown(f"**{offre.get('intitule', 'Sans titre')}**")
+
+                    # 📍 Lieu
+                    lieu = offre.get("lieuTravail", {}).get("libelle", "Lieu non précisé")
+                    st.write(f"📍 {lieu}")
+
+                    # 🗓️ Date
+                    date_creation = offre.get("dateCreation")
+                    if date_creation:
+                        st.write(f"🗓️ Publiée le : {date_creation[:10]}")
+
+                    # 🎓 Alternance
+                    if offre.get("alternance", False):
+                        st.write("🎓 Offre en alternance")
+
+                    # 🔗 Lien vers l'offre
+                    url = offre.get("origineOffre", {}).get("url")
+                    url_origine = offre.get("origineOffre", {}).get("urlOrigine")
+
+                    if url:
+                        st.markdown(f"[🔗 Voir l'offre (France Travail)]({url})")
+                    elif url_origine:
+                        st.markdown(f"[🔗 Voir l'offre (partenaire)]({url_origine})")
+                    else:
+                        st.write("❌ Aucun lien vers l’offre fourni")
+
+                    st.markdown("---")
+
+
+            else:
+                st.info("Aucune offre récente trouvée dans cette zone.")
+                st.write("Debug - Code postal : ", str(int(row["code_postal"])))
+                st.write("Token : ", token_pe)
+
 
 
 ######################################################################################################################################
@@ -446,6 +573,138 @@ else:
             st.write(f"📈 Nombre d'annonces analysées : {loyer_right['nbobs']}")
             if loyer_right['nbobs'] < 30:
                 st.warning("⚠️ Fiabilité faible : moins de 30 observations.")
-        else:
-            st.warning("Pas de données de loyer disponibles pour cette commune.")
+
+
+        # Offres d'emploi récentes
+        token_pe = get_pe_token()
+        if token_pe and pd.notna(row['code_postal']):
+            st.subheader("🧳 Offres d'emploi récentes")
+            code_insee = row["code_insee"]
+            offres = get_job_offers(code_insee, token_pe)
+
+            if offres:
+                for offre in offres:
+                    st.markdown(f"**{offre.get('intitule', 'Sans titre')}**")
+
+                    # 📍 Lieu
+                    lieu = offre.get("lieuTravail", {}).get("libelle", "Lieu non précisé")
+                    st.write(f"📍 {lieu}")
+
+                    # 🗓️ Date
+                    date_creation = offre.get("dateCreation")
+                    if date_creation:
+                        st.write(f"🗓️ Publiée le : {date_creation[:10]}")
+
+                    # 🎓 Alternance
+                    if offre.get("alternance", False):
+                        st.write("🎓 Offre en alternance")
+
+                    # 🔗 Lien vers l'offre
+                    url = offre.get("origineOffre", {}).get("url")
+                    url_origine = offre.get("origineOffre", {}).get("urlOrigine")
+
+                    if url:
+                        st.markdown(f"[🔗 Voir l'offre (France Travail)]({url})")
+                    elif url_origine:
+                        st.markdown(f"[🔗 Voir l'offre (partenaire)]({url_origine})")
+                    else:
+                        st.write("❌ Aucun lien vers l’offre fourni")
+
+                    st.markdown("---")
+
+            else:
+                st.info("Aucune offre récente trouvée dans cette zone.")
+                st.write("Debug - Code postal : ", str(int(row["code_postal"])))
+                st.write("Token : ", token_pe)
+
+            
+ # Section de comparaison des données d'emploi
+st.markdown("---")
+st.header("Comparaison des données d'emploi")
+
+df = load_data()
+df_emploi = load_employment_data()
+
+# Nettoyage et standardisation des colonnes pour éviter les erreurs
+df_emploi.columns = df_emploi.columns.str.strip()
+
+# Affichage des colonnes pour debug (désactive si tout fonctionne)
+# st.write("Colonnes dans data.csv :", df_emploi.columns.tolist())
+
+# On cherche la colonne qui contient les codes INSEE
+possible_code_col = [col for col in df_emploi.columns if "code" in col.lower()]
+code_col = possible_code_col[0] if possible_code_col else None
+
+if code_col is None:
+    st.error("Impossible de trouver la colonne contenant les codes INSEE dans le fichier data.csv.")
+else:
+    # Sélection des lignes pour les deux communes
+    emploi_gauche = df_emploi[df_emploi[code_col].astype(str).str.strip() == str(code_insee_left)]
+    emploi_droite = df_emploi[df_emploi[code_col].astype(str).str.strip() == str(code_insee_right)]
+
+    # Vérifie si les deux communes sont présentes
+    if not emploi_gauche.empty and not emploi_droite.empty:
+        # Tentative de détection automatique des colonnes utiles
+        try:
+            pop_col = [col for col in df_emploi.columns if "population municipale" in col.lower()][0]
+            nb_emplois_col = [col for col in df_emploi.columns if "emplois au lieu de travail" in col.lower()][0]
+            part_salaries_col = [col for col in df_emploi.columns if "emplois sal" in col.lower()][0]
+            
+
+            compare_df = pd.DataFrame({
+                'Commune': [commune_gauche, commune_droite],
+                'Population': [
+                    int(str(emploi_gauche.iloc[0][pop_col]).replace(" ", "").replace(",", "")),
+                    int(str(emploi_droite.iloc[0][pop_col]).replace(" ", "").replace(",", ""))
+                ],
+                '% emplois salariés': [
+                    float(str(emploi_gauche.iloc[0][part_salaries_col]).replace(",", ".").replace("%", "").strip()),
+                    float(str(emploi_droite.iloc[0][part_salaries_col]).replace(",", ".").replace("%", "").strip())
+                ],
+                'Nb emplois': [
+                    int(str(emploi_gauche.iloc[0][nb_emplois_col]).replace(" ", "").replace(",", "")),
+                    int(str(emploi_droite.iloc[0][nb_emplois_col]).replace(" ", "").replace(",", ""))
+                ]
+            })
+
+            # Calcul du ratio emplois/population
+            compare_df['Emplois pour 1000 hab.'] = (compare_df['Nb emplois'] / compare_df['Population']) * 1000
+
+            # Affichage des données
+            st.dataframe(compare_df.set_index("Commune").T)
+
+
+            # ---------- GRAPHIQUE Plotly interactif ----------
+            import plotly.express as px
+
+            # Graphique 3 : Population
+            fig3 = px.bar(compare_df, x="Commune", y="Population", color="Commune",
+                        title="Population municipale (2022)", text="Population")
+            st.plotly_chart(fig3, use_container_width=True)
+
+            # Graphique 1 : Nombre d'emplois
+            fig1 = px.bar(compare_df, x="Commune", y="Nb emplois", color="Commune",
+                        title="Nombre total d'emplois (2021)", text="Nb emplois")
+            st.plotly_chart(fig1, use_container_width=True)
+
+            # Graphique 2 : Pourcentage d'emplois salariés
+            fig2 = px.bar(compare_df, x="Commune", y="% emplois salariés", color="Commune",
+                        title="Part des emplois salariés (%)", text="% emplois salariés")
+            fig2.update_yaxes(range=[0, 100])
+            st.plotly_chart(fig2, use_container_width=True)
+
+
+            compare_df["Emplois pour 1000 hab. arrondis"] = compare_df["Emplois pour 1000 hab."].round(0).astype(int)
+            fig4 = px.bar(compare_df, x="Commune", y="Emplois pour 1000 hab. arrondis", color="Commune",
+              title="Emplois pour 1000 habitants", 
+              text="Emplois pour 1000 hab. arrondis")
+            st.plotly_chart(fig4, use_container_width=True)
+
+
+        except Exception as e:
+            st.error(f"Erreur lors de l'analyse des données d'emploi : {e}")
+    else:
+        st.warning("Données d'emploi manquantes pour une ou les deux communes.")
+
+
 
