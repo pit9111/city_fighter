@@ -39,7 +39,7 @@ CITY/
 > 1. Clone the  repository:
 >
 > ```console
-> git clone [../](https://github.com/pit9111/city_fighter.git)
+> git clone https://github.com/pit9111/city_fighter.git
 > ```
 >
 > 2. Change to the project directory:
