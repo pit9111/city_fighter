@@ -3,6 +3,8 @@ import pandas as pd
 import requests
 import locale
 import requests
+# Configuration de la page en mode "wide"
+st.set_page_config(page_title="Comparateur de Communes", layout="wide")
 # Forcer l'affichage en français
 try:
     locale.setlocale(locale.LC_TIME, 'fr_FR.UTF-8')
@@ -11,8 +13,7 @@ except:
         locale.setlocale(locale.LC_TIME, 'fr_FR')
     except:
         st.warning("⚠️ Impossible de définir la langue française pour les jours.")
-# Configuration de la page en mode "wide"
-st.set_page_config(page_title="Comparateur de Communes", layout="wide")
+
 # 🔐 Authentification OAuth2
 @st.cache_data
 def get_pe_token():
