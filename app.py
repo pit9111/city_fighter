@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import requests
 
-import requests
 from datetime import datetime
 # Configuration de la page en mode "wide"
 st.set_page_config(page_title="Comparateur de Communes", layout="wide")
