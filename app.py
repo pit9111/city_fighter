@@ -294,10 +294,25 @@ else:
 
     # Sélection des communes dans deux colonnes (selectbox intégrée avec saisie possible pour filtrer)
     col_select_left, col_select_right = st.columns(2)
+    # Prendre automatiquement la première et la deuxième commune
+    commune_gauche_defaut = communes[0]
+    commune_droite_defaut = communes[1]
     with col_select_left:
-        commune_gauche = st.selectbox("Commune de gauche", communes, key="commune_gauche")
+        commune_gauche = st.selectbox(
+            "Commune de gauche",
+            communes,
+            index=0,  # Première ville
+            key="commune_gauche"
+        )
+
     with col_select_right:
-        commune_droite = st.selectbox("Commune de droite", communes, key="commune_droite")
+        commune_droite = st.selectbox(
+            "Commune de droite",
+            communes,
+            index=1,  # Deuxième ville
+            key="commune_droite"
+        )
+
 
     st.markdown("---")
 
@@ -339,7 +354,21 @@ else:
             col1, col2 = st.columns(2)
 
             with col1:
+                # --- Gestion des communes sans coordonnées ---
+
+                # Vérifier s'il y a des NaN dans lat/lon
+                nb_villes_incompletes = df_map["lat"].isna().sum() + df_map["lon"].isna().sum()
+
+                # Supprimer les lignes sans lat/lon pour la carte
+                df_map = df_map.dropna(subset=["lat", "lon"])
+
+                # Si certaines communes n'ont pas été affichées, prévenir
+                if nb_villes_incompletes > 0:
+                    st.warning(f"⚠️ Cette ville n'a pas pu être affichée car ces coordonnées sont manquantes.")
+
+                # --- Afficher la carte ---
                 st.map(df_map, zoom=6)
+
 
             st.markdown("---")
 
@@ -500,7 +529,21 @@ else:
             col1, col2 = st.columns(2)
 
             with col1:
+                # --- Gestion des communes sans coordonnées ---
+
+                # Vérifier s'il y a des NaN dans lat/lon
+                nb_villes_incompletes = df_map["lat"].isna().sum() + df_map["lon"].isna().sum()
+
+                # Supprimer les lignes sans lat/lon pour la carte
+                df_map = df_map.dropna(subset=["lat", "lon"])
+
+                # Si certaines communes n'ont pas été affichées, prévenir
+                if nb_villes_incompletes > 0:
+                    st.warning(f"⚠️ Cette ville n'a pas pu être affichée car ces coordonnées sont manquantes.")
+
+                # --- Afficher la carte ---
                 st.map(df_map, zoom=6)
+
 
 
             st.markdown("---")
