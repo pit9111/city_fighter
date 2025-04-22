@@ -3,7 +3,15 @@ import pandas as pd
 import requests
 import locale
 import requests
-# 👉 Page config doit être ici, juste après les imports
+# Forcer l'affichage en français
+try:
+    locale.setlocale(locale.LC_TIME, 'fr_FR.UTF-8')
+except:
+    try:
+        locale.setlocale(locale.LC_TIME, 'fr_FR')
+    except:
+        st.warning("⚠️ Impossible de définir la langue française pour les jours.")
+# Configuration de la page en mode "wide"
 st.set_page_config(page_title="Comparateur de Communes", layout="wide")
 # 🔐 Authentification OAuth2
 @st.cache_data
@@ -38,16 +46,7 @@ def get_job_offers(insee_code, token, rayon=10):
 
 
 
-# Forcer l'affichage en français
-try:
-    locale.setlocale(locale.LC_TIME, 'fr_FR.UTF-8')
-except:
-    try:
-        locale.setlocale(locale.LC_TIME, 'fr_FR')
-    except:
-        st.warning("⚠️ Impossible de définir la langue française pour les jours.")
-# Configuration de la page en mode "wide"
-st.set_page_config(page_title="Comparateur de Communes", layout="wide")
+
 
 # Chargement des données depuis le CSV avec mise en cache
 @st.cache_data
