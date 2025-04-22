@@ -3,7 +3,8 @@ import pandas as pd
 import requests
 import locale
 import requests
-
+# 👉 Page config doit être ici, juste après les imports
+st.set_page_config(page_title="Comparateur de Communes", layout="wide")
 # 🔐 Authentification OAuth2
 @st.cache_data
 def get_pe_token():
