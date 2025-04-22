@@ -24,3 +24,50 @@ CITY/
 │   └── wiki.py
 
 
+
+```
+##  Getting Started
+
+**System Requirements:**
+
+* **Python**: `version 3.`
+
+###  Installation
+
+<h4>From <code>source</code></h4>
+
+> 1. Clone the  repository:
+>
+> ```console
+> git clone [../](https://github.com/pit9111/city_fighter.git)
+> ```
+>
+> 2. Change to the project directory:
+> ```console
+> cd ./city_fighter
+> ```
+>
+> 3. Create a virtualenv:
+> ```console
+> python -m venv env
+> ```
+>
+
+>
+> 4. Launch the virtualenv
+> ```console
+> env\Scripts\activate
+
+
+> 5. Install the dependencies:
+> ```console
+> pip install -r requirements.txt
+>
+> ```
+
+> 6. Launch the apps:
+> ```console
+> python -m streamlit run app.py
+>
+> ```
+>
