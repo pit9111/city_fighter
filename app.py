@@ -1,11 +1,15 @@
 import streamlit as st
 import pandas as pd
 import requests
-import locale
+
 import requests
 import pydeck as pdk
-
+from datetime import datetime
 # 🔐 Authentification OAuth2
+
+# Configuration de la page en mode "wide"
+st.set_page_config(page_title="Comparateur de Communes", layout="wide")
+
 @st.cache_data
 def get_pe_token(ttl=3500):
     url = "https://entreprise.pole-emploi.fr/connexion/oauth2/access_token?realm=/partenaire"
@@ -44,17 +48,7 @@ def get_job_offers(insee_code, token, rayon=10):
         st.text(f"Contenu brut: {response.text[:300]}...")  # Affiche les premiers caractères de la réponse
         return []
 
-# Forcer l'affichage en français
-try:
-    locale.setlocale(locale.LC_TIME, 'fr_FR.UTF-8')
-except:
-    try:
-        locale.setlocale(locale.LC_TIME, 'fr_FR')
-    except:
-        st.warning("⚠️ Impossible de définir la langue française pour les jours.")
 
-# Configuration de la page en mode "wide"
-st.set_page_config(page_title="Comparateur de Communes", layout="wide")
 
 # Chargement des données depuis le CSV avec mise en cache
 @st.cache_data
@@ -121,17 +115,31 @@ def get_weather_forecast(insee_code):
     response = requests.get(url)
     if response.status_code == 200:
         data = response.json()
+        mois_francais = {
+            1: "janvier", 2: "février", 3: "mars", 4: "avril",
+            5: "mai", 6: "juin", 7: "juillet", 8: "août",
+            9: "septembre", 10: "octobre", 11: "novembre", 12: "décembre"
+        }
+        jours_francais = {
+            0: "lundi", 1: "mardi", 2: "mercredi", 3: "jeudi",
+            4: "vendredi", 5: "samedi", 6: "dimanche"
+        }
+
         forecasts = []
-        for item in data['forecast'][:4]:  # Prochains 4 jours
+        for item in data['forecast'][:4]:  # ← 4 jours
+            date_obj = datetime.strptime(item['datetime'][:10], "%Y-%m-%d")
+            date_fr = f"{jours_francais[date_obj.weekday()]} {date_obj.day} {mois_francais[date_obj.month]} {date_obj.year}"
             forecasts.append({
-                "date": item['datetime'][:10],
+                "date": date_fr,
                 "weather": weather_codes.get(item['weather'], f"Code {item['weather']}"),
                 "tmin": item['tmin'],
                 "tmax": item['tmax'],
                 "wind": item['wind10m'],
                 "sun_hours": item['sun_hours']
             })
-        return forecasts
+
+        return forecasts  # ✅ return après la boucle
+
     else:
         return None
 
@@ -250,7 +258,15 @@ def load_culture_data():
     df_culture = df_culture.rename(columns={"Latitude": "latitude", "Longitude": "longitude"})
     df_culture = df_culture.dropna(subset=["latitude", "longitude"])  # supprime les lignes sans coord
     return df_culture
+@st.cache_data
+def load_formation_data():
+    df_form = pd.read_csv("data/base_formation.csv", sep=";", encoding="utf-8", low_memory=False)
+    df_form.columns = df_form.columns.str.strip()
 
+    # Séparation de latitude/longitude
+    df_form[['latitude', 'longitude']] = df_form["Localisation"].str.split(",", expand=True).astype(float)
+    df_form = df_form.dropna(subset=["latitude", "longitude"])
+    return df_form
 
 # Chargement des données
 df = load_data()
@@ -264,8 +280,11 @@ st.markdown("Sélectionnez une commune à gauche et une à droite pour comparer 
 with st.sidebar:
     st.title("🧭 Paramètres")
     communes = sorted(df["nom_standard"].unique())
-    commune_gauche = st.selectbox("Commune de gauche", communes)
-    commune_droite = st.selectbox("Commune de droite", communes)
+    commune_gauche_defaut = communes[0]
+    commune_droite_defaut = communes[1]
+    commune_gauche = st.selectbox("Commune de gauche", communes, index=0, key="commune_gauche")
+    commune_droite = st.selectbox("Commune de droite", communes, index=1, key="commune_droite")
+
 
 # Récupération des données
 data_gauche = df[df["nom_standard"] == commune_gauche].iloc[0]
@@ -275,7 +294,7 @@ code_insee_left = data_gauche["code_insee"]
 code_insee_right = data_droite["code_insee"]
 
 # Création des onglets
-onglet1, onglet2, onglet3, onglet4, onglet5 = st.tabs(["📊 Données générales", "💼 Emploi", "🏠 Logement", "🌦️ Météo", "🎭 Culture"])
+onglet1, onglet2, onglet3, onglet4, onglet5, onglet6 = st.tabs(["📊 Données générales", "💼 Emploi", "🏠 Logement", "🌦️ Météo", "🎭 Culture", "🎓 Formation"])
 
 # Onglet 1: Données générales
 with onglet1:
@@ -292,7 +311,7 @@ with onglet1:
         st.subheader("👥 Démographie")
         st.markdown(f"**Population** : {data_gauche['population']:,} habitants")
         st.markdown(f"**Superficie** : {data_gauche['superficie_km2']} km²")
-        st.markdown(f"**Densité** : {data_gauche['grille_densite_texte']}")
+        st.markdown(f"**Catégorie urbaine** : {data_gauche['grille_densite_texte']}")
 
                 # Carte de localisation
         st.subheader("🗺️ Localisation")
@@ -300,7 +319,13 @@ with onglet1:
             'lat': [data_gauche['latitude_centre']],
             'lon': [data_gauche['longitude_centre']]
         })
-        st.map(df_map, zoom=10)
+        nb_villes_incompletes = df_map["lat"].isna().sum() + df_map["lon"].isna().sum()
+        df_map = df_map.dropna(subset=["lat", "lon"])
+
+        if nb_villes_incompletes > 0:
+            st.warning(f"⚠️ Cette ville n'a pas pu être affichée car ces coordonnées sont manquantes.")
+
+        st.map(df_map, zoom=6)
         
         # Image Wikipedia
         title_wiki = get_wikipedia_title_from_insee(code_insee_left)
@@ -330,7 +355,7 @@ with onglet1:
         st.subheader("👥 Démographie")
         st.markdown(f"**Population** : {data_droite['population']:,} habitants")
         st.markdown(f"**Superficie** : {data_droite['superficie_km2']} km²")
-        st.markdown(f"**Densité** : {data_droite['grille_densite_texte']}")
+        st.markdown(f"**Catégorie urbaine** : {data_droite['grille_densite_texte']}")
 
                 # Carte de localisation
         st.subheader("🗺️ Localisation")
@@ -338,7 +363,13 @@ with onglet1:
             'lat': [data_droite['latitude_centre']],
             'lon': [data_droite['longitude_centre']]
         })
-        st.map(df_map, zoom=10)
+        nb_villes_incompletes = df_map["lat"].isna().sum() + df_map["lon"].isna().sum()
+        df_map = df_map.dropna(subset=["lat", "lon"])
+
+        if nb_villes_incompletes > 0:
+            st.warning(f"⚠️ Cette ville n'a pas pu être affichée car ces coordonnées sont manquantes.")
+
+        st.map(df_map, zoom=6)
         
         # Image Wikipedia
         # Image Wikipedia
@@ -487,34 +518,39 @@ with onglet2:
                 st.error("Impossible de se connecter à l'API Pôle Emploi")
         else:
             st.warning("Données d'emploi manquantes pour une ou les deux communes.")
+def afficher_loyer(nom_commune, loyer_info):
+    if not loyer_info:
+        st.warning(f"Pas de données de loyer disponibles pour {nom_commune}.")
+        return
+
+    couleur = "#f0f9ff" if loyer_info["nbobs"] >= 30 else "#fff5e6"
+    message_fiabilite = (
+        "<p style='text-align:center; color: red;'>⚠️ Fiabilité faible : moins de 30 observations.</p>"
+        if loyer_info["nbobs"] < 30 else ""
+    )
+
+    st.markdown(f"""
+    <div style="border: 1px solid #CCC; border-radius: 12px; padding: 20px; background-color: {couleur}; margin-bottom: 20px;">
+        <h3 style="text-align:center;">🏠 {nom_commune}</h3>
+        <p style="font-size: 26px; text-align:center;"><b>💶 {loyer_info['loypredm2']} € / m²</b></p>
+        <p style="text-align:center; color: #666;">📏 Intervalle estimé : {loyer_info['lwr']} € – {loyer_info['upr']} € / m²</p>
+        <p style="text-align:center; color: #999;">📊 {loyer_info['nbobs']} annonces analysées</p>
+        {message_fiabilite}
+    </div>
+    """, unsafe_allow_html=True)
 
 # Onglet 3: Logement
 with onglet3:
     col1, col2 = st.columns(2)
-    
+
     with col1:
-        st.header(f"🏠 Logement - {commune_gauche}")
         loyer_left = get_loyer_info(code_insee_left, df_loyer)
-        if loyer_left:
-            st.write(f"**Loyer moyen au m²** : {loyer_left['loypredm2']} €/m²")
-            st.write(f"**Intervalle estimé** : {loyer_left['lwr']} € - {loyer_left['upr']} € /m²")
-            st.write(f"**Nombre d'annonces analysées** : {loyer_left['nbobs']}")
-            if loyer_left['nbobs'] < 30:
-                st.warning("⚠️ Fiabilité faible : moins de 30 observations.")
-        else:
-            st.warning("Pas de données de loyer disponibles pour cette commune.")
-    
+        afficher_loyer(commune_gauche, loyer_left)
+
     with col2:
-        st.header(f"🏠 Logement - {commune_droite}")
         loyer_right = get_loyer_info(code_insee_right, df_loyer)
-        if loyer_right:
-            st.write(f"**Loyer moyen au m²** : {loyer_right['loypredm2']} €/m²")
-            st.write(f"**Intervalle estimé** : {loyer_right['lwr']} € - {loyer_right['upr']} € /m²")
-            st.write(f"**Nombre d'annonces analysées** : {loyer_right['nbobs']}")
-            if loyer_right['nbobs'] < 30:
-                st.warning("⚠️ Fiabilité faible : moins de 30 observations.")
-        else:
-            st.warning("Pas de données de loyer disponibles pour cette commune.")
+        afficher_loyer(commune_droite, loyer_right)
+
 
 # Onglet 4: Météo
 with onglet4:
@@ -537,9 +573,44 @@ with onglet4:
                     "wind": "Vent (km/h)",
                     "sun_hours": "Ensoleillement (h)"
                 })
-                df_meteo_left["Date"] = pd.to_datetime(df_meteo_left["Date"]).dt.strftime('%A')
+
+
                 df_meteo_left.loc[0, "Date"] = "Aujourd'hui"
-                st.table(df_meteo_left)
+                # Emoji météo simplifié
+                def emoji_meteo(description):
+                    if "Soleil" in description:
+                        return "☀️"
+                    elif "nuageux" in description.lower():
+                        return "⛅"
+                    elif "pluie" in description.lower():
+                        return "🌧️"
+                    elif "neige" in description.lower():
+                        return "❄️"
+                    elif "orage" in description.lower():
+                        return "⛈️"
+                    else:
+                        return "⛅"
+
+                # Colonnes pour chaque jour
+                cols = st.columns(len(df_meteo_left))
+
+                for i, jour in df_meteo_left.iterrows():
+                    with cols[i]:
+                        st.markdown(
+                            f"""
+                            <div style="border:1px solid #DDD; border-radius:10px; padding:15px; margin-bottom:10px; background-color:#f9f9f9;">
+                                <h4 style="text-align:center;">{jour['Date']}</h4>
+                                <p style="font-size:40px; text-align:center;">{emoji_meteo(jour['Météo'])}</p>
+                                <p style="text-align:center;"><b>{jour['Météo']}</b></p>
+                                <p>🌡️ Min : {jour['Min (°C)']}°C</p>
+                                <p>🌡️ Max : {jour['Max (°C)']}°C</p>
+                                <p>💨 Vent : {jour['Vent (km/h)']} km/h</p>
+                                <p>☀️ Ensoleillement : {jour['Ensoleillement (h)']} h</p>
+                            </div>
+                            """,
+                            unsafe_allow_html=True
+                        )
+
             else:
                 st.warning("Pas de données météo disponibles.")
         
@@ -578,9 +649,41 @@ with onglet4:
                     "wind": "Vent (km/h)",
                     "sun_hours": "Ensoleillement (h)"
                 })
-                df_meteo_right["Date"] = pd.to_datetime(df_meteo_right["Date"]).dt.strftime('%A')
+                
                 df_meteo_right.loc[0, "Date"] = "Aujourd'hui"
-                st.table(df_meteo_right)
+                def emoji_meteo(description):
+                    if "Soleil" in description:
+                        return "☀️"
+                    elif "nuageux" in description.lower():
+                        return "⛅"
+                    elif "pluie" in description.lower():
+                        return "🌧️"
+                    elif "neige" in description.lower():
+                        return "❄️"
+                    elif "orage" in description.lower():
+                        return "⛈️"
+                    else:
+                        return "⛅"
+
+                # Colonnes pour chaque jour
+                cols = st.columns(len(df_meteo_left))
+
+                for i, jour in df_meteo_left.iterrows():
+                    with cols[i]:
+                        st.markdown(
+                            f"""
+                            <div style="border:1px solid #DDD; border-radius:10px; padding:15px; margin-bottom:10px; background-color:#f9f9f9;">
+                                <h4 style="text-align:center;">{jour['Date']}</h4>
+                                <p style="font-size:40px; text-align:center;">{emoji_meteo(jour['Météo'])}</p>
+                                <p style="text-align:center;"><b>{jour['Météo']}</b></p>
+                                <p>🌡️ Min : {jour['Min (°C)']}°C</p>
+                                <p>🌡️ Max : {jour['Max (°C)']}°C</p>
+                                <p>💨 Vent : {jour['Vent (km/h)']} km/h</p>
+                                <p>☀️ Ensoleillement : {jour['Ensoleillement (h)']} h</p>
+                            </div>
+                            """,
+                            unsafe_allow_html=True
+                        )
             else:
                 st.warning("Pas de données météo disponibles.")
         
@@ -663,3 +766,63 @@ with onglet5:
     with col2:
         show_culture_map(lieux_droite, commune_droite)
 
+    import pydeck as pdk
+
+    with onglet6:
+        st.header("🎓 Formations disponibles dans chaque commune")
+
+        df_form = load_formation_data()
+
+        # Filtrage par code INSEE des deux communes
+        villes_gauche = df_form[df_form["Commune"].str.lower() == commune_gauche.lower()]
+        villes_droite = df_form[df_form["Commune"].str.lower() == commune_droite.lower()]
+
+        # Liste des types de formation
+        all_types = sorted(df_form["Types de formation"].dropna().unique())
+        selected_types = st.multiselect("🎯 Filtrer par type de formation", all_types, default=all_types)
+
+        villes_gauche = villes_gauche[villes_gauche["Types de formation"].isin(selected_types)]
+        villes_droite = villes_droite[villes_droite["Types de formation"].isin(selected_types)]
+
+        col1, col2 = st.columns(2)
+
+        def show_formation_map(df, nom_commune):
+            if df.empty:
+                st.info(f"Aucune formation trouvée pour {nom_commune}.")
+                return
+
+            st.markdown(f"### {nom_commune} ({len(df)} formation(s))")
+
+            layer = pdk.Layer(
+                "ScatterplotLayer",
+                data=df,
+                get_position='[longitude, latitude]',
+                get_radius=100,
+                get_color=[100, 100, 250],
+                pickable=True,
+            )
+
+            tooltip = {
+                "html": "<b>{Nom de l'établissement}</b><br/>{Nom long de la formation}<br/><a href='{Lien vers la fiche formation}' target='_blank'>Voir fiche</a>",
+                "style": {"backgroundColor": "white", "color": "black"}
+            }
+
+            view_state = pdk.ViewState(
+                latitude=df["latitude"].mean(),
+                longitude=df["longitude"].mean(),
+                zoom=11,
+                pitch=0,
+            )
+
+            st.pydeck_chart(pdk.Deck(layers=[layer], initial_view_state=view_state, tooltip=tooltip))
+
+            st.dataframe(
+                df[["Nom de l'établissement", "Nom long de la formation", "Types de formation"]].dropna().reset_index(drop=True),
+                use_container_width=True
+            )
+
+        with col1:
+            show_formation_map(villes_gauche, commune_gauche)
+
+        with col2:
+            show_formation_map(villes_droite, commune_droite)

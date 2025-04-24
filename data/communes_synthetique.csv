@@ -32,7 +32,7 @@ code_insee,nom_standard,dep_nom,reg_nom,population,superficie_km2,grille_densite
 13041,Gardanne,Bouches-du-Rhône,Provence-Alpes-Côte d'Azur,21174,27,Centres urbains intermédiaires,13120.0,https://fr.wikipedia.org/wiki/fr:Gardanne,43.453,5.48
 13047,Istres,Bouches-du-Rhône,Provence-Alpes-Côte d'Azur,44577,114,Centres urbains intermédiaires,13118.0,https://fr.wikipedia.org/wiki/fr:Istres,43.55,4.951
 13054,Marignane,Bouches-du-Rhône,Provence-Alpes-Côte d'Azur,33003,24,Centres urbains intermédiaires,13700.0,https://fr.wikipedia.org/wiki/fr:Marignane,43.417,5.212
-13055,Marseille,Bouches-du-Rhône,Provence-Alpes-Côte d'Azur,873076,241,Grands centres urbains,13000.0,https://fr.wikipedia.org/wiki/fr:Marseille,,
+13055,Marseille,Bouches-du-Rhône,Provence-Alpes-Côte d'Azur,873076,241,Grands centres urbains,13000.0,https://fr.wikipedia.org/wiki/fr:Marseille,43.2965,5.3698
 13056,Martigues,Bouches-du-Rhône,Provence-Alpes-Côte d'Azur,48568,74,Grands centres urbains,13500.0,https://fr.wikipedia.org/wiki/fr:Martigues,43.38,5.05
 13063,Miramas,Bouches-du-Rhône,Provence-Alpes-Côte d'Azur,26405,26,Centres urbains intermédiaires,13140.0,https://fr.wikipedia.org/wiki/fr:Miramas,43.584,5.014
 13071,Les Pennes-Mirabeau,Bouches-du-Rhône,Provence-Alpes-Côte d'Azur,22161,34,Ceintures urbaines,13170.0,https://fr.wikipedia.org/wiki/fr:Les Pennes-Mirabeau,43.403,5.316
@@ -217,7 +217,7 @@ code_insee,nom_standard,dep_nom,reg_nom,population,superficie_km2,grille_densite
 69029,Bron,Rhône,Auvergne-Rhône-Alpes,43049,10,Grands centres urbains,69500.0,https://fr.wikipedia.org/wiki/fr:Bron,45.734,4.912
 69034,Caluire-et-Cuire,Rhône,Auvergne-Rhône-Alpes,43572,10,Grands centres urbains,69300.0,https://fr.wikipedia.org/wiki/fr:Caluire-et-Cuire,45.797,4.851
 69091,Givors,Rhône,Auvergne-Rhône-Alpes,20654,17,Centres urbains intermédiaires,69700.0,https://fr.wikipedia.org/wiki/fr:Givors,45.582,4.757
-69123,Lyon,Rhône,Auvergne-Rhône-Alpes,522250,48,Grands centres urbains,69000.0,https://fr.wikipedia.org/wiki/fr:Lyon,,
+69123,Lyon,Rhône,Auvergne-Rhône-Alpes,522250,48,Grands centres urbains,69000.0,https://fr.wikipedia.org/wiki/fr:Lyon,45.764,4.8357
 69149,Oullins-Pierre-Bénite,Rhône,Auvergne-Rhône-Alpes,27113,4,Grands centres urbains,69600.0,https://fr.wikipedia.org/wiki/fr:Oullins,45.715,4.803
 69202,Sainte-Foy-lès-Lyon,Rhône,Auvergne-Rhône-Alpes,21858,7,Grands centres urbains,69110.0,https://fr.wikipedia.org/wiki/fr:Sainte-Foy-lès-Lyon,45.736,4.793
 69204,Saint-Genis-Laval,Rhône,Auvergne-Rhône-Alpes,20929,13,Grands centres urbains,69230.0,https://fr.wikipedia.org/wiki/fr:Saint-Genis-Laval,45.694,4.789
@@ -239,7 +239,7 @@ code_insee,nom_standard,dep_nom,reg_nom,population,superficie_km2,grille_densite
 74010,Annecy,Haute-Savoie,Auvergne-Rhône-Alpes,131715,16,Grands centres urbains,74000.0,https://fr.wikipedia.org/wiki/fr:Annecy,45.891,6.126
 74012,Annemasse,Haute-Savoie,Auvergne-Rhône-Alpes,37918,5,Grands centres urbains,74100.0,https://fr.wikipedia.org/wiki/fr:Annemasse,46.191,6.242
 74281,Thonon-les-Bains,Haute-Savoie,Auvergne-Rhône-Alpes,37027,16,Centres urbains intermédiaires,74200.0,https://fr.wikipedia.org/wiki/fr:Thonon-les-Bains,46.37,6.482
-75056,Paris,Paris,Île-de-France,2133111,105,Grands centres urbains,75000.0,https://fr.wikipedia.org/wiki/fr:Paris,,
+75056,Paris,Paris,Île-de-France,2133111,105,Grands centres urbains,75000.0,https://fr.wikipedia.org/wiki/fr:Paris,48.8566,2.3522
 76217,Dieppe,Seine-Maritime,Normandie,28358,12,Centres urbains intermédiaires,76370.0,https://fr.wikipedia.org/wiki/fr:Dieppe (Seine-Maritime),49.922,1.087
 76322,Le Grand-Quevilly,Seine-Maritime,Normandie,25975,11,Grands centres urbains,76120.0,https://fr.wikipedia.org/wiki/fr:Le Grand-Quevilly,49.409,1.04
 76351,Le Havre,Seine-Maritime,Normandie,166058,55,Grands centres urbains,76620.0,https://fr.wikipedia.org/wiki/fr:Le Havre,49.498,0.14
