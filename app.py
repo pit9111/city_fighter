@@ -1,11 +1,9 @@
 import streamlit as st
 import pandas as pd
 import requests
-
-from datetime import datetime
-# Configuration de la page en mode "wide"
-st.set_page_config(page_title="Comparateur de Communes", layout="wide")
-
+import locale
+import requests
+import pydeck as pdk
 
 # 🔐 Authentification OAuth2
 @st.cache_data
@@ -46,11 +44,17 @@ def get_job_offers(insee_code, token, rayon=10):
         st.text(f"Contenu brut: {response.text[:300]}...")  # Affiche les premiers caractères de la réponse
         return []
 
+# Forcer l'affichage en français
+try:
+    locale.setlocale(locale.LC_TIME, 'fr_FR.UTF-8')
+except:
+    try:
+        locale.setlocale(locale.LC_TIME, 'fr_FR')
+    except:
+        st.warning("⚠️ Impossible de définir la langue française pour les jours.")
 
-
-
-
-
+# Configuration de la page en mode "wide"
+st.set_page_config(page_title="Comparateur de Communes", layout="wide")
 
 # Chargement des données depuis le CSV avec mise en cache
 @st.cache_data
@@ -118,27 +122,9 @@ def get_weather_forecast(insee_code):
     if response.status_code == 200:
         data = response.json()
         forecasts = []
-        
-
-        # Dictionnaires français (comme avant)
-        mois_francais = {
-            1: "janvier", 2: "février", 3: "mars", 4: "avril",
-            5: "mai", 6: "juin", 7: "juillet", 8: "août",
-            9: "septembre", 10: "octobre", 11: "novembre", 12: "décembre"
-        }
-        jours_francais = {
-            0: "lundi", 1: "mardi", 2: "mercredi", 3: "jeudi",
-            4: "vendredi", 5: "samedi", 6: "dimanche"
-        }
-
-        
-
         for item in data['forecast'][:4]:  # Prochains 4 jours
-            date_obj = datetime.strptime(item['datetime'][:10], "%Y-%m-%d")
-            # Format français
-            date_fr = f"{jours_francais[date_obj.weekday()]} {date_obj.day} {mois_francais[date_obj.month]} {date_obj.year}"
             forecasts.append({
-                "date": date_fr,
+                "date": item['datetime'][:10],
                 "weather": weather_codes.get(item['weather'], f"Code {item['weather']}"),
                 "tmin": item['tmin'],
                 "tmax": item['tmax'],
@@ -148,7 +134,6 @@ def get_weather_forecast(insee_code):
         return forecasts
     else:
         return None
-
 
 # Fonction pour récupérer les normales climatiques d'une commune
 @st.cache_data
@@ -230,9 +215,6 @@ def load_loyer_data():
 
     return df_loyer
 
-
-
-
 @st.cache_data
 def get_loyer_info(insee_code, df_loyer):
     infos = df_loyer[df_loyer["INSEE_C"] == str(insee_code)]
@@ -260,163 +242,288 @@ def load_employment_data():
     df_emploi['Code'] = df_emploi['Code'].astype(str).str.strip()
     return df_emploi
 
-# Requête SPARQL : récupérer l'URL de l'article Wikipédia correspondant à un code INSEE
 @st.cache_data
-def get_wikipedia_title_from_insee(insee_code):
-    query = f"""
-    SELECT ?article WHERE {{
-      ?ville wdt:P374 "{insee_code}".
-      ?article schema:about ?ville;
-               schema:inLanguage "fr";
-               schema:isPartOf <https://fr.wikipedia.org/>.
-    }}
-    """
-    url = "https://query.wikidata.org/sparql"
-    headers = {"Accept": "application/sparql-results+json"}
-    response = requests.get(url, params={'query': query, 'format': 'json'}, headers=headers)
-    if response.status_code != 200:
-        return None
-    data = response.json()
-    results = data.get("results", {}).get("bindings", [])
-    if results:
-        full_url = results[0]["article"]["value"]
-        # Extraction du titre à partir de l'URL (la partie après "/wiki/")
-        title = full_url.split("/wiki/")[-1]
-        return title
-    return None
-
-# Récupération de l'image via l'API REST de Wikipédia
-@st.cache_data
-def get_wikipedia_thumbnail(title):
-    url = f"https://fr.wikipedia.org/api/rest_v1/page/summary/{title}"
-    response = requests.get(url)
-    if response.status_code == 200:
-        data = response.json()
-        image_url = data.get("thumbnail", {}).get("source", None)
-        city_name = data.get("title", None)
-        extract = data.get("extract", None)
-        return image_url, city_name, extract
-    return None, None, None
+def load_culture_data():
+    df_culture = pd.read_csv("data/base_culture.csv", sep=";", encoding="utf-8", low_memory=False)
+    df_culture.columns = df_culture.columns.str.strip()
+    df_culture["code_insee"] = df_culture["code_insee"].astype(str).str.zfill(5)
+    df_culture = df_culture.rename(columns={"Latitude": "latitude", "Longitude": "longitude"})
+    df_culture = df_culture.dropna(subset=["latitude", "longitude"])  # supprime les lignes sans coord
+    return df_culture
 
 
-
-# Chargement du DataFrame
+# Chargement des données
 df = load_data()
 df_loyer = load_loyer_data()
+df_emploi = load_employment_data()
 
-# Vérification de la présence de la colonne contenant le nom de la commune
-if "nom_standard" not in df.columns:
-    st.error("La colonne 'nom_standard' n'est pas présente dans le DataFrame.")
-else:
-    # Trier les noms de communes en ordre alphabétique pour faciliter leur recherche dans la selectbox
+# Interface utilisateur
+st.title("Comparateur de Communes")
+st.markdown("Sélectionnez une commune à gauche et une à droite pour comparer leurs informations.")
+
+with st.sidebar:
+    st.title("🧭 Paramètres")
     communes = sorted(df["nom_standard"].unique())
+    commune_gauche = st.selectbox("Commune de gauche", communes)
+    commune_droite = st.selectbox("Commune de droite", communes)
 
-    st.title("Comparateur de Communes")
-    st.markdown("Sélectionnez une commune à gauche et une à droite pour comparer leurs informations.")
+# Récupération des données
+data_gauche = df[df["nom_standard"] == commune_gauche].iloc[0]
+data_droite = df[df["nom_standard"] == commune_droite].iloc[0]
 
-    # Sélection des communes dans deux colonnes (selectbox intégrée avec saisie possible pour filtrer)
-    col_select_left, col_select_right = st.columns(2)
-    # Prendre automatiquement la première et la deuxième commune
-    commune_gauche_defaut = communes[0]
-    commune_droite_defaut = communes[1]
-    with col_select_left:
-        commune_gauche = st.selectbox(
-            "Commune de gauche",
-            communes,
-            index=0,  # Première ville
-            key="commune_gauche"
-        )
+code_insee_left = data_gauche["code_insee"]
+code_insee_right = data_droite["code_insee"]
 
-    with col_select_right:
-        commune_droite = st.selectbox(
-            "Commune de droite",
-            communes,
-            index=1,  # Deuxième ville
-            key="commune_droite"
-        )
+# Création des onglets
+onglet1, onglet2, onglet3, onglet4, onglet5 = st.tabs(["📊 Données générales", "💼 Emploi", "🏠 Logement", "🌦️ Météo", "🎭 Culture"])
 
+# Onglet 1: Données générales
+with onglet1:
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.header(f"🏙️ {commune_gauche}")
+        st.subheader("📍 Informations générales")
+        st.markdown(f"**Nom** : {data_gauche['nom_standard']}")
+        st.markdown(f"**Code postal** : {int(data_gauche['code_postal']) if not pd.isna(data_gauche['code_postal']) else 'Non disponible'}")
+        st.markdown(f"**Département** : {data_gauche['dep_nom']}")
+        st.markdown(f"**Région** : {data_gauche['reg_nom']}")
+        
+        st.subheader("👥 Démographie")
+        st.markdown(f"**Population** : {data_gauche['population']:,} habitants")
+        st.markdown(f"**Superficie** : {data_gauche['superficie_km2']} km²")
+        st.markdown(f"**Densité** : {data_gauche['grille_densite_texte']}")
 
-    st.markdown("---")
+                # Carte de localisation
+        st.subheader("🗺️ Localisation")
+        df_map = pd.DataFrame({
+            'lat': [data_gauche['latitude_centre']],
+            'lon': [data_gauche['longitude_centre']]
+        })
+        st.map(df_map, zoom=10)
+        
+        # Image Wikipedia
+        title_wiki = get_wikipedia_title_from_insee(code_insee_left)
+        if title_wiki:
+            image_url, city_name, extract = get_wikipedia_thumbnail(title_wiki)
+            if image_url:
+                st.image(image_url, caption=city_name, width=300)
+            if extract:
+                st.markdown(f"**Description** : {extract}")
+            
+            # 🔗 Ajout du lien vers Wikipédia
+            st.markdown(f"[🔗 Voir l'article Wikipédia](https://fr.wikipedia.org/wiki/{title_wiki})")
+        
 
-    # Affichage des informations et images dans deux colonnes
-    col_detail_left, col_detail_right = st.columns(2)
+                
+        
+        
+    
+    with col2:
+        st.header(f"🏙️ {commune_droite}")
+        st.subheader("📍 Informations générales")
+        st.markdown(f"**Nom** : {data_droite['nom_standard']}")
+        st.markdown(f"**Code postal** : {int(data_droite['code_postal']) if not pd.isna(data_droite['code_postal']) else 'Non disponible'}")
+        st.markdown(f"**Département** : {data_droite['dep_nom']}")
+        st.markdown(f"**Région** : {data_droite['reg_nom']}")
+        
+        st.subheader("👥 Démographie")
+        st.markdown(f"**Population** : {data_droite['population']:,} habitants")
+        st.markdown(f"**Superficie** : {data_droite['superficie_km2']} km²")
+        st.markdown(f"**Densité** : {data_droite['grille_densite_texte']}")
 
-    # Détails pour la commune de gauche
-    with col_detail_left:
-        st.header(f"🏙️ Détails de {commune_gauche}")
-        details_gauche = df[df["nom_standard"] == commune_gauche]
+                # Carte de localisation
+        st.subheader("🗺️ Localisation")
+        df_map = pd.DataFrame({
+            'lat': [data_droite['latitude_centre']],
+            'lon': [data_droite['longitude_centre']]
+        })
+        st.map(df_map, zoom=10)
+        
+        # Image Wikipedia
+        # Image Wikipedia
+        title_wiki = get_wikipedia_title_from_insee(code_insee_right)
+        if title_wiki:
+            image_url, city_name, extract = get_wikipedia_thumbnail(title_wiki)
+            if image_url:
+                st.image(image_url, caption=city_name, width=300)
+            if extract:
+                st.markdown(f"**Description** : {extract}")
+            
+            # 🔗 Ajout du lien vers Wikipédia
+            st.markdown(f"[🔗 Voir l'article Wikipédia](https://fr.wikipedia.org/wiki/{title_wiki})")
 
-        if not details_gauche.empty:
-            row = details_gauche.iloc[0]
+        
 
-            # Deux colonnes pour présentation
-            col1, col2 = st.columns(2)
+# Onglet 2: Emploi
+# Onglet 2: Emploi
+with onglet2:
+    st.header("Comparaison des données d'emploi")
+    
+    # Nettoyage et standardisation des colonnes pour éviter les erreurs
+    df_emploi.columns = df_emploi.columns.str.strip()
 
-            with col1:
-                st.subheader("📍 Informations générales")
-                st.markdown(f"**Nom** : {row['nom_standard']}")
-                st.markdown(f"**Code postal** : {int(row['code_postal']) if not pd.isna(row['code_postal']) else 'Non disponible'}")
-                st.markdown(f"**Département** : {row['dep_nom']}")
-                st.markdown(f"**Région** : {row['reg_nom']}")
+    # On cherche la colonne qui contient les codes INSEE
+    possible_code_col = [col for col in df_emploi.columns if "code" in col.lower()]
+    code_col = possible_code_col[0] if possible_code_col else None
 
-            with col2:
-                st.subheader("👥 Démographie")
-                st.markdown(f"**Population** : {row['population']:,} habitants")
-                st.markdown(f"**Superficie** : {row['superficie_km2']} km²")
-                st.markdown(f"**Densité** : {row['grille_densite_texte']}")
+    if code_col is None:
+        st.error("Impossible de trouver la colonne contenant les codes INSEE dans le fichier data.csv.")
+    else:
+        # Sélection des lignes pour les deux communes
+        emploi_gauche = df_emploi[df_emploi[code_col].astype(str).str.strip() == str(code_insee_left)]
+        emploi_droite = df_emploi[df_emploi[code_col].astype(str).str.strip() == str(code_insee_right)]
 
-            st.markdown("---")
+        # Vérifie si les deux communes sont présentes
+        if not emploi_gauche.empty and not emploi_droite.empty:
+            # Tentative de détection automatique des colonnes utiles
+            try:
+                pop_col = [col for col in df_emploi.columns if "population municipale" in col.lower()][0]
+                nb_emplois_col = [col for col in df_emploi.columns if "emplois au lieu de travail" in col.lower()][0]
+                part_salaries_col = [col for col in df_emploi.columns if "emplois sal" in col.lower()][0]
+                
+                compare_df = pd.DataFrame({
+                    'Commune': [commune_gauche, commune_droite],
+                    'Population': [
+                        int(str(emploi_gauche.iloc[0][pop_col]).replace(" ", "").replace(",", "")),
+                        int(str(emploi_droite.iloc[0][pop_col]).replace(" ", "").replace(",", ""))
+                    ],
+                    '% emplois salariés': [
+                        float(str(emploi_gauche.iloc[0][part_salaries_col]).replace(",", ".").replace("%", "").strip()),
+                        float(str(emploi_droite.iloc[0][part_salaries_col]).replace(",", ".").replace("%", "").strip())
+                    ],
+                    'Nb emplois': [
+                        int(str(emploi_gauche.iloc[0][nb_emplois_col]).replace(" ", "").replace(",", "")),
+                        int(str(emploi_droite.iloc[0][nb_emplois_col]).replace(" ", "").replace(",", ""))
+                    ]
+                })
 
-            # Carte de localisation
-            st.subheader("🗺️ Localisation sur la carte")
-            df_map = pd.DataFrame({
-                'lat': [row['latitude_centre']],
-                'lon': [row['longitude_centre']]
-            })
-            col1, col2 = st.columns(2)
+                # Calcul du ratio emplois/population
+                compare_df['Emplois pour 1000 hab.'] = (compare_df['Nb emplois'] / compare_df['Population']) * 1000
 
-            with col1:
-                # --- Gestion des communes sans coordonnées ---
+                # Affichage des données
+                st.dataframe(compare_df.set_index("Commune").T)
 
-                # Vérifier s'il y a des NaN dans lat/lon
-                nb_villes_incompletes = df_map["lat"].isna().sum() + df_map["lon"].isna().sum()
+                # Graphiques Plotly interactifs
+                import plotly.express as px
 
-                # Supprimer les lignes sans lat/lon pour la carte
-                df_map = df_map.dropna(subset=["lat", "lon"])
+                # Graphique 3 : Population
+                fig3 = px.bar(compare_df, x="Commune", y="Population", color="Commune",
+                            title="Population municipale (2022)", text="Population")
+                st.plotly_chart(fig3, use_container_width=True)
 
-                # Si certaines communes n'ont pas été affichées, prévenir
-                if nb_villes_incompletes > 0:
-                    st.warning(f"⚠️ Cette ville n'a pas pu être affichée car ces coordonnées sont manquantes.")
+                # Graphique 1 : Nombre d'emplois
+                fig1 = px.bar(compare_df, x="Commune", y="Nb emplois", color="Commune",
+                            title="Nombre total d'emplois (2021)", text="Nb emplois")
+                st.plotly_chart(fig1, use_container_width=True)
 
-                # --- Afficher la carte ---
-                st.map(df_map, zoom=6)
+                # Graphique 2 : Pourcentage d'emplois salariés
+                fig2 = px.bar(compare_df, x="Commune", y="% emplois salariés", color="Commune",
+                            title="Part des emplois salariés (%)", text="% emplois salariés")
+                fig2.update_yaxes(range=[0, 100])
+                st.plotly_chart(fig2, use_container_width=True)
 
+                compare_df["Emplois pour 1000 hab. arrondis"] = compare_df["Emplois pour 1000 hab."].round(0).astype(int)
+                fig4 = px.bar(compare_df, x="Commune", y="Emplois pour 1000 hab. arrondis", color="Commune",
+                  title="Emplois pour 1000 habitants", 
+                  text="Emplois pour 1000 hab. arrondis")
+                st.plotly_chart(fig4, use_container_width=True)
 
-            st.markdown("---")
-
-            # Lien Wikipedia si disponible
-            if pd.notna(row['url_wikipedia']):
-                st.markdown(f"[🔗 Voir sur Wikipédia]({row['url_wikipedia']})")
-
-            # Image de la ville
-            code_insee_left = row["code_insee"]
-            if code_insee_left:
-                with st.spinner("🔎 Recherche de l'image..."):
-                    title_wiki = get_wikipedia_title_from_insee(code_insee_left)
-                    if title_wiki:
-                        image_url, city_name, _ = get_wikipedia_thumbnail(title_wiki)
-                        if image_url:
-                            st.image(image_url, caption=city_name, width=400)
-                        else:
-                            st.warning("Aucune image trouvée pour cette commune.")
+            except Exception as e:
+                st.error(f"Erreur lors de l'analyse des données d'emploi : {e}")
+            
+            # Section API Pôle Emploi
+            st.header("🧳 Offres d'emploi récentes")
+            token_pe = get_pe_token()
+            if token_pe:
+                col_emploi1, col_emploi2 = st.columns(2)
+                
+                with col_emploi1:
+                    st.subheader(f"{commune_gauche}")
+                    offres = get_job_offers(code_insee_left, token_pe)
+                    if offres:
+                        for offre in offres:
+                            st.markdown(f"**{offre.get('intitule', 'Sans titre')}**")
+                            lieu = offre.get("lieuTravail", {}).get("libelle", "Lieu non précisé")
+                            st.write(f"📍 {lieu}")
+                            date_creation = offre.get("dateCreation")
+                            if date_creation:
+                                st.write(f"🗓️ Publiée le : {date_creation[:10]}")
+                            if offre.get("alternance", False):
+                                st.write("🎓 Offre en alternance")
+                            url = offre.get("origineOffre", {}).get("url")
+                            url_origine = offre.get("origineOffre", {}).get("urlOrigine")
+                            if url:
+                                st.markdown(f"[🔗 Voir l'offre (France Travail)]({url})")
+                            elif url_origine:
+                                st.markdown(f"[🔗 Voir l'offre (partenaire)]({url_origine})")
+                            st.markdown("---")
                     else:
-                        st.error("Aucune page Wikipédia trouvée pour ce code INSEE.")
+                        st.info("Aucune offre récente trouvée dans cette zone.")
+                
+                with col_emploi2:
+                    st.subheader(f"{commune_droite}")
+                    offres = get_job_offers(code_insee_right, token_pe)
+                    if offres:
+                        for offre in offres:
+                            st.markdown(f"**{offre.get('intitule', 'Sans titre')}**")
+                            lieu = offre.get("lieuTravail", {}).get("libelle", "Lieu non précisé")
+                            st.write(f"📍 {lieu}")
+                            date_creation = offre.get("dateCreation")
+                            if date_creation:
+                                st.write(f"🗓️ Publiée le : {date_creation[:10]}")
+                            if offre.get("alternance", False):
+                                st.write("🎓 Offre en alternance")
+                            url = offre.get("origineOffre", {}).get("url")
+                            url_origine = offre.get("origineOffre", {}).get("urlOrigine")
+                            if url:
+                                st.markdown(f"[🔗 Voir l'offre (France Travail)]({url})")
+                            elif url_origine:
+                                st.markdown(f"[🔗 Voir l'offre (partenaire)]({url_origine})")
+                            st.markdown("---")
+                    else:
+                        st.info("Aucune offre récente trouvée dans cette zone.")
+            else:
+                st.error("Impossible de se connecter à l'API Pôle Emploi")
         else:
-            st.write("Aucune donnée disponible pour cette commune.")
+            st.warning("Données d'emploi manquantes pour une ou les deux communes.")
 
+# Onglet 3: Logement
+with onglet3:
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.header(f"🏠 Logement - {commune_gauche}")
+        loyer_left = get_loyer_info(code_insee_left, df_loyer)
+        if loyer_left:
+            st.write(f"**Prix moyen au m²** : {loyer_left['loypredm2']} €/m²")
+            st.write(f"**Intervalle estimé** : {loyer_left['lwr']} € - {loyer_left['upr']} € /m²")
+            st.write(f"**Nombre d'annonces analysées** : {loyer_left['nbobs']}")
+            if loyer_left['nbobs'] < 30:
+                st.warning("⚠️ Fiabilité faible : moins de 30 observations.")
+        else:
+            st.warning("Pas de données de loyer disponibles pour cette commune.")
+    
+    with col2:
+        st.header(f"🏠 Logement - {commune_droite}")
+        loyer_right = get_loyer_info(code_insee_right, df_loyer)
+        if loyer_right:
+            st.write(f"**Prix moyen au m²** : {loyer_right['loypredm2']} €/m²")
+            st.write(f"**Intervalle estimé** : {loyer_right['lwr']} € - {loyer_right['upr']} € /m²")
+            st.write(f"**Nombre d'annonces analysées** : {loyer_right['nbobs']}")
+            if loyer_right['nbobs'] < 30:
+                st.warning("⚠️ Fiabilité faible : moins de 30 observations.")
+        else:
+            st.warning("Pas de données de loyer disponibles pour cette commune.")
 
-
-        # Récupération météo
+# Onglet 4: Météo
+with onglet4:
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.header(f"🌦️ Météo - {commune_gauche}")
+        
+        # Prévisions météo
         with st.spinner("Recherche de la météo..."):
             forecast_left = get_weather_forecast(code_insee_left)
             if forecast_left:
@@ -430,18 +537,15 @@ else:
                     "wind": "Vent (km/h)",
                     "sun_hours": "Ensoleillement (h)"
                 })
-                # 🆕 Reformater la colonne Date
-                
+                df_meteo_left["Date"] = pd.to_datetime(df_meteo_left["Date"]).dt.strftime('%A')
                 df_meteo_left.loc[0, "Date"] = "Aujourd'hui"
                 st.table(df_meteo_left)
             else:
                 st.warning("Pas de données météo disponibles.")
-
-
-
-        # Récupération climat
-        latitude_left = row["latitude_centre"]
-        longitude_left = row["longitude_centre"]
+        
+        # Climat
+        latitude_left = data_gauche["latitude_centre"]
+        longitude_left = data_gauche["longitude_centre"]
 
         if pd.notna(latitude_left) and pd.notna(longitude_left):
             with st.spinner("Recherche du climat..."):
@@ -456,142 +560,11 @@ else:
                     st.write(f"🌤️ Ensoleillement moyen : {round(climat_left['tsun']/60, 1)} h/mois" if climat_left and climat_left['tsun'] is not None else "🌤️ Ensoleillement moyen : Donnée indisponible")
                 else:
                     st.warning("Pas de données climatiques disponibles.")
-        # Affichage des données logement
-        loyer_left = get_loyer_info(code_insee_left, df_loyer)
-        if loyer_left:
-            st.subheader("Loyer moyen (T3 2023)")
-            st.write(f"🏠 Prix moyen au m² : {loyer_left['loypredm2']} €/m²")
-            st.write(f"📏 Intervalle estimé : {loyer_left['lwr']} € - {loyer_left['upr']} € /m²")
-            st.write(f"📈 Nombre d'annonces analysées : {loyer_left['nbobs']}")
-            if loyer_left['nbobs'] < 30:
-                st.warning("⚠️ Fiabilité faible : moins de 30 observations.")
-        else:
-            st.warning("Pas de données de loyer disponibles pour cette commune.")
-
-        # Offres d'emploi récentes
-        token_pe = get_pe_token()
-        if token_pe and pd.notna(row['code_postal']):
-            st.subheader("🧳 Offres d'emploi récentes")
-            code_insee = row["code_insee"]
-            offres = get_job_offers(code_insee, token_pe)
-            if offres:
-                for offre in offres:
-                    st.markdown(f"**{offre.get('intitule', 'Sans titre')}**")
-
-                    # 📍 Lieu
-                    lieu = offre.get("lieuTravail", {}).get("libelle", "Lieu non précisé")
-                    st.write(f"📍 {lieu}")
-
-                    # 🗓️ Date
-                    date_creation = offre.get("dateCreation")
-                    if date_creation:
-                        st.write(f"🗓️ Publiée le : {date_creation[:10]}")
-
-                    # 🎓 Alternance
-                    if offre.get("alternance", False):
-                        st.write("🎓 Offre en alternance")
-
-                    # 🔗 Lien vers l'offre
-                    url = offre.get("origineOffre", {}).get("url")
-                    url_origine = offre.get("origineOffre", {}).get("urlOrigine")
-
-                    if url:
-                        st.markdown(f"[🔗 Voir l'offre (France Travail)]({url})")
-                    elif url_origine:
-                        st.markdown(f"[🔗 Voir l'offre (partenaire)]({url_origine})")
-                    else:
-                        st.write("❌ Aucun lien vers l’offre fourni")
-
-                    st.markdown("---")
-
-
-            else:
-                st.info("Aucune offre récente trouvée dans cette zone.")
-                st.write("Debug - Code postal : ", str(int(row["code_postal"])))
-                st.write("Token : ", token_pe)
-
-
-
-######################################################################################################################################
-######################################################################################################################################
-######################################################################################################################################
-
-    # Détails pour la commune de droite
-    with col_detail_right:
-        st.header(f"🏙️ Détails de {commune_droite}")
-        details_droite = df[df["nom_standard"] == commune_droite]
-
-        if not details_droite.empty:
-            row = details_droite.iloc[0]
-
-            # Deux colonnes pour présentation
-            col1, col2 = st.columns(2)
-
-            with col1:
-                st.subheader("📍 Informations générales")
-                st.markdown(f"**Nom** : {row['nom_standard']}")
-                st.markdown(f"**Code postal** : {int(row['code_postal']) if not pd.isna(row['code_postal']) else 'Non disponible'}")
-                st.markdown(f"**Département** : {row['dep_nom']}")
-                st.markdown(f"**Région** : {row['reg_nom']}")
-
-            with col2:
-                st.subheader("👥 Démographie")
-                st.markdown(f"**Population** : {row['population']:,} habitants")
-                st.markdown(f"**Superficie** : {row['superficie_km2']} km²")
-                st.markdown(f"**Densité** : {row['grille_densite_texte']}")
-
-            st.markdown("---")
-
-            # Carte de localisation
-            st.subheader("🗺️ Localisation sur la carte")
-            df_map = pd.DataFrame({
-                'lat': [row['latitude_centre']],
-                'lon': [row['longitude_centre']]
-            })
-            col1, col2 = st.columns(2)
-
-            with col1:
-                # --- Gestion des communes sans coordonnées ---
-
-                # Vérifier s'il y a des NaN dans lat/lon
-                nb_villes_incompletes = df_map["lat"].isna().sum() + df_map["lon"].isna().sum()
-
-                # Supprimer les lignes sans lat/lon pour la carte
-                df_map = df_map.dropna(subset=["lat", "lon"])
-
-                # Si certaines communes n'ont pas été affichées, prévenir
-                if nb_villes_incompletes > 0:
-                    st.warning(f"⚠️ Cette ville n'a pas pu être affichée car ces coordonnées sont manquantes.")
-
-                # --- Afficher la carte ---
-                st.map(df_map, zoom=6)
-
-
-
-            st.markdown("---")
-
-            # Lien Wikipedia si disponible
-            if pd.notna(row['url_wikipedia']):
-                st.markdown(f"[🔗 Voir sur Wikipédia]({row['url_wikipedia']})")
-
-            # Image de la ville
-            code_insee_right = row["code_insee"]
-            if code_insee_right:
-                with st.spinner("🔎 Recherche de l'image..."):
-                    title_wiki = get_wikipedia_title_from_insee(code_insee_right)
-                    if title_wiki:
-                        image_url, city_name, _ = get_wikipedia_thumbnail(title_wiki)
-                        if image_url:
-                            st.image(image_url, caption=city_name, width=400)
-                        else:
-                            st.warning("Aucune image trouvée pour cette commune.")
-                    else:
-                        st.error("Aucune page Wikipédia trouvée pour ce code INSEE.")
-        else:
-            st.write("Aucune donnée disponible pour cette commune.")
-
-
-        # Récupération météo
+    
+    with col2:
+        st.header(f"🌦️ Météo - {commune_droite}")
+        
+        # Prévisions météo
         with st.spinner("Recherche de la météo..."):
             forecast_right = get_weather_forecast(code_insee_right)
             if forecast_right:
@@ -605,15 +578,15 @@ else:
                     "wind": "Vent (km/h)",
                     "sun_hours": "Ensoleillement (h)"
                 })
-                # 🆕 Reformater la colonne Date
+                df_meteo_right["Date"] = pd.to_datetime(df_meteo_right["Date"]).dt.strftime('%A')
                 df_meteo_right.loc[0, "Date"] = "Aujourd'hui"
                 st.table(df_meteo_right)
             else:
                 st.warning("Pas de données météo disponibles.")
-
-        # Récupération climat
-        latitude_right = row["latitude_centre"]
-        longitude_right = row["longitude_centre"]
+        
+        # Climat
+        latitude_right = data_droite["latitude_centre"]
+        longitude_right = data_droite["longitude_centre"]
 
         if pd.notna(latitude_right) and pd.notna(longitude_right):
             with st.spinner("Recherche du climat..."):
@@ -629,149 +602,64 @@ else:
                 else:
                     st.warning("Pas de données climatiques disponibles.")
 
-        loyer_right = get_loyer_info(code_insee_right, df_loyer)
-        if loyer_right:
-            st.subheader("Loyer moyen (T3 2023)")
-            st.write(f"🏠 Prix moyen au m² : {loyer_right['loypredm2']} €/m²")
-            st.write(f"📏 Intervalle estimé : {loyer_right['lwr']} € - {loyer_right['upr']} € /m²")
-            st.write(f"📈 Nombre d'annonces analysées : {loyer_right['nbobs']}")
-            if loyer_right['nbobs'] < 30:
-                st.warning("⚠️ Fiabilité faible : moins de 30 observations.")
 
+with onglet5:
+    st.header("🎭 Équipements culturels")
 
-        # Offres d'emploi récentes
-        token_pe = get_pe_token()
-        if token_pe and pd.notna(row['code_postal']):
-            st.subheader("🧳 Offres d'emploi récentes")
-            code_insee = row["code_insee"]
-            offres = get_job_offers(code_insee, token_pe)
+    df_culture = load_culture_data()
 
-            if offres:
-                for offre in offres:
-                    st.markdown(f"**{offre.get('intitule', 'Sans titre')}**")
+    # Filtrage par commune
+    lieux_gauche = df_culture[df_culture["code_insee"] == str(code_insee_left)]
+    lieux_droite = df_culture[df_culture["code_insee"] == str(code_insee_right)]
 
-                    # 📍 Lieu
-                    lieu = offre.get("lieuTravail", {}).get("libelle", "Lieu non précisé")
-                    st.write(f"📍 {lieu}")
+    # Sélection des types disponibles
+    types_lieux = sorted(df_culture["Type équipement ou lieu"].dropna().unique())
+    type_selectionne = st.multiselect("🎯 Filtrer par type d’équipement", types_lieux, default=types_lieux)
 
-                    # 🗓️ Date
-                    date_creation = offre.get("dateCreation")
-                    if date_creation:
-                        st.write(f"🗓️ Publiée le : {date_creation[:10]}")
+    lieux_gauche = lieux_gauche[lieux_gauche["Type équipement ou lieu"].isin(type_selectionne)]
+    lieux_droite = lieux_droite[lieux_droite["Type équipement ou lieu"].isin(type_selectionne)]
 
-                    # 🎓 Alternance
-                    if offre.get("alternance", False):
-                        st.write("🎓 Offre en alternance")
+    col1, col2 = st.columns(2)
 
-                    # 🔗 Lien vers l'offre
-                    url = offre.get("origineOffre", {}).get("url")
-                    url_origine = offre.get("origineOffre", {}).get("urlOrigine")
+    # 📍 Fonction carte avec info-bulle
+    def show_culture_map(df, nom_commune):
+        if df.empty:
+            st.info(f"Aucun équipement culturel trouvé pour {nom_commune}.")
+            return
 
-                    if url:
-                        st.markdown(f"[🔗 Voir l'offre (France Travail)]({url})")
-                    elif url_origine:
-                        st.markdown(f"[🔗 Voir l'offre (partenaire)]({url_origine})")
-                    else:
-                        st.write("❌ Aucun lien vers l’offre fourni")
+        st.markdown(f"### {nom_commune} ({len(df)} lieu(x))")
 
-                    st.markdown("---")
+        layer = pdk.Layer(
+            "ScatterplotLayer",
+            data=df,
+            get_position='[longitude, latitude]',
+            get_radius=100,
+            get_color=[255, 100, 100],
+            pickable=True,
+        )
 
-            else:
-                st.info("Aucune offre récente trouvée dans cette zone.")
-                st.write("Debug - Code postal : ", str(int(row["code_postal"])))
-                st.write("Token : ", token_pe)
+        tooltip = {
+            "html": "<b>{Nom}</b><br/>{Type équipement ou lieu}<br/>{Adresse}",
+            "style": {"backgroundColor": "white", "color": "black"}
+        }
 
-            
- # Section de comparaison des données d'emploi
-st.markdown("---")
-st.header("Comparaison des données d'emploi")
+        view_state = pdk.ViewState(
+            latitude=df["latitude"].mean(),
+            longitude=df["longitude"].mean(),
+            zoom=11,
+            pitch=0,
+        )
 
-df = load_data()
-df_emploi = load_employment_data()
+        st.pydeck_chart(pdk.Deck(layers=[layer], initial_view_state=view_state, tooltip=tooltip))
 
-# Nettoyage et standardisation des colonnes pour éviter les erreurs
-df_emploi.columns = df_emploi.columns.str.strip()
+        st.dataframe(
+            df[["Nom", "Type équipement ou lieu", "Adresse", "Domaine"]].dropna().reset_index(drop=True),
+            use_container_width=True
+        )
 
-# Affichage des colonnes pour debug (désactive si tout fonctionne)
-# st.write("Colonnes dans data.csv :", df_emploi.columns.tolist())
+    with col1:
+        show_culture_map(lieux_gauche, commune_gauche)
 
-# On cherche la colonne qui contient les codes INSEE
-possible_code_col = [col for col in df_emploi.columns if "code" in col.lower()]
-code_col = possible_code_col[0] if possible_code_col else None
-
-if code_col is None:
-    st.error("Impossible de trouver la colonne contenant les codes INSEE dans le fichier data.csv.")
-else:
-    # Sélection des lignes pour les deux communes
-    emploi_gauche = df_emploi[df_emploi[code_col].astype(str).str.strip() == str(code_insee_left)]
-    emploi_droite = df_emploi[df_emploi[code_col].astype(str).str.strip() == str(code_insee_right)]
-
-    # Vérifie si les deux communes sont présentes
-    if not emploi_gauche.empty and not emploi_droite.empty:
-        # Tentative de détection automatique des colonnes utiles
-        try:
-            pop_col = [col for col in df_emploi.columns if "population municipale" in col.lower()][0]
-            nb_emplois_col = [col for col in df_emploi.columns if "emplois au lieu de travail" in col.lower()][0]
-            part_salaries_col = [col for col in df_emploi.columns if "emplois sal" in col.lower()][0]
-            
-
-            compare_df = pd.DataFrame({
-                'Commune': [commune_gauche, commune_droite],
-                'Population': [
-                    int(str(emploi_gauche.iloc[0][pop_col]).replace(" ", "").replace(",", "")),
-                    int(str(emploi_droite.iloc[0][pop_col]).replace(" ", "").replace(",", ""))
-                ],
-                '% emplois salariés': [
-                    float(str(emploi_gauche.iloc[0][part_salaries_col]).replace(",", ".").replace("%", "").strip()),
-                    float(str(emploi_droite.iloc[0][part_salaries_col]).replace(",", ".").replace("%", "").strip())
-                ],
-                'Nb emplois': [
-                    int(str(emploi_gauche.iloc[0][nb_emplois_col]).replace(" ", "").replace(",", "")),
-                    int(str(emploi_droite.iloc[0][nb_emplois_col]).replace(" ", "").replace(",", ""))
-                ]
-            })
-
-            # Calcul du ratio emplois/population
-            compare_df['Emplois pour 1000 hab.'] = (compare_df['Nb emplois'] / compare_df['Population']) * 1000
-
-            # Affichage des données
-            st.dataframe(compare_df.set_index("Commune").T)
-
-
-            # ---------- GRAPHIQUE Plotly interactif ----------
-            import plotly.express as px
-
-            # Graphique 3 : Population
-            fig3 = px.bar(compare_df, x="Commune", y="Population", color="Commune",
-                        title="Population municipale (2022)", text="Population")
-            st.plotly_chart(fig3, use_container_width=True)
-
-            # Graphique 1 : Nombre d'emplois
-            fig1 = px.bar(compare_df, x="Commune", y="Nb emplois", color="Commune",
-                        title="Nombre total d'emplois (2021)", text="Nb emplois")
-            st.plotly_chart(fig1, use_container_width=True)
-
-            # Graphique 2 : Pourcentage d'emplois salariés
-            fig2 = px.bar(compare_df, x="Commune", y="% emplois salariés", color="Commune",
-                        title="Part des emplois salariés (%)", text="% emplois salariés")
-            fig2.update_yaxes(range=[0, 100])
-            st.plotly_chart(fig2, use_container_width=True)
-
-
-            compare_df["Emplois pour 1000 hab. arrondis"] = compare_df["Emplois pour 1000 hab."].round(0).astype(int)
-            fig4 = px.bar(compare_df, x="Commune", y="Emplois pour 1000 hab. arrondis", color="Commune",
-              title="Emplois pour 1000 habitants", 
-              text="Emplois pour 1000 hab. arrondis")
-            st.plotly_chart(fig4, use_container_width=True)
-
-
-        except Exception as e:
-            st.error(f"Erreur lors de l'analyse des données d'emploi : {e}")
-    else:
-        st.warning("Données d'emploi manquantes pour une ou les deux communes.")
-
-
-
-
-
+    with col2:
+        show_culture_map(lieux_droite, commune_droite)
 
