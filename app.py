@@ -30,12 +30,22 @@ def get_job_offers(insee_code, token, rayon=10):
     url = "https://api.pole-emploi.io/partenaire/offresdemploi/v2/offres/search"
     headers = {"Authorization": f"Bearer {token}"}
     params = {
-        "commune": insee_code,  # utilise code INSEE ici
+        "commune": insee_code,
         "rayon": rayon,
         "range": "0-5",
     }
+
     response = requests.get(url, headers=headers, params=params)
-    return response.json().get("resultats", [])
+
+    try:
+        data = response.json()
+        return data.get("resultats", [])
+    except ValueError:
+        st.warning("❌ Réponse invalide reçue de l'API Pôle Emploi.")
+        st.text(f"Statut: {response.status_code}")
+        st.text(f"Contenu brut: {response.text[:300]}...")  # Affiche les premiers caractères de la réponse
+        return []
+
 
 
 
@@ -759,6 +769,9 @@ else:
             st.error(f"Erreur lors de l'analyse des données d'emploi : {e}")
     else:
         st.warning("Données d'emploi manquantes pour une ou les deux communes.")
+
+
+
 
 
 
