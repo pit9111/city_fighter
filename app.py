@@ -496,7 +496,7 @@ with onglet3:
         st.header(f"🏠 Logement - {commune_gauche}")
         loyer_left = get_loyer_info(code_insee_left, df_loyer)
         if loyer_left:
-            st.write(f"**Prix moyen au m²** : {loyer_left['loypredm2']} €/m²")
+            st.write(f"**Loyer moyen au m²** : {loyer_left['loypredm2']} €/m²")
             st.write(f"**Intervalle estimé** : {loyer_left['lwr']} € - {loyer_left['upr']} € /m²")
             st.write(f"**Nombre d'annonces analysées** : {loyer_left['nbobs']}")
             if loyer_left['nbobs'] < 30:
@@ -508,7 +508,7 @@ with onglet3:
         st.header(f"🏠 Logement - {commune_droite}")
         loyer_right = get_loyer_info(code_insee_right, df_loyer)
         if loyer_right:
-            st.write(f"**Prix moyen au m²** : {loyer_right['loypredm2']} €/m²")
+            st.write(f"**Loyer moyen au m²** : {loyer_right['loypredm2']} €/m²")
             st.write(f"**Intervalle estimé** : {loyer_right['lwr']} € - {loyer_right['upr']} € /m²")
             st.write(f"**Nombre d'annonces analysées** : {loyer_right['nbobs']}")
             if loyer_right['nbobs'] < 30:
