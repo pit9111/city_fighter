@@ -9,7 +9,7 @@ st.set_page_config(page_title="Comparateur de Communes", layout="wide")
 
 # 🔐 Authentification OAuth2
 @st.cache_data
-def get_pe_token():
+def get_pe_token(ttl=3500):
     url = "https://entreprise.pole-emploi.fr/connexion/oauth2/access_token?realm=/partenaire"
     data = {
         "grant_type": "client_credentials",
