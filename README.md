@@ -71,3 +71,39 @@ CITY/
 >
 > ```
 >
+
+# 📖 Mode d'emploi de l'interface
+
+## 1. Vue globale de l'application
+L'application se présente sous la forme d'une interface simple et épurée.  
+À gauche, vous trouverez la barre latérale pour sélectionner les communes à comparer.  
+Au centre et à droite, les informations s'affichent dans des onglets thématiques.
+
+![Vue globale de l'application](.assets/vue_globale.png)
+
+---
+
+## 2. Sélection des communes
+Dans la barre latérale, sélectionnez la **commune de gauche** et la **commune de droite** via des menus déroulants.  
+Vous pouvez choisir n'importe quelle ville disponible dans la base.
+
+![Sélection des communes](.assets/selection_ville.png)
+
+---
+
+## 3. Présentation des onglets
+Après avoir sélectionné vos communes, naviguez à travers les différents **onglets** pour explorer les informations :  
+- 📊 Données générales
+- 💼 Emploi
+- 🏠 Logement
+- 🌦️ Météo
+- 🎭 Culture
+- 🎓 Formation
+
+Chaque onglet affiche les données comparatives entre les deux communes.
+
+![Présentation des onglets](.assets/onglets.png)
+
+
+
+
