@@ -102,7 +102,7 @@ Après avoir sélectionné vos communes, naviguez à travers les différents **o
 
 Chaque onglet affiche les données comparatives entre les deux communes.
 
-![Présentation des onglets](.assets/onglets.png)
+![Présentation des onglets](assets/onglets.png)
 
 
 
