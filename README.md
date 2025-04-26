@@ -10,11 +10,19 @@ Lien de l'application : [💥🏙️City Fighter](https://cityfighter-da-silva-n
 ```sh
 CITY/
 ├── app.py
+├── README.md
+├── requirements.txt
+├── Rapport SAE Outils Décisionnels.docx
+│
 ├── data/
+│   ├── base_culture.csv
+│   ├── base_formation.csv
 │   ├── communes_synthetique.csv
 │   ├── communes-france-2025 (1).csv
+│   ├── data.csv
 │   ├── guide-utilisation-des-donnees.pdf
-│   ├── pred-app-mef-dhup.csv
+│   └── pred-app-mef-dhup.csv
+│
 ├── utils/
 │   ├── clim.py
 │   ├── climat.py
@@ -22,6 +30,11 @@ CITY/
 │   ├── loyer.py
 │   ├── meteo.py
 │   └── wiki.py
+│
+├── assets/
+│   ├── onglets.png
+│   ├── selection_ville.png
+│   ├── vue_globale.png
 
 
 
