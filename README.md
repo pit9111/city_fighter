@@ -79,7 +79,7 @@ L'application se présente sous la forme d'une interface simple et épurée.
 À gauche, vous trouverez la barre latérale pour sélectionner les communes à comparer.  
 Au centre et à droite, les informations s'affichent dans des onglets thématiques.
 
-![Vue globale de l'application](.assets/vue_globale.png)
+![Vue globale de l'application](assets/vue_globale.png)
 
 ---
 
@@ -87,7 +87,7 @@ Au centre et à droite, les informations s'affichent dans des onglets thématiqu
 Dans la barre latérale, sélectionnez la **commune de gauche** et la **commune de droite** via des menus déroulants.  
 Vous pouvez choisir n'importe quelle ville disponible dans la base.
 
-![Sélection des communes](.assets/selection_ville.png)
+![Sélection des communes](assets/selection_ville.png)
 
 ---
 
