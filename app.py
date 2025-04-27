@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import requests
 
-import requests
 import pydeck as pdk
 from datetime import datetime
 # 🔐 Authentification OAuth2
@@ -99,7 +98,7 @@ def get_wikipedia_thumbnail(title):
 def get_weather_forecast(insee_code):
     import requests
 
-    TOKEN = "3470179d59546380b4311d495d6be96833c5041f8eda9188f444f460bb60715a"
+    TOKEN = "53ed6fa76d3c503a4d2577a7d14909104244f231fdf3fc9cbd639b146073801b"
     url = f"https://api.meteo-concept.com/api/forecast/daily?token={TOKEN}&insee={insee_code}"
 
     weather_codes = {0: "Soleil", 1: "Peu nuageux", 2: "Ciel voilé", 3: "Nuageux", 4: "Très nuageux", 5: "Couvert",6: "Brouillard", 7: "Brouillard givrant", 10: "Pluie faible", 11: "Pluie modérée", 12: "Pluie forte",13: "Pluie faible verglaçante", 14: "Pluie modérée verglaçante", 15: "Pluie forte verglaçante",16: "Bruine", 20: "Neige faible", 21: "Neige modérée", 22: "Neige forte",
@@ -223,9 +222,39 @@ def load_loyer_data():
 
     return df_loyer
 
+
 @st.cache_data
 def get_loyer_info(insee_code, df_loyer):
-    infos = df_loyer[df_loyer["INSEE_C"] == str(insee_code)]
+    grandes_villes = {
+        "Paris": "751",
+        "Marseille": "132",
+        "Lyon": "693"
+    }
+
+    insee_code_str = str(insee_code)
+
+    # Vérifie si c'est une grande ville
+    for ville, prefixe in grandes_villes.items():
+        if insee_code_str.startswith(prefixe):
+            infos = df_loyer[df_loyer["INSEE_C"].str.startswith(prefixe)]
+            if infos.empty:
+                return None
+            else:
+                # ⚡ Ici on prend la moyenne pour être logique
+                moy_loypredm2 = round(infos["loypredm2"].mean(), 2)
+                moy_lwr = round(infos["lwr.IPm2"].mean(), 2)
+                moy_upr = round(infos["upr.IPm2"].mean(), 2)
+                nbobs_total = int(infos["nbobs_com"].sum())
+
+                return {
+                    "loypredm2": moy_loypredm2,
+                    "lwr": moy_lwr,
+                    "upr": moy_upr,
+                    "nbobs": nbobs_total
+                }
+
+    # 🔹 Cas normal pour les autres villes
+    infos = df_loyer[df_loyer["INSEE_C"] == insee_code_str]
     if infos.empty:
         return None
     else:
@@ -236,6 +265,7 @@ def get_loyer_info(insee_code, df_loyer):
             "upr": round(row["upr.IPm2"], 2),
             "nbobs": int(row["nbobs_com"])
         }
+
 
 # Chargement des données d'emploi
 @st.cache_data
@@ -258,6 +288,7 @@ def load_culture_data():
     df_culture = df_culture.rename(columns={"Latitude": "latitude", "Longitude": "longitude"})
     df_culture = df_culture.dropna(subset=["latitude", "longitude"])  # supprime les lignes sans coord
     return df_culture
+
 @st.cache_data
 def load_formation_data():
     df_form = pd.read_csv("data/base_formation.csv", sep=";", encoding="utf-8", low_memory=False)
@@ -284,6 +315,14 @@ with st.sidebar:
     commune_droite_defaut = communes[1]
     commune_gauche = st.selectbox("Commune de gauche", communes, index=0, key="commune_gauche")
     commune_droite = st.selectbox("Commune de droite", communes, index=1, key="commune_droite")
+
+    
+    st.markdown("---")
+    st.markdown("**👥 Connectez-vous avec nous sur LinkedIn :**")
+    st.markdown("[Daniel Da Silva](https://www.linkedin.com/in/daniel-da-silva-50368a268/)")
+    st.markdown("[Furkan Narin](https://www.linkedin.com/in/furkan-narin/)")
+    st.markdown("[Léo-Paul Houitte](https://www.linkedin.com/in/l%C3%A9o-paul-houitte/)")
+
 
 
 # Récupération des données
@@ -387,7 +426,6 @@ with onglet1:
         
 
 # Onglet 2: Emploi
-# Onglet 2: Emploi
 with onglet2:
     st.header("Comparaison des données d'emploi")
     
@@ -460,6 +498,10 @@ with onglet2:
                   text="Emplois pour 1000 hab. arrondis")
                 st.plotly_chart(fig4, use_container_width=True)
 
+                st.markdown("---")
+                st.markdown("**Sources de données :** [Statistiques locales INSEE](https://statistiques-locales.insee.fr/#c=home)")
+
+
             except Exception as e:
                 st.error(f"Erreur lors de l'analyse des données d'emploi : {e}")
             
@@ -512,12 +554,18 @@ with onglet2:
                             elif url_origine:
                                 st.markdown(f"[🔗 Voir l'offre (partenaire)]({url_origine})")
                             st.markdown("---")
+
+                            st.markdown("---")
+                            st.markdown("**Sources de données :** [API Offres d'emploi - France Travail (ex-Pôle Emploi)](https://www.data.gouv.fr/fr/dataservices/api-offres-demploi/)")
+
                     else:
                         st.info("Aucune offre récente trouvée dans cette zone.")
             else:
                 st.error("Impossible de se connecter à l'API Pôle Emploi")
         else:
             st.warning("Données d'emploi manquantes pour une ou les deux communes.")
+
+
 def afficher_loyer(nom_commune, loyer_info):
     if not loyer_info:
         st.warning(f"Pas de données de loyer disponibles pour {nom_commune}.")
@@ -532,7 +580,7 @@ def afficher_loyer(nom_commune, loyer_info):
     st.markdown(f"""
     <div style="border: 1px solid #CCC; border-radius: 12px; padding: 20px; background-color: {couleur}; margin-bottom: 20px;">
         <h3 style="text-align:center;">🏠 {nom_commune}</h3>
-        <p style="font-size: 26px; text-align:center;"><b>💶 {loyer_info['loypredm2']} € / m²</b></p>
+        <p style="font-size: 26px; text-align:center;"><b>💶 Loyer : {loyer_info['loypredm2']} € / m²</b></p>
         <p style="text-align:center; color: #666;">📏 Intervalle estimé : {loyer_info['lwr']} € – {loyer_info['upr']} € / m²</p>
         <p style="text-align:center; color: #999;">📊 {loyer_info['nbobs']} annonces analysées</p>
         {message_fiabilite}
@@ -542,6 +590,7 @@ def afficher_loyer(nom_commune, loyer_info):
 # Onglet 3: Logement
 with onglet3:
     col1, col2 = st.columns(2)
+
 
     with col1:
         loyer_left = get_loyer_info(code_insee_left, df_loyer)
@@ -711,20 +760,36 @@ with onglet5:
 
     df_culture = load_culture_data()
 
+    def filtrer_par_insee(df, code_insee, commune_nom):
+        grandes_villes = {
+            "Paris": "751",
+            "Marseille": "13055",
+            "Lyon": "69123"
+        }
+
+        for ville, prefixe in grandes_villes.items():
+            if ville.lower() in commune_nom.lower():
+                return df[df["code_insee"].str.startswith(prefixe)]
+        
+        return df[df["code_insee"] == str(code_insee)]
+    
     # Filtrage par commune
-    lieux_gauche = df_culture[df_culture["code_insee"] == str(code_insee_left)]
-    lieux_droite = df_culture[df_culture["code_insee"] == str(code_insee_right)]
+    lieux_gauche = filtrer_par_insee(df_culture, code_insee_left, commune_gauche)
+    lieux_droite = filtrer_par_insee(df_culture, code_insee_right, commune_droite)
 
-    # Sélection des types disponibles
-    types_lieux = sorted(df_culture["Type équipement ou lieu"].dropna().unique())
-    type_selectionne = st.multiselect("🎯 Filtrer par type d’équipement", types_lieux, default=types_lieux)
+    st.markdown("#### Filtrer par type d’équipement")
+    search_culture = st.text_input("Tapez un ou plusieurs mots-clé(s) séparés par une virgule (ex: musée, cinéma, bibliothèque)", value="")
 
-    lieux_gauche = lieux_gauche[lieux_gauche["Type équipement ou lieu"].isin(type_selectionne)]
-    lieux_droite = lieux_droite[lieux_droite["Type équipement ou lieu"].isin(type_selectionne)]
+    if search_culture:
+        keywords_culture = [kw.strip() for kw in search_culture.split(",") if kw.strip()]
+        mask_culture = df_culture["Type équipement ou lieu"].apply(lambda x: any(kw.lower() in str(x).lower() for kw in keywords_culture))
+        df_culture_filtered = df_culture[mask_culture]
+    else:
+        df_culture_filtered = df_culture.copy()
+
 
     col1, col2 = st.columns(2)
 
-    # 📍 Fonction carte avec info-bulle
     def show_culture_map(df, nom_commune):
         if df.empty:
             st.info(f"Aucun équipement culturel trouvé pour {nom_commune}.")
@@ -737,7 +802,7 @@ with onglet5:
             data=df,
             get_position='[longitude, latitude]',
             get_radius=100,
-            get_color=[255, 100, 100],
+            get_color=[255, 100, 100],  # Rouge doux
             pickable=True,
         )
 
@@ -753,12 +818,24 @@ with onglet5:
             pitch=0,
         )
 
-        st.pydeck_chart(pdk.Deck(layers=[layer], initial_view_state=view_state, tooltip=tooltip))
+        st.pydeck_chart(pdk.Deck(
+            layers=[layer],
+            initial_view_state=view_state,
+            tooltip=tooltip,
+            map_style="mapbox://styles/mapbox/light-v9"  # ✅ Fond gris clair
+        ))
 
+        # ✅ Tableau sans index
         st.dataframe(
-            df[["Nom", "Type équipement ou lieu", "Adresse", "Domaine"]].dropna().reset_index(drop=True),
-            use_container_width=True
+            df[["Nom", "Type équipement ou lieu", "Adresse", "Domaine"]].dropna(),
+            use_container_width=True,
+            hide_index=True  # ⚡ Solution Streamlit 1.30+ pour cacher index
         )
+
+        st.markdown("---")
+        st.markdown("**Sources de données :** [Base des lieux et équipements culturels - BASILIC](https://www.data.gouv.fr/fr/datasets/base-des-lieux-et-equipements-culturels-basilic/)")
+
+
 
     with col1:
         show_culture_map(lieux_gauche, commune_gauche)
@@ -766,26 +843,34 @@ with onglet5:
     with col2:
         show_culture_map(lieux_droite, commune_droite)
 
-    import pydeck as pdk
 
-    with onglet6:
+
+
+
+with onglet6:
         st.header("🎓 Formations disponibles dans chaque commune")
 
         df_form = load_formation_data()
 
-        # Filtrage par code INSEE des deux communes
-        villes_gauche = df_form[df_form["Commune"].str.lower() == commune_gauche.lower()]
-        villes_droite = df_form[df_form["Commune"].str.lower() == commune_droite.lower()]
+    # 🎯 Saisie libre pour filtrer le type de formation
+        st.markdown("#### Filtrer par type de formation")
+        search_type = st.text_input("Tapez un ou plusieurs mot-clé(s) du type de formation (ex: Licence, BTS, BUT)", value="")
 
-        # Liste des types de formation
-        all_types = sorted(df_form["Types de formation"].dropna().unique())
-        selected_types = st.multiselect("🎯 Filtrer par type de formation", all_types, default=all_types)
+        if search_type:
+            keywords = [kw.strip() for kw in search_type.split(",") if kw.strip()]
+            mask = df_form["Types de formation"].apply(lambda x: any(kw.lower() in str(x).lower() for kw in keywords))
+            df_form_filtered = df_form[mask]
+        else:
+            df_form_filtered = df_form.copy()
 
-        villes_gauche = villes_gauche[villes_gauche["Types de formation"].isin(selected_types)]
-        villes_droite = villes_droite[villes_droite["Types de formation"].isin(selected_types)]
+
+        # Sélection des communes
+        villes_gauche = df_form_filtered[df_form_filtered["Commune"].str.lower() == commune_gauche.lower()]
+        villes_droite = df_form_filtered[df_form_filtered["Commune"].str.lower() == commune_droite.lower()]
 
         col1, col2 = st.columns(2)
 
+        # 📍 Fonction carte + tableau
         def show_formation_map(df, nom_commune):
             if df.empty:
                 st.info(f"Aucune formation trouvée pour {nom_commune}.")
@@ -798,7 +883,7 @@ with onglet5:
                 data=df,
                 get_position='[longitude, latitude]',
                 get_radius=100,
-                get_color=[100, 100, 250],
+                get_color=[0, 100, 200],  # Bleu
                 pickable=True,
             )
 
@@ -814,12 +899,24 @@ with onglet5:
                 pitch=0,
             )
 
-            st.pydeck_chart(pdk.Deck(layers=[layer], initial_view_state=view_state, tooltip=tooltip))
+            st.pydeck_chart(pdk.Deck(
+                layers=[layer],
+                initial_view_state=view_state,
+                tooltip=tooltip,
+                map_style="mapbox://styles/mapbox/light-v9"  # ✅ Fond gris clair
+            ))
 
+            # ✅ Tableau sans index
             st.dataframe(
-                df[["Nom de l'établissement", "Nom long de la formation", "Types de formation"]].dropna().reset_index(drop=True),
-                use_container_width=True
+                df[["Nom de l'établissement", "Nom long de la formation", "Types de formation", "Commune", "Lien vers la fiche formation"]].dropna(),
+                use_container_width=True,
+                hide_index=True  # ⚡ Solution Streamlit 1.30+ pour cacher index
             )
+
+            st.markdown("---")
+            st.markdown("**Sources de données :** [Cartographie Formations Parcoursup - Ministère de l'Éducation](https://data.education.gouv.fr/explore/dataset/fr-esr-cartographie_formations_parcoursup/table/?disjunctive.tf&disjunctive.nm&disjunctive.fl&disjunctive.nmc&disjunctive.amg&sort=-annee)")
+
+
 
         with col1:
             show_formation_map(villes_gauche, commune_gauche)
