@@ -1,0 +1,484 @@
+code_insee,nom_standard,dep_nom,reg_nom,population,superficie_km2,grille_densite_texte,code_postal,url_wikipedia,latitude_centre,longitude_centre
+01053,Bourg-en-Bresse,Ain,Auvergne-Rhône-Alpes,41525,24,Centres urbains intermédiaires,1000.0,https://fr.wikipedia.org/wiki/fr:Bourg-en-Bresse,46.205,5.246
+01283,Oyonnax,Ain,Auvergne-Rhône-Alpes,22277,36,Centres urbains intermédiaires,1100.0,https://fr.wikipedia.org/wiki/fr:Oyonnax,46.26,5.653
+02408,Laon,Aisne,Hauts-de-France,24021,45,Centres urbains intermédiaires,2000.0,https://fr.wikipedia.org/wiki/fr:Laon,49.568,3.621
+02691,Saint-Quentin,Aisne,Hauts-de-France,52958,23,Centres urbains intermédiaires,2100.0,https://fr.wikipedia.org/wiki/fr:Saint-Quentin,49.847,3.278
+02722,Soissons,Aisne,Hauts-de-France,28705,12,Centres urbains intermédiaires,2200.0,https://fr.wikipedia.org/wiki/fr:Soissons,49.379,3.325
+03185,Montluçon,Allier,Auvergne-Rhône-Alpes,33342,21,Centres urbains intermédiaires,3100.0,https://fr.wikipedia.org/wiki/fr:Montluçon,46.339,2.604
+03310,Vichy,Allier,Auvergne-Rhône-Alpes,25789,6,Centres urbains intermédiaires,3200.0,https://fr.wikipedia.org/wiki/fr:Vichy,46.13,3.424
+04112,Manosque,Alpes-de-Haute-Provence,Provence-Alpes-Côte d'Azur,22926,57,Centres urbains intermédiaires,4100.0,https://fr.wikipedia.org/wiki/fr:Manosque,43.835,5.791
+05061,Gap,Hautes-Alpes,Provence-Alpes-Côte d'Azur,40500,109,Centres urbains intermédiaires,5000.0,https://fr.wikipedia.org/wiki/fr:Gap,44.58,6.065
+06004,Antibes,Alpes-Maritimes,Provence-Alpes-Côte d'Azur,75130,27,Grands centres urbains,6160.0,https://fr.wikipedia.org/wiki/fr:Antibes,43.588,7.106
+06027,Cagnes-sur-Mer,Alpes-Maritimes,Provence-Alpes-Côte d'Azur,52580,18,Grands centres urbains,6800.0,https://fr.wikipedia.org/wiki/fr:Cagnes-sur-Mer,43.672,7.153
+06029,Cannes,Alpes-Maritimes,Provence-Alpes-Côte d'Azur,73255,21,Grands centres urbains,6150.0,https://fr.wikipedia.org/wiki/fr:Cannes,43.553,7.004
+06030,Le Cannet,Alpes-Maritimes,Provence-Alpes-Côte d'Azur,41597,8,Grands centres urbains,6110.0,https://fr.wikipedia.org/wiki/fr:Le Cannet,43.573,7.006
+06069,Grasse,Alpes-Maritimes,Provence-Alpes-Côte d'Azur,48323,44,Centres urbains intermédiaires,6130.0,https://fr.wikipedia.org/wiki/fr:Grasse,43.656,6.932
+06079,Mandelieu-la-Napoule,Alpes-Maritimes,Provence-Alpes-Côte d'Azur,21561,32,Grands centres urbains,6210.0,https://fr.wikipedia.org/wiki/fr:Mandelieu-la-Napoule,43.538,6.918
+06083,Menton,Alpes-Maritimes,Provence-Alpes-Côte d'Azur,30412,14,Centres urbains intermédiaires,6500.0,https://fr.wikipedia.org/wiki/fr:Menton (Alpes-Maritimes),43.791,7.494
+06088,Nice,Alpes-Maritimes,Provence-Alpes-Côte d'Azur,348085,74,Grands centres urbains,6000.0,https://fr.wikipedia.org/wiki/fr:Nice,43.712,7.238
+06123,Saint-Laurent-du-Var,Alpes-Maritimes,Provence-Alpes-Côte d'Azur,30941,9,Grands centres urbains,6700.0,https://fr.wikipedia.org/wiki/fr:Saint-Laurent-du-Var,43.686,7.182
+06155,Vallauris,Alpes-Maritimes,Provence-Alpes-Côte d'Azur,28025,13,Grands centres urbains,6220.0,https://fr.wikipedia.org/wiki/fr:Vallauris,43.577,7.058
+08105,Charleville-Mézières,Ardennes,Grand Est,46398,32,Centres urbains intermédiaires,8000.0,https://fr.wikipedia.org/wiki/fr:Charleville-Mézières,49.775,4.717
+10387,Troyes,Aube,Grand Est,62782,13,Grands centres urbains,10000.0,https://fr.wikipedia.org/wiki/fr:Troyes,48.297,4.078
+11069,Carcassonne,Aude,Occitanie,46218,65,Centres urbains intermédiaires,11000.0,https://fr.wikipedia.org/wiki/fr:Carcassonne,43.209,2.344
+11262,Narbonne,Aude,Occitanie,56395,175,Centres urbains intermédiaires,11100.0,https://fr.wikipedia.org/wiki/fr:Narbonne,43.165,3.02
+12145,Millau,Aveyron,Occitanie,21712,170,Centres urbains intermédiaires,12100.0,https://fr.wikipedia.org/wiki/fr:Millau,44.098,3.117
+12202,Rodez,Aveyron,Occitanie,24207,11,Centres urbains intermédiaires,12000.0,https://fr.wikipedia.org/wiki/fr:Rodez,44.358,2.567
+13001,Aix-en-Provence,Bouches-du-Rhône,Provence-Alpes-Côte d'Azur,147478,188,Grands centres urbains,13100.0,https://fr.wikipedia.org/wiki/fr:Aix-en-Provence,43.536,5.399
+13002,Allauch,Bouches-du-Rhône,Provence-Alpes-Côte d'Azur,21490,50,Grands centres urbains,13190.0,https://fr.wikipedia.org/wiki/fr:Allauch,43.353,5.511
+13004,Arles,Bouches-du-Rhône,Provence-Alpes-Côte d'Azur,50415,758,Centres urbains intermédiaires,13280.0,https://fr.wikipedia.org/wiki/fr:Arles,43.547,4.662
+13005,Aubagne,Bouches-du-Rhône,Provence-Alpes-Côte d'Azur,47342,55,Grands centres urbains,13400.0,https://fr.wikipedia.org/wiki/fr:Aubagne,43.294,5.563
+13028,La Ciotat,Bouches-du-Rhône,Provence-Alpes-Côte d'Azur,36987,32,Centres urbains intermédiaires,13600.0,https://fr.wikipedia.org/wiki/fr:La Ciotat,43.193,5.613
+13041,Gardanne,Bouches-du-Rhône,Provence-Alpes-Côte d'Azur,21174,27,Centres urbains intermédiaires,13120.0,https://fr.wikipedia.org/wiki/fr:Gardanne,43.453,5.48
+13047,Istres,Bouches-du-Rhône,Provence-Alpes-Côte d'Azur,44577,114,Centres urbains intermédiaires,13118.0,https://fr.wikipedia.org/wiki/fr:Istres,43.55,4.951
+13054,Marignane,Bouches-du-Rhône,Provence-Alpes-Côte d'Azur,33003,24,Centres urbains intermédiaires,13700.0,https://fr.wikipedia.org/wiki/fr:Marignane,43.417,5.212
+13055,Marseille,Bouches-du-Rhône,Provence-Alpes-Côte d'Azur,873076,241,Grands centres urbains,13000.0,https://fr.wikipedia.org/wiki/fr:Marseille,43.2965,5.3698
+13056,Martigues,Bouches-du-Rhône,Provence-Alpes-Côte d'Azur,48568,74,Grands centres urbains,13500.0,https://fr.wikipedia.org/wiki/fr:Martigues,43.38,5.05
+13063,Miramas,Bouches-du-Rhône,Provence-Alpes-Côte d'Azur,26405,26,Centres urbains intermédiaires,13140.0,https://fr.wikipedia.org/wiki/fr:Miramas,43.584,5.014
+13071,Les Pennes-Mirabeau,Bouches-du-Rhône,Provence-Alpes-Côte d'Azur,22161,34,Ceintures urbaines,13170.0,https://fr.wikipedia.org/wiki/fr:Les Pennes-Mirabeau,43.403,5.316
+13103,Salon-de-Provence,Bouches-du-Rhône,Provence-Alpes-Côte d'Azur,44731,71,Centres urbains intermédiaires,13300.0,https://fr.wikipedia.org/wiki/fr:Salon-de-Provence,43.646,5.068
+13117,Vitrolles,Bouches-du-Rhône,Provence-Alpes-Côte d'Azur,35532,37,Centres urbains intermédiaires,13127.0,https://fr.wikipedia.org/wiki/fr:Vitrolles (Bouches-du-Rhône),43.45,5.264
+14118,Caen,Calvados,Normandie,108200,26,Grands centres urbains,14000.0,https://fr.wikipedia.org/wiki/fr:Caen,49.185,-0.37
+14327,Hérouville-Saint-Clair,Calvados,Normandie,22227,11,Grands centres urbains,14200.0,https://fr.wikipedia.org/wiki/fr:Hérouville-Saint-Clair,49.207,-0.331
+15014,Aurillac,Cantal,Auvergne-Rhône-Alpes,25815,29,Centres urbains intermédiaires,15000.0,https://fr.wikipedia.org/wiki/fr:Aurillac,44.924,2.442
+16015,Angoulême,Charente,Nouvelle-Aquitaine,41086,22,Centres urbains intermédiaires,16000.0,https://fr.wikipedia.org/wiki/fr:Angoulême,45.647,0.145
+17299,Rochefort,Charente-Maritime,Nouvelle-Aquitaine,23092,22,Centres urbains intermédiaires,17300.0,https://fr.wikipedia.org/wiki/fr:Rochefort (Charente-Maritime),45.943,-0.972
+17300,La Rochelle,Charente-Maritime,Nouvelle-Aquitaine,78535,32,Grands centres urbains,17000.0,https://fr.wikipedia.org/wiki/fr:La Rochelle,46.162,-1.175
+17415,Saintes,Charente-Maritime,Nouvelle-Aquitaine,25518,46,Centres urbains intermédiaires,17100.0,https://fr.wikipedia.org/wiki/fr:Saintes,45.742,-0.65
+18033,Bourges,Cher,Centre-Val de Loire,63702,69,Grands centres urbains,18000.0,https://fr.wikipedia.org/wiki/fr:Bourges,47.075,2.404
+18279,Vierzon,Cher,Centre-Val de Loire,25348,75,Centres urbains intermédiaires,18100.0,https://fr.wikipedia.org/wiki/fr:Vierzon,47.237,2.079
+19031,Brive-la-Gaillarde,Corrèze,Nouvelle-Aquitaine,46599,48,Centres urbains intermédiaires,19100.0,https://fr.wikipedia.org/wiki/fr:Brive-la-Gaillarde,45.144,1.519
+21054,Beaune,Côte-d'Or,Bourgogne-Franche-Comté,20032,31,Centres urbains intermédiaires,21200.0,https://fr.wikipedia.org/wiki/fr:Beaune,47.026,4.838
+21231,Dijon,Côte-d'Or,Bourgogne-Franche-Comté,159346,42,Grands centres urbains,21000.0,https://fr.wikipedia.org/wiki/fr:Dijon,47.323,5.038
+22113,Lannion,Côtes-d'Armor,Bretagne,20344,48,Petites villes,22300.0,https://fr.wikipedia.org/wiki/fr:Lannion,48.743,-3.462
+22278,Saint-Brieuc,Côtes-d'Armor,Bretagne,44224,19,Grands centres urbains,22000.0,https://fr.wikipedia.org/wiki/fr:Saint-Brieuc,48.515,-2.762
+24037,Bergerac,Dordogne,Nouvelle-Aquitaine,26323,57,Centres urbains intermédiaires,24100.0,https://fr.wikipedia.org/wiki/fr:Bergerac (Dordogne),44.854,0.486
+24322,Périgueux,Dordogne,Nouvelle-Aquitaine,29516,10,Centres urbains intermédiaires,24000.0,https://fr.wikipedia.org/wiki/fr:Périgueux,45.192,0.712
+25056,Besançon,Doubs,Bourgogne-Franche-Comté,119198,65,Grands centres urbains,25000.0,https://fr.wikipedia.org/wiki/fr:Besançon,47.255,6.02
+25388,Montbéliard,Doubs,Bourgogne-Franche-Comté,25573,15,Grands centres urbains,25200.0,https://fr.wikipedia.org/wiki/fr:Montbéliard,47.516,6.792
+26198,Montélimar,Drôme,Auvergne-Rhône-Alpes,40399,46,Centres urbains intermédiaires,26200.0,https://fr.wikipedia.org/wiki/fr:Montélimar,44.554,4.749
+26281,Romans-sur-Isère,Drôme,Auvergne-Rhône-Alpes,32911,33,Centres urbains intermédiaires,26100.0,https://fr.wikipedia.org/wiki/fr:Romans-sur-Isère,45.055,5.038
+26362,Valence,Drôme,Auvergne-Rhône-Alpes,64483,37,Grands centres urbains,26000.0,https://fr.wikipedia.org/wiki/fr:Valence (Drôme),44.923,4.914
+27229,Évreux,Eure,Normandie,47289,26,Centres urbains intermédiaires,27000.0,https://fr.wikipedia.org/wiki/fr:Évreux,49.02,1.142
+27681,Vernon,Eure,Normandie,24543,34,Centres urbains intermédiaires,27200.0,https://fr.wikipedia.org/wiki/fr:Vernon (Eure),49.088,1.485
+28085,Chartres,Eure-et-Loir,Centre-Val de Loire,38447,17,Grands centres urbains,28000.0,https://fr.wikipedia.org/wiki/fr:Chartres,48.447,1.506
+28134,Dreux,Eure-et-Loir,Centre-Val de Loire,30879,24,Centres urbains intermédiaires,28100.0,https://fr.wikipedia.org/wiki/fr:Dreux,48.748,1.359
+29019,Brest,Finistère,Bretagne,139619,49,Grands centres urbains,29200.0,https://fr.wikipedia.org/wiki/fr:Brest,48.4,-4.503
+29039,Concarneau,Finistère,Bretagne,20607,41,Petites villes,29900.0,https://fr.wikipedia.org/wiki/fr:Concarneau,47.897,-3.907
+29232,Quimper,Finistère,Bretagne,63642,84,Grands centres urbains,29000.0,https://fr.wikipedia.org/wiki/fr:Quimper,47.997,-4.091
+2A004,Ajaccio,Corse-du-Sud,Corse,73822,83,Centres urbains intermédiaires,20000.0,https://fr.wikipedia.org/wiki/fr:Ajaccio,41.935,8.701
+2B033,Bastia,Haute-Corse,Corse,48768,20,Centres urbains intermédiaires,20600.0,https://fr.wikipedia.org/wiki/fr:Bastia,42.686,9.425
+30007,Alès,Gard,Occitanie,43892,23,Centres urbains intermédiaires,30100.0,https://fr.wikipedia.org/wiki/fr:Alès,44.125,4.088
+30189,Nîmes,Gard,Occitanie,148104,161,Grands centres urbains,30900.0,https://fr.wikipedia.org/wiki/fr:Nîmes,43.845,4.348
+31069,Blagnac,Haute-Garonne,Occitanie,26466,17,Grands centres urbains,31700.0,https://fr.wikipedia.org/wiki/fr:Blagnac,43.642,1.379
+31149,Colomiers,Haute-Garonne,Occitanie,40159,21,Grands centres urbains,31770.0,https://fr.wikipedia.org/wiki/fr:Colomiers,43.612,1.327
+31157,Cugnaux,Haute-Garonne,Occitanie,20341,13,Grands centres urbains,31270.0,https://fr.wikipedia.org/wiki/fr:Cugnaux,43.545,1.343
+31395,Muret,Haute-Garonne,Occitanie,25060,58,Centres urbains intermédiaires,31600.0,https://fr.wikipedia.org/wiki/fr:Muret (Haute-Garonne),43.449,1.308
+31555,Toulouse,Haute-Garonne,Occitanie,504078,118,Grands centres urbains,31100.0,https://fr.wikipedia.org/wiki/fr:Toulouse,43.596,1.432
+31557,Tournefeuille,Haute-Garonne,Occitanie,29439,18,Grands centres urbains,31170.0,https://fr.wikipedia.org/wiki/fr:Tournefeuille,43.578,1.335
+32013,Auch,Gers,Occitanie,23041,73,Centres urbains intermédiaires,32000.0,https://fr.wikipedia.org/wiki/fr:Auch,43.653,0.575
+33039,Bègles,Gironde,Nouvelle-Aquitaine,30813,11,Grands centres urbains,33130.0,https://fr.wikipedia.org/wiki/fr:Bègles,44.802,-0.548
+33063,Bordeaux,Gironde,Nouvelle-Aquitaine,261804,50,Grands centres urbains,33300.0,https://fr.wikipedia.org/wiki/fr:Bordeaux,44.857,-0.574
+33069,Le Bouscat,Gironde,Nouvelle-Aquitaine,24339,5,Grands centres urbains,33110.0,https://fr.wikipedia.org/wiki/fr:Le Bouscat,44.866,-0.602
+33075,Bruges,Gironde,Nouvelle-Aquitaine,20215,14,Grands centres urbains,33520.0,https://fr.wikipedia.org/wiki/fr:Bruges (Gironde),44.889,-0.6
+33119,Cenon,Gironde,Nouvelle-Aquitaine,26778,6,Grands centres urbains,33150.0,https://fr.wikipedia.org/wiki/fr:Cenon,44.855,-0.521
+33162,Eysines,Gironde,Nouvelle-Aquitaine,24374,12,Grands centres urbains,33320.0,https://fr.wikipedia.org/wiki/fr:Eysines,44.88,-0.648
+33192,Gradignan,Gironde,Nouvelle-Aquitaine,25835,16,Grands centres urbains,33170.0,https://fr.wikipedia.org/wiki/fr:Gradignan,44.771,-0.616
+33199,Gujan-Mestras,Gironde,Nouvelle-Aquitaine,22399,50,Ceintures urbaines,33470.0,https://fr.wikipedia.org/wiki/fr:Gujan-Mestras,44.594,-1.084
+33243,Libourne,Gironde,Nouvelle-Aquitaine,24557,21,Centres urbains intermédiaires,33500.0,https://fr.wikipedia.org/wiki/fr:Libourne,44.913,-0.235
+33249,Lormont,Gironde,Nouvelle-Aquitaine,23291,8,Grands centres urbains,33310.0,https://fr.wikipedia.org/wiki/fr:Lormont,44.877,-0.52
+33281,Mérignac,Gironde,Nouvelle-Aquitaine,75729,48,Grands centres urbains,33700.0,https://fr.wikipedia.org/wiki/fr:Mérignac (Gironde),44.832,-0.682
+33318,Pessac,Gironde,Nouvelle-Aquitaine,66760,39,Grands centres urbains,33600.0,https://fr.wikipedia.org/wiki/fr:Pessac,44.792,-0.676
+33449,Saint-Médard-en-Jalles,Gironde,Nouvelle-Aquitaine,32538,85,Grands centres urbains,33160.0,https://fr.wikipedia.org/wiki/fr:Saint-Médard-en-Jalles,44.883,-0.784
+33522,Talence,Gironde,Nouvelle-Aquitaine,45225,8,Grands centres urbains,33400.0,https://fr.wikipedia.org/wiki/fr:Talence,44.806,-0.591
+33529,La Teste-de-Buch,Gironde,Nouvelle-Aquitaine,26556,178,Centres urbains intermédiaires,33115.0,https://fr.wikipedia.org/wiki/fr:La Teste-de-Buch,44.556,-1.175
+33550,Villenave-d'Ornon,Gironde,Nouvelle-Aquitaine,40500,21,Grands centres urbains,33140.0,https://fr.wikipedia.org/wiki/fr:Villenave-d'Ornon,44.773,-0.558
+34003,Agde,Hérault,Occitanie,29103,51,Centres urbains intermédiaires,34300.0,https://fr.wikipedia.org/wiki/fr:Agde,43.309,3.484
+34032,Béziers,Hérault,Occitanie,80341,96,Grands centres urbains,34500.0,https://fr.wikipedia.org/wiki/fr:Béziers,43.348,3.231
+34057,Castelnau-le-Lez,Hérault,Occitanie,24888,11,Grands centres urbains,34170.0,https://fr.wikipedia.org/wiki/fr:Castelnau-le-Lez,43.638,3.913
+34108,Frontignan,Hérault,Occitanie,23808,40,Centres urbains intermédiaires,34110.0,https://fr.wikipedia.org/wiki/fr:Frontignan,43.448,3.749
+34145,Lunel,Hérault,Occitanie,26185,24,Centres urbains intermédiaires,34400.0,https://fr.wikipedia.org/wiki/fr:Lunel,43.682,4.136
+34172,Montpellier,Hérault,Occitanie,302454,57,Grands centres urbains,34080.0,https://fr.wikipedia.org/wiki/fr:Montpellier,43.613,3.868
+34301,Sète,Hérault,Occitanie,44712,42,Centres urbains intermédiaires,34200.0,https://fr.wikipedia.org/wiki/fr:Sète,43.392,3.647
+35115,Fougères,Ille-et-Vilaine,Bretagne,20653,10,Centres urbains intermédiaires,35300.0,https://fr.wikipedia.org/wiki/fr:Fougères,48.352,-1.194
+35238,Rennes,Ille-et-Vilaine,Bretagne,225081,50,Grands centres urbains,35700.0,https://fr.wikipedia.org/wiki/fr:Rennes,48.112,-1.682
+35288,Saint-Malo,Ille-et-Vilaine,Bretagne,47323,37,Centres urbains intermédiaires,35400.0,https://fr.wikipedia.org/wiki/fr:Saint-Malo,48.64,-1.981
+36044,Châteauroux,Indre,Centre-Val de Loire,42968,25,Centres urbains intermédiaires,36000.0,https://fr.wikipedia.org/wiki/fr:Châteauroux,46.803,1.694
+37122,Joué-lès-Tours,Indre-et-Loire,Centre-Val de Loire,38183,32,Grands centres urbains,37300.0,https://fr.wikipedia.org/wiki/fr:Joué-lès-Tours,47.334,0.654
+37261,Tours,Indre-et-Loire,Centre-Val de Loire,137658,33,Grands centres urbains,37100.0,https://fr.wikipedia.org/wiki/fr:Tours,47.399,0.696
+38053,Bourgoin-Jallieu,Isère,Auvergne-Rhône-Alpes,29577,25,Centres urbains intermédiaires,38300.0,https://fr.wikipedia.org/wiki/fr:Bourgoin-Jallieu,45.602,5.274
+38151,Échirolles,Isère,Auvergne-Rhône-Alpes,36849,8,Grands centres urbains,38130.0,https://fr.wikipedia.org/wiki/fr:Échirolles,45.147,5.715
+38169,Fontaine,Isère,Auvergne-Rhône-Alpes,22891,7,Grands centres urbains,38600.0,https://fr.wikipedia.org/wiki/fr:Fontaine (Isère),45.193,5.678
+38185,Grenoble,Isère,Auvergne-Rhône-Alpes,157477,19,Grands centres urbains,38000.0,https://fr.wikipedia.org/wiki/fr:Grenoble,45.182,5.721
+38421,Saint-Martin-d'Hères,Isère,Auvergne-Rhône-Alpes,38454,9,Grands centres urbains,38400.0,https://fr.wikipedia.org/wiki/fr:Saint-Martin-d'Hères,45.176,5.765
+38544,Vienne,Isère,Auvergne-Rhône-Alpes,31051,23,Centres urbains intermédiaires,38200.0,https://fr.wikipedia.org/wiki/fr:Vienne (Isère),45.521,4.881
+38563,Voiron,Isère,Auvergne-Rhône-Alpes,20891,22,Centres urbains intermédiaires,38500.0,https://fr.wikipedia.org/wiki/fr:Voiron,45.379,5.582
+39198,Dole,Jura,Bourgogne-Franche-Comté,23775,38,Centres urbains intermédiaires,39100.0,https://fr.wikipedia.org/wiki/fr:Dole (Jura),47.076,5.501
+40088,Dax,Landes,Nouvelle-Aquitaine,21347,20,Centres urbains intermédiaires,40100.0,https://fr.wikipedia.org/wiki/fr:Dax,43.701,-1.06
+40192,Mont-de-Marsan,Landes,Nouvelle-Aquitaine,30674,37,Centres urbains intermédiaires,40000.0,https://fr.wikipedia.org/wiki/fr:Mont-de-Marsan,43.899,-0.491
+41018,Blois,Loir-et-Cher,Centre-Val de Loire,46813,38,Centres urbains intermédiaires,41000.0,https://fr.wikipedia.org/wiki/fr:Blois,47.582,1.306
+42187,Roanne,Loire,Auvergne-Rhône-Alpes,34762,16,Centres urbains intermédiaires,42300.0,https://fr.wikipedia.org/wiki/fr:Roanne,46.045,4.08
+42207,Saint-Chamond,Loire,Auvergne-Rhône-Alpes,35068,55,Centres urbains intermédiaires,42400.0,https://fr.wikipedia.org/wiki/fr:Saint-Chamond,45.47,4.502
+42218,Saint-Étienne,Loire,Auvergne-Rhône-Alpes,172718,80,Grands centres urbains,42100.0,https://fr.wikipedia.org/wiki/fr:Saint-Étienne,45.43,4.379
+44020,Bouguenais,Loire-Atlantique,Pays de la Loire,20410,31,Ceintures urbaines,44340.0,https://fr.wikipedia.org/wiki/fr:Bouguenais,47.171,-1.617
+44026,Carquefou,Loire-Atlantique,Pays de la Loire,20510,43,Centres urbains intermédiaires,44470.0,https://fr.wikipedia.org/wiki/fr:Carquefou,47.302,-1.473
+44035,La Chapelle-sur-Erdre,Loire-Atlantique,Pays de la Loire,20331,33,Ceintures urbaines,44240.0,https://fr.wikipedia.org/wiki/fr:La Chapelle-sur-Erdre,47.304,-1.561
+44047,Couëron,Loire-Atlantique,Pays de la Loire,23057,49,Ceintures urbaines,44220.0,https://fr.wikipedia.org/wiki/fr:Couëron,47.231,-1.729
+44109,Nantes,Loire-Atlantique,Pays de la Loire,323204,66,Grands centres urbains,44200.0,https://fr.wikipedia.org/wiki/fr:Nantes,47.232,-1.548
+44114,Orvault,Loire-Atlantique,Pays de la Loire,27872,28,Grands centres urbains,44700.0,https://fr.wikipedia.org/wiki/fr:Orvault,47.274,-1.623
+44143,Rezé,Loire-Atlantique,Pays de la Loire,42998,16,Grands centres urbains,44400.0,https://fr.wikipedia.org/wiki/fr:Rezé,47.176,-1.55
+44162,Saint-Herblain,Loire-Atlantique,Pays de la Loire,49537,30,Grands centres urbains,44800.0,https://fr.wikipedia.org/wiki/fr:Saint-Herblain,47.224,-1.634
+44184,Saint-Nazaire,Loire-Atlantique,Pays de la Loire,72057,48,Centres urbains intermédiaires,44600.0,https://fr.wikipedia.org/wiki/fr:Saint-Nazaire,47.28,-2.254
+44190,Saint-Sébastien-sur-Loire,Loire-Atlantique,Pays de la Loire,28283,12,Grands centres urbains,44230.0,https://fr.wikipedia.org/wiki/fr:Saint-Sébastien-sur-Loire,47.203,-1.499
+44215,Vertou,Loire-Atlantique,Pays de la Loire,26002,38,Ceintures urbaines,44120.0,https://fr.wikipedia.org/wiki/fr:Vertou,47.16,-1.47
+45147,Fleury-les-Aubrais,Loiret,Centre-Val de Loire,21438,10,Grands centres urbains,45400.0,https://fr.wikipedia.org/wiki/fr:Fleury-les-Aubrais,47.939,1.92
+45232,Olivet,Loiret,Centre-Val de Loire,22855,23,Grands centres urbains,45160.0,https://fr.wikipedia.org/wiki/fr:Olivet (Loiret),47.855,1.888
+45234,Orléans,Loiret,Centre-Val de Loire,116617,28,Grands centres urbains,45000.0,https://fr.wikipedia.org/wiki/fr:Orléans,47.883,1.916
+45284,Saint-Jean-de-Braye,Loiret,Centre-Val de Loire,21700,14,Grands centres urbains,45800.0,https://fr.wikipedia.org/wiki/fr:Saint-Jean-de-Braye,47.918,1.972
+46042,Cahors,Lot,Occitanie,20141,65,Centres urbains intermédiaires,46000.0,https://fr.wikipedia.org/wiki/fr:Cahors,44.451,1.441
+47001,Agen,Lot-et-Garonne,Nouvelle-Aquitaine,32485,12,Centres urbains intermédiaires,47000.0,https://fr.wikipedia.org/wiki/fr:Agen,44.203,0.626
+47323,Villeneuve-sur-Lot,Lot-et-Garonne,Nouvelle-Aquitaine,21629,81,Centres urbains intermédiaires,47300.0,https://fr.wikipedia.org/wiki/fr:Villeneuve-sur-Lot,44.425,0.742
+49007,Angers,Maine-et-Loire,Pays de la Loire,157175,44,Grands centres urbains,49000.0,https://fr.wikipedia.org/wiki/fr:Angers,47.477,-0.556
+49023,Beaupréau-en-Mauges,Maine-et-Loire,Pays de la Loire,23639,36,Bourgs ruraux,49600.0,https://fr.wikipedia.org/wiki/fr:Beaupréau-en-Mauges,47.213,-0.984
+49092,Chemillé-en-Anjou,Maine-et-Loire,Pays de la Loire,21386,49,Bourgs ruraux,49120.0,https://fr.wikipedia.org/wiki/fr:Chemillé-en-Anjou,47.227,-0.73
+49099,Cholet,Maine-et-Loire,Pays de la Loire,53936,87,Centres urbains intermédiaires,49300.0,https://fr.wikipedia.org/wiki/fr:Cholet,47.045,-0.878
+49301,Sèvremoine,Maine-et-Loire,Pays de la Loire,25806,28,Bourgs ruraux,49450.0,https://fr.wikipedia.org/wiki/fr:Sèvremoine,47.126,-0.998
+49328,Saumur,Maine-et-Loire,Pays de la Loire,26215,66,Petites villes,49400.0,https://fr.wikipedia.org/wiki/fr:Saumur,47.267,-0.083
+50129,Cherbourg-en-Cotentin,Manche,Normandie,77808,16,Grands centres urbains,50110.0,https://fr.wikipedia.org/wiki/fr:Cherbourg-en-Cotentin,49.633,-1.634
+51108,Châlons-en-Champagne,Marne,Grand Est,43877,26,Centres urbains intermédiaires,51000.0,https://fr.wikipedia.org/wiki/fr:Châlons-en-Champagne,48.964,4.379
+51230,Épernay,Marne,Grand Est,22001,23,Centres urbains intermédiaires,51200.0,https://fr.wikipedia.org/wiki/fr:Épernay,49.037,3.931
+51454,Reims,Marne,Grand Est,179380,47,Grands centres urbains,51100.0,https://fr.wikipedia.org/wiki/fr:Reims,49.252,4.04
+52121,Chaumont,Haute-Marne,Grand Est,21699,55,Centres urbains intermédiaires,52000.0,https://fr.wikipedia.org/wiki/fr:Chaumont (Haute-Marne),48.098,5.141
+52448,Saint-Dizier,Haute-Marne,Grand Est,23068,48,Centres urbains intermédiaires,52100.0,https://fr.wikipedia.org/wiki/fr:Saint-Dizier,48.628,4.949
+53130,Laval,Mayenne,Pays de la Loire,49657,34,Centres urbains intermédiaires,53000.0,https://fr.wikipedia.org/wiki/fr:Laval (Mayenne),48.061,-0.766
+54395,Nancy,Meurthe-et-Moselle,Grand Est,104260,15,Grands centres urbains,54100.0,https://fr.wikipedia.org/wiki/fr:Nancy,48.69,6.176
+54547,Vandœuvre-lès-Nancy,Meurthe-et-Moselle,Grand Est,29537,9,Grands centres urbains,54500.0,https://fr.wikipedia.org/wiki/fr:Vandœuvre-lès-Nancy,48.658,6.165
+56098,Lanester,Morbihan,Bretagne,23026,16,Grands centres urbains,56600.0,https://fr.wikipedia.org/wiki/fr:Lanester,47.769,-3.326
+56121,Lorient,Morbihan,Bretagne,57846,15,Grands centres urbains,56100.0,https://fr.wikipedia.org/wiki/fr:Lorient,47.75,-3.378
+56260,Vannes,Morbihan,Bretagne,54420,33,Grands centres urbains,56000.0,https://fr.wikipedia.org/wiki/fr:Vannes,47.66,-2.757
+57227,Forbach,Moselle,Grand Est,21130,16,Centres urbains intermédiaires,57600.0,https://fr.wikipedia.org/wiki/fr:Forbach,49.191,6.893
+57463,Metz,Moselle,Grand Est,120874,42,Grands centres urbains,57070.0,https://fr.wikipedia.org/wiki/fr:Metz,49.108,6.196
+57480,Montigny-lès-Metz,Moselle,Grand Est,21854,7,Grands centres urbains,57950.0,https://fr.wikipedia.org/wiki/fr:Montigny-lès-Metz,49.095,6.154
+57631,Sarreguemines,Moselle,Grand Est,20624,30,Petites villes,57200.0,https://fr.wikipedia.org/wiki/fr:Sarreguemines,49.109,7.069
+57672,Thionville,Moselle,Grand Est,42163,50,Centres urbains intermédiaires,57100.0,https://fr.wikipedia.org/wiki/fr:Thionville,49.376,6.129
+58194,Nevers,Nièvre,Bourgogne-Franche-Comté,32830,17,Centres urbains intermédiaires,58000.0,https://fr.wikipedia.org/wiki/fr:Nevers,46.988,3.157
+59009,Villeneuve-d'Ascq,Nord,Hauts-de-France,62067,28,Grands centres urbains,59650.0,https://fr.wikipedia.org/wiki/fr:Villeneuve-d'Ascq,50.632,3.154
+59017,Armentières,Nord,Hauts-de-France,25581,6,Centres urbains intermédiaires,59280.0,https://fr.wikipedia.org/wiki/fr:Armentières,50.691,2.88
+59122,Cambrai,Nord,Hauts-de-France,31425,18,Centres urbains intermédiaires,59400.0,https://fr.wikipedia.org/wiki/fr:Cambrai,50.17,3.242
+59155,Coudekerque-Branche,Nord,Hauts-de-France,20765,9,Grands centres urbains,59210.0,https://fr.wikipedia.org/wiki/fr:Coudekerque-Branche,51.018,2.396
+59163,Croix,Nord,Hauts-de-France,20778,4,Grands centres urbains,59170.0,https://fr.wikipedia.org/wiki/fr:Croix (Nord),50.674,3.155
+59172,Denain,Nord,Hauts-de-France,20640,12,Centres urbains intermédiaires,59220.0,https://fr.wikipedia.org/wiki/fr:Denain,50.33,3.39
+59178,Douai,Nord,Hauts-de-France,39648,17,Grands centres urbains,59500.0,https://fr.wikipedia.org/wiki/fr:Douai,50.382,3.092
+59183,Dunkerque,Nord,Hauts-de-France,86788,43,Grands centres urbains,59140.0,https://fr.wikipedia.org/wiki/fr:Dunkerque,51.031,2.338
+59271,Grande-Synthe,Nord,Hauts-de-France,20331,21,Grands centres urbains,59760.0,https://fr.wikipedia.org/wiki/fr:Grande-Synthe,51.017,2.291
+59279,Halluin,Nord,Hauts-de-France,20829,13,Grands centres urbains,59250.0,https://fr.wikipedia.org/wiki/fr:Halluin,50.775,3.127
+59295,Hazebrouck,Nord,Hauts-de-France,21498,27,Centres urbains intermédiaires,59190.0,https://fr.wikipedia.org/wiki/fr:Hazebrouck,50.726,2.539
+59328,Lambersart,Nord,Hauts-de-France,27121,6,Grands centres urbains,59130.0,https://fr.wikipedia.org/wiki/fr:Lambersart,50.652,3.025
+59350,Lille,Nord,Hauts-de-France,236710,35,Grands centres urbains,59260.0,https://fr.wikipedia.org/wiki/fr:Lille,50.632,3.048
+59360,Loos,Nord,Hauts-de-France,23013,7,Grands centres urbains,59120.0,https://fr.wikipedia.org/wiki/fr:Loos (Nord),50.608,3.021
+59368,La Madeleine,Nord,Hauts-de-France,22488,3,Grands centres urbains,59110.0,https://fr.wikipedia.org/wiki/fr:La Madeleine (Nord),50.655,3.07
+59378,Marcq-en-Barœul,Nord,Hauts-de-France,39356,14,Grands centres urbains,59700.0,https://fr.wikipedia.org/wiki/fr:Marcq-en-Barœul,50.675,3.101
+59392,Maubeuge,Nord,Hauts-de-France,29066,19,Centres urbains intermédiaires,59600.0,https://fr.wikipedia.org/wiki/fr:Maubeuge,50.284,3.963
+59410,Mons-en-Barœul,Nord,Hauts-de-France,21467,3,Grands centres urbains,59370.0,https://fr.wikipedia.org/wiki/fr:Mons-en-Barœul,50.643,3.109
+59512,Roubaix,Nord,Hauts-de-France,98892,13,Grands centres urbains,59100.0,https://fr.wikipedia.org/wiki/fr:Roubaix,50.688,3.183
+59599,Tourcoing,Nord,Hauts-de-France,99011,15,Grands centres urbains,59200.0,https://fr.wikipedia.org/wiki/fr:Tourcoing,50.725,3.159
+59606,Valenciennes,Nord,Hauts-de-France,42991,14,Grands centres urbains,59300.0,https://fr.wikipedia.org/wiki/fr:Valenciennes,50.359,3.516
+59646,Wasquehal,Nord,Hauts-de-France,20836,7,Grands centres urbains,59290.0,https://fr.wikipedia.org/wiki/fr:Wasquehal,50.675,3.129
+59650,Wattrelos,Nord,Hauts-de-France,40836,14,Grands centres urbains,59150.0,https://fr.wikipedia.org/wiki/fr:Wattrelos,50.706,3.216
+60057,Beauvais,Oise,Hauts-de-France,56677,33,Centres urbains intermédiaires,60000.0,https://fr.wikipedia.org/wiki/fr:Beauvais,49.437,2.086
+60159,Compiègne,Oise,Hauts-de-France,40394,53,Centres urbains intermédiaires,60200.0,https://fr.wikipedia.org/wiki/fr:Compiègne,49.399,2.853
+60175,Creil,Oise,Hauts-de-France,36106,11,Grands centres urbains,60100.0,https://fr.wikipedia.org/wiki/fr:Creil,49.253,2.485
+60463,Nogent-sur-Oise,Oise,Hauts-de-France,21382,7,Grands centres urbains,60180.0,https://fr.wikipedia.org/wiki/fr:Nogent-sur-Oise,49.276,2.464
+61001,Alençon,Orne,Normandie,25555,11,Centres urbains intermédiaires,61000.0,https://fr.wikipedia.org/wiki/fr:Alençon,48.432,0.092
+62041,Arras,Pas-de-Calais,Hauts-de-France,42600,12,Grands centres urbains,62000.0,https://fr.wikipedia.org/wiki/fr:Arras,50.29,2.766
+62119,Béthune,Pas-de-Calais,Hauts-de-France,24992,10,Centres urbains intermédiaires,62400.0,https://fr.wikipedia.org/wiki/fr:Béthune,50.529,2.642
+62160,Boulogne-sur-Mer,Pas-de-Calais,Hauts-de-France,40910,8,Grands centres urbains,62200.0,https://fr.wikipedia.org/wiki/fr:Boulogne-sur-Mer,50.727,1.608
+62178,Bruay-la-Buissière,Pas-de-Calais,Hauts-de-France,21827,17,Centres urbains intermédiaires,62700.0,https://fr.wikipedia.org/wiki/fr:Bruay-la-Buissière,50.49,2.552
+62193,Calais,Pas-de-Calais,Hauts-de-France,67380,33,Grands centres urbains,62100.0,https://fr.wikipedia.org/wiki/fr:Calais,50.95,1.876
+62427,Hénin-Beaumont,Pas-de-Calais,Hauts-de-France,26035,21,Grands centres urbains,62110.0,https://fr.wikipedia.org/wiki/fr:Hénin-Beaumont,50.409,2.959
+62498,Lens,Pas-de-Calais,Hauts-de-France,32618,12,Grands centres urbains,62300.0,https://fr.wikipedia.org/wiki/fr:Lens (Pas-de-Calais),50.437,2.821
+62510,Liévin,Pas-de-Calais,Hauts-de-France,30149,13,Grands centres urbains,62800.0,https://fr.wikipedia.org/wiki/fr:Liévin,50.424,2.773
+63113,Clermont-Ferrand,Puy-de-Dôme,Auvergne-Rhône-Alpes,147327,43,Grands centres urbains,63100.0,https://fr.wikipedia.org/wiki/fr:Clermont-Ferrand,45.786,3.116
+63124,Cournon-d'Auvergne,Puy-de-Dôme,Auvergne-Rhône-Alpes,20193,19,Centres urbains intermédiaires,63800.0,https://fr.wikipedia.org/wiki/fr:Cournon-d'Auvergne,45.743,3.187
+64024,Anglet,Pyrénées-Atlantiques,Nouvelle-Aquitaine,41153,28,Grands centres urbains,64600.0,https://fr.wikipedia.org/wiki/fr:Anglet,43.492,-1.516
+64102,Bayonne,Pyrénées-Atlantiques,Nouvelle-Aquitaine,52749,26,Grands centres urbains,64100.0,https://fr.wikipedia.org/wiki/fr:Bayonne,43.492,-1.466
+64122,Biarritz,Pyrénées-Atlantiques,Nouvelle-Aquitaine,25764,12,Grands centres urbains,64200.0,https://fr.wikipedia.org/wiki/fr:Biarritz,43.47,-1.553
+64445,Pau,Pyrénées-Atlantiques,Nouvelle-Aquitaine,77066,32,Grands centres urbains,64000.0,https://fr.wikipedia.org/wiki/fr:Pau,43.32,-0.35
+65440,Tarbes,Hautes-Pyrénées,Occitanie,43955,15,Centres urbains intermédiaires,65000.0,https://fr.wikipedia.org/wiki/fr:Tarbes,43.235,0.066
+66136,Perpignan,Pyrénées-Orientales,Occitanie,119656,68,Grands centres urbains,66000.0,https://fr.wikipedia.org/wiki/fr:Perpignan,42.697,2.899
+67180,Haguenau,Bas-Rhin,Grand Est,35715,184,Centres urbains intermédiaires,67500.0,https://fr.wikipedia.org/wiki/fr:Haguenau,48.842,7.83
+67218,Illkirch-Graffenstaden,Bas-Rhin,Grand Est,27118,22,Grands centres urbains,67400.0,https://fr.wikipedia.org/wiki/fr:Illkirch-Graffenstaden,48.52,7.731
+67267,Lingolsheim,Bas-Rhin,Grand Est,20266,6,Grands centres urbains,67380.0,https://fr.wikipedia.org/wiki/fr:Lingolsheim,48.554,7.681
+67447,Schiltigheim,Bas-Rhin,Grand Est,34129,8,Grands centres urbains,67300.0,https://fr.wikipedia.org/wiki/fr:Schiltigheim,48.612,7.744
+67482,Strasbourg,Bas-Rhin,Grand Est,291313,78,Grands centres urbains,67000.0,https://fr.wikipedia.org/wiki/fr:Strasbourg,48.571,7.768
+68066,Colmar,Haut-Rhin,Grand Est,67730,66,Grands centres urbains,68000.0,https://fr.wikipedia.org/wiki/fr:Colmar,48.11,7.385
+68224,Mulhouse,Haut-Rhin,Grand Est,106341,22,Grands centres urbains,68200.0,https://fr.wikipedia.org/wiki/fr:Mulhouse,47.749,7.326
+68297,Saint-Louis,Haut-Rhin,Grand Est,22698,17,Grands centres urbains,68300.0,https://fr.wikipedia.org/wiki/fr:Saint-Louis (Haut-Rhin),47.602,7.541
+69029,Bron,Rhône,Auvergne-Rhône-Alpes,43049,10,Grands centres urbains,69500.0,https://fr.wikipedia.org/wiki/fr:Bron,45.734,4.912
+69034,Caluire-et-Cuire,Rhône,Auvergne-Rhône-Alpes,43572,10,Grands centres urbains,69300.0,https://fr.wikipedia.org/wiki/fr:Caluire-et-Cuire,45.797,4.851
+69091,Givors,Rhône,Auvergne-Rhône-Alpes,20654,17,Centres urbains intermédiaires,69700.0,https://fr.wikipedia.org/wiki/fr:Givors,45.582,4.757
+69123,Lyon,Rhône,Auvergne-Rhône-Alpes,522250,48,Grands centres urbains,69000.0,https://fr.wikipedia.org/wiki/fr:Lyon,45.764,4.8357
+69149,Oullins-Pierre-Bénite,Rhône,Auvergne-Rhône-Alpes,27113,4,Grands centres urbains,69600.0,https://fr.wikipedia.org/wiki/fr:Oullins,45.715,4.803
+69202,Sainte-Foy-lès-Lyon,Rhône,Auvergne-Rhône-Alpes,21858,7,Grands centres urbains,69110.0,https://fr.wikipedia.org/wiki/fr:Sainte-Foy-lès-Lyon,45.736,4.793
+69204,Saint-Genis-Laval,Rhône,Auvergne-Rhône-Alpes,20929,13,Grands centres urbains,69230.0,https://fr.wikipedia.org/wiki/fr:Saint-Genis-Laval,45.694,4.789
+69244,Tassin-la-Demi-Lune,Rhône,Auvergne-Rhône-Alpes,22676,8,Grands centres urbains,69160.0,https://fr.wikipedia.org/wiki/fr:Tassin-la-Demi-Lune,45.763,4.755
+69256,Vaulx-en-Velin,Rhône,Auvergne-Rhône-Alpes,52139,21,Grands centres urbains,69120.0,https://fr.wikipedia.org/wiki/fr:Vaulx-en-Velin,45.786,4.926
+69259,Vénissieux,Rhône,Auvergne-Rhône-Alpes,66363,15,Grands centres urbains,69200.0,https://fr.wikipedia.org/wiki/fr:Vénissieux,45.704,4.881
+69264,Villefranche-sur-Saône,Rhône,Auvergne-Rhône-Alpes,35913,9,Centres urbains intermédiaires,69400.0,https://fr.wikipedia.org/wiki/fr:Villefranche-sur-Saône,45.988,4.732
+69266,Villeurbanne,Rhône,Auvergne-Rhône-Alpes,156928,15,Grands centres urbains,69100.0,https://fr.wikipedia.org/wiki/fr:Villeurbanne,45.771,4.888
+69275,Décines-Charpieu,Rhône,Auvergne-Rhône-Alpes,29731,17,Grands centres urbains,69150.0,https://fr.wikipedia.org/wiki/fr:Décines-Charpieu,45.772,4.961
+69282,Meyzieu,Rhône,Auvergne-Rhône-Alpes,35882,24,Grands centres urbains,69330.0,https://fr.wikipedia.org/wiki/fr:Meyzieu,45.777,5.006
+69286,Rillieux-la-Pape,Rhône,Auvergne-Rhône-Alpes,31247,15,Grands centres urbains,69140.0,https://fr.wikipedia.org/wiki/fr:Rillieux-la-Pape,45.821,4.898
+69290,Saint-Priest,Rhône,Auvergne-Rhône-Alpes,48822,30,Grands centres urbains,69800.0,https://fr.wikipedia.org/wiki/fr:Saint-Priest (Rhône),45.702,4.949
+71076,Chalon-sur-Saône,Saône-et-Loire,Bourgogne-Franche-Comté,45031,15,Centres urbains intermédiaires,71100.0,https://fr.wikipedia.org/wiki/fr:Chalon-sur-Saône,46.79,4.852
+71153,Le Creusot,Saône-et-Loire,Bourgogne-Franche-Comté,20731,18,Centres urbains intermédiaires,71200.0,https://fr.wikipedia.org/wiki/fr:Le Creusot,46.807,4.426
+71270,Mâcon,Saône-et-Loire,Bourgogne-Franche-Comté,34448,27,Centres urbains intermédiaires,71000.0,https://fr.wikipedia.org/wiki/fr:Mâcon,46.321,4.818
+72181,Le Mans,Sarthe,Pays de la Loire,145004,53,Grands centres urbains,72100.0,https://fr.wikipedia.org/wiki/fr:Le Mans,47.988,0.2
+73008,Aix-les-Bains,Savoie,Auvergne-Rhône-Alpes,31874,16,Centres urbains intermédiaires,73100.0,https://fr.wikipedia.org/wiki/fr:Aix-les-Bains,45.698,5.904
+73065,Chambéry,Savoie,Auvergne-Rhône-Alpes,59856,21,Grands centres urbains,73000.0,https://fr.wikipedia.org/wiki/fr:Chambéry,45.583,5.909
+74010,Annecy,Haute-Savoie,Auvergne-Rhône-Alpes,131715,16,Grands centres urbains,74000.0,https://fr.wikipedia.org/wiki/fr:Annecy,45.891,6.126
+74012,Annemasse,Haute-Savoie,Auvergne-Rhône-Alpes,37918,5,Grands centres urbains,74100.0,https://fr.wikipedia.org/wiki/fr:Annemasse,46.191,6.242
+74281,Thonon-les-Bains,Haute-Savoie,Auvergne-Rhône-Alpes,37027,16,Centres urbains intermédiaires,74200.0,https://fr.wikipedia.org/wiki/fr:Thonon-les-Bains,46.37,6.482
+75056,Paris,Paris,Île-de-France,2133111,105,Grands centres urbains,75000.0,https://fr.wikipedia.org/wiki/fr:Paris,48.8566,2.3522
+76217,Dieppe,Seine-Maritime,Normandie,28358,12,Centres urbains intermédiaires,76370.0,https://fr.wikipedia.org/wiki/fr:Dieppe (Seine-Maritime),49.922,1.087
+76322,Le Grand-Quevilly,Seine-Maritime,Normandie,25975,11,Grands centres urbains,76120.0,https://fr.wikipedia.org/wiki/fr:Le Grand-Quevilly,49.409,1.04
+76351,Le Havre,Seine-Maritime,Normandie,166058,55,Grands centres urbains,76620.0,https://fr.wikipedia.org/wiki/fr:Le Havre,49.498,0.14
+76451,Mont-Saint-Aignan,Seine-Maritime,Normandie,20066,8,Grands centres urbains,76130.0,https://fr.wikipedia.org/wiki/fr:Mont-Saint-Aignan,49.468,1.082
+76498,Le Petit-Quevilly,Seine-Maritime,Normandie,21782,4,Grands centres urbains,76140.0,https://fr.wikipedia.org/wiki/fr:Le Petit-Quevilly,49.424,1.06
+76540,Rouen,Seine-Maritime,Normandie,114083,21,Grands centres urbains,76100.0,https://fr.wikipedia.org/wiki/fr:Rouen,49.441,1.093
+76575,Saint-Étienne-du-Rouvray,Seine-Maritime,Normandie,28508,18,Grands centres urbains,76800.0,https://fr.wikipedia.org/wiki/fr:Saint-Étienne-du-Rouvray,49.382,1.09
+76681,Sotteville-lès-Rouen,Seine-Maritime,Normandie,28965,7,Grands centres urbains,76300.0,https://fr.wikipedia.org/wiki/fr:Sotteville-lès-Rouen,49.41,1.095
+77058,Bussy-Saint-Georges,Seine-et-Marne,Île-de-France,26571,15,Grands centres urbains,77600.0,https://fr.wikipedia.org/wiki/fr:Bussy-Saint-Georges,48.831,2.722
+77083,Champs-sur-Marne,Seine-et-Marne,Île-de-France,25695,8,Grands centres urbains,77420.0,https://fr.wikipedia.org/wiki/fr:Champs-sur-Marne,48.848,2.596
+77108,Chelles,Seine-et-Marne,Île-de-France,54309,16,Grands centres urbains,77500.0,https://fr.wikipedia.org/wiki/fr:Chelles,48.884,2.597
+77122,Combs-la-Ville,Seine-et-Marne,Île-de-France,22240,15,Grands centres urbains,77380.0,https://fr.wikipedia.org/wiki/fr:Combs-la-Ville,48.658,2.575
+77152,Dammarie-les-Lys,Seine-et-Marne,Île-de-France,22845,10,Grands centres urbains,77190.0,https://fr.wikipedia.org/wiki/fr:Dammarie-les-Lys,48.514,2.628
+77243,Lagny-sur-Marne,Seine-et-Marne,Île-de-France,21191,6,Grands centres urbains,77400.0,https://fr.wikipedia.org/wiki/fr:Lagny-sur-Marne,48.873,2.71
+77284,Meaux,Seine-et-Marne,Île-de-France,55616,15,Grands centres urbains,77100.0,https://fr.wikipedia.org/wiki/fr:Meaux,48.957,2.9
+77285,Le Mée-sur-Seine,Seine-et-Marne,Île-de-France,20207,6,Grands centres urbains,77350.0,https://fr.wikipedia.org/wiki/fr:Le Mée-sur-Seine,48.54,2.629
+77288,Melun,Seine-et-Marne,Île-de-France,42367,8,Grands centres urbains,77000.0,https://fr.wikipedia.org/wiki/fr:Melun,48.544,2.658
+77294,Mitry-Mory,Seine-et-Marne,Île-de-France,20627,30,Grands centres urbains,77290.0,https://fr.wikipedia.org/wiki/fr:Mitry-Mory,48.978,2.612
+77305,Montereau-Fault-Yonne,Seine-et-Marne,Île-de-France,22259,9,Centres urbains intermédiaires,77130.0,https://fr.wikipedia.org/wiki/fr:Montereau-Fault-Yonne,48.39,2.962
+77350,Ozoir-la-Ferrière,Seine-et-Marne,Île-de-France,20692,16,Centres urbains intermédiaires,77330.0,https://fr.wikipedia.org/wiki/fr:Ozoir-la-Ferrière,48.764,2.68
+77373,Pontault-Combault,Seine-et-Marne,Île-de-France,38258,14,Grands centres urbains,77340.0,https://fr.wikipedia.org/wiki/fr:Pontault-Combault,48.787,2.614
+77390,Roissy-en-Brie,Seine-et-Marne,Île-de-France,23061,14,Grands centres urbains,77680.0,https://fr.wikipedia.org/wiki/fr:Roissy-en-Brie,48.79,2.661
+77445,Savigny-le-Temple,Seine-et-Marne,Île-de-France,30510,12,Centres urbains intermédiaires,77176.0,https://fr.wikipedia.org/wiki/fr:Savigny-le-Temple,48.588,2.574
+77468,Torcy,Seine-et-Marne,Île-de-France,22444,6,Grands centres urbains,77200.0,https://fr.wikipedia.org/wiki/fr:Torcy (Seine-et-Marne),48.853,2.651
+77514,Villeparisis,Seine-et-Marne,Île-de-France,26822,8,Grands centres urbains,77270.0,https://fr.wikipedia.org/wiki/fr:Villeparisis,48.942,2.617
+78005,Achères,Yvelines,Île-de-France,21368,10,Grands centres urbains,78260.0,https://fr.wikipedia.org/wiki/fr:Achères (Yvelines),48.972,2.09
+78126,La Celle-Saint-Cloud,Yvelines,Île-de-France,20476,6,Grands centres urbains,78170.0,https://fr.wikipedia.org/wiki/fr:La Celle-Saint-Cloud,48.847,2.135
+78146,Chatou,Yvelines,Île-de-France,29649,5,Grands centres urbains,78400.0,https://fr.wikipedia.org/wiki/fr:Chatou,48.897,2.154
+78158,Le Chesnay-Rocquencourt,Yvelines,Île-de-France,30924,4,Grands centres urbains,78150.0,https://fr.wikipedia.org/wiki/fr:Le Chesnay-Rocquencourt,48.827,2.13
+78172,Conflans-Sainte-Honorine,Yvelines,Île-de-France,35926,10,Grands centres urbains,78700.0,https://fr.wikipedia.org/wiki/fr:Conflans-Sainte-Honorine,49.0,2.099
+78208,Élancourt,Yvelines,Île-de-France,26082,9,Grands centres urbains,78990.0,https://fr.wikipedia.org/wiki/fr:Élancourt,48.778,1.96
+78297,Guyancourt,Yvelines,Île-de-France,29406,13,Grands centres urbains,78280.0,https://fr.wikipedia.org/wiki/fr:Guyancourt,48.773,2.076
+78311,Houilles,Yvelines,Île-de-France,33449,4,Grands centres urbains,78800.0,https://fr.wikipedia.org/wiki/fr:Houilles,48.927,2.188
+78358,Maisons-Laffitte,Yvelines,Île-de-France,23080,7,Grands centres urbains,78600.0,https://fr.wikipedia.org/wiki/fr:Maisons-Laffitte,48.952,2.152
+78361,Mantes-la-Jolie,Yvelines,Île-de-France,44539,9,Grands centres urbains,78200.0,https://fr.wikipedia.org/wiki/fr:Mantes-la-Jolie,48.998,1.693
+78362,Mantes-la-Ville,Yvelines,Île-de-France,21376,6,Grands centres urbains,78711.0,https://fr.wikipedia.org/wiki/fr:Mantes-la-Ville,48.975,1.712
+78423,Montigny-le-Bretonneux,Yvelines,Île-de-France,31777,11,Grands centres urbains,78180.0,https://fr.wikipedia.org/wiki/fr:Montigny-le-Bretonneux,48.78,2.03
+78440,Les Mureaux,Yvelines,Île-de-France,33977,12,Centres urbains intermédiaires,78130.0,https://fr.wikipedia.org/wiki/fr:Les Mureaux,48.989,1.914
+78490,Plaisir,Yvelines,Île-de-France,31375,18,Grands centres urbains,78370.0,https://fr.wikipedia.org/wiki/fr:Plaisir (Yvelines),48.813,1.947
+78498,Poissy,Yvelines,Île-de-France,40016,13,Grands centres urbains,78300.0,https://fr.wikipedia.org/wiki/fr:Poissy,48.924,2.027
+78517,Rambouillet,Yvelines,Île-de-France,26816,36,Centres urbains intermédiaires,78120.0,https://fr.wikipedia.org/wiki/fr:Rambouillet,48.654,1.826
+78545,Saint-Cyr-l'École,Yvelines,Île-de-France,20971,5,Grands centres urbains,78210.0,https://fr.wikipedia.org/wiki/fr:Saint-Cyr-l'École,48.807,2.066
+78551,Saint-Germain-en-Laye,Yvelines,Île-de-France,44380,49,Grands centres urbains,78112.0,,48.941,2.099
+78586,Sartrouville,Yvelines,Île-de-France,51220,8,Grands centres urbains,78500.0,https://fr.wikipedia.org/wiki/fr:Sartrouville,48.94,2.175
+78621,Trappes,Yvelines,Île-de-France,33717,14,Grands centres urbains,78190.0,https://fr.wikipedia.org/wiki/fr:Trappes,48.775,1.993
+78640,Vélizy-Villacoublay,Yvelines,Île-de-France,22713,9,Grands centres urbains,78140.0,https://fr.wikipedia.org/wiki/fr:Vélizy-Villacoublay,48.784,2.197
+78646,Versailles,Yvelines,Île-de-France,83587,26,Grands centres urbains,78000.0,https://fr.wikipedia.org/wiki/fr:Versailles,48.803,2.118
+79191,Niort,Deux-Sèvres,Nouvelle-Aquitaine,59309,68,Centres urbains intermédiaires,79000.0,https://fr.wikipedia.org/wiki/fr:Niort,46.328,-0.465
+80001,Abbeville,Somme,Hauts-de-France,22595,26,Centres urbains intermédiaires,80100.0,https://fr.wikipedia.org/wiki/fr:Abbeville,50.108,1.832
+80021,Amiens,Somme,Hauts-de-France,133625,50,Grands centres urbains,80090.0,https://fr.wikipedia.org/wiki/fr:Amiens,49.901,2.29
+81004,Albi,Tarn,Occitanie,49714,45,Centres urbains intermédiaires,81000.0,https://fr.wikipedia.org/wiki/fr:Albi,43.926,2.147
+81065,Castres,Tarn,Occitanie,42672,99,Centres urbains intermédiaires,81100.0,https://fr.wikipedia.org/wiki/fr:Castres,43.616,2.238
+82121,Montauban,Tarn-et-Garonne,Occitanie,61919,136,Centres urbains intermédiaires,82000.0,https://fr.wikipedia.org/wiki/fr:Montauban,44.022,1.364
+83050,Draguignan,Var,Provence-Alpes-Côte d'Azur,39745,54,Centres urbains intermédiaires,83300.0,https://fr.wikipedia.org/wiki/fr:Draguignan,43.536,6.454
+83061,Fréjus,Var,Provence-Alpes-Côte d'Azur,57082,105,Grands centres urbains,83600.0,https://fr.wikipedia.org/wiki/fr:Fréjus,43.472,6.764
+83062,La Garde,Var,Provence-Alpes-Côte d'Azur,25912,16,Grands centres urbains,83130.0,https://fr.wikipedia.org/wiki/fr:La Garde (Var),43.126,6.019
+83069,Hyères,Var,Provence-Alpes-Côte d'Azur,55103,134,Centres urbains intermédiaires,83400.0,https://fr.wikipedia.org/wiki/fr:Hyères,43.102,6.189
+83118,Saint-Raphaël,Var,Provence-Alpes-Côte d'Azur,35950,91,Grands centres urbains,83530.0,https://fr.wikipedia.org/wiki/fr:Saint-Raphaël (Var),43.458,6.847
+83126,La Seyne-sur-Mer,Var,Provence-Alpes-Côte d'Azur,62763,24,Grands centres urbains,83500.0,https://fr.wikipedia.org/wiki/fr:La Seyne-sur-Mer,43.088,5.871
+83129,Six-Fours-les-Plages,Var,Provence-Alpes-Côte d'Azur,36203,27,Grands centres urbains,83140.0,https://fr.wikipedia.org/wiki/fr:Six-Fours-les-Plages,43.087,5.829
+83137,Toulon,Var,Provence-Alpes-Côte d'Azur,180452,44,Grands centres urbains,83000.0,https://fr.wikipedia.org/wiki/fr:Toulon,43.136,5.932
+83144,La Valette-du-Var,Var,Provence-Alpes-Côte d'Azur,23955,15,Grands centres urbains,83160.0,https://fr.wikipedia.org/wiki/fr:La Valette-du-Var,43.15,5.992
+84007,Avignon,Vaucluse,Provence-Alpes-Côte d'Azur,90330,65,Grands centres urbains,84000.0,https://fr.wikipedia.org/wiki/fr:Avignon,43.935,4.841
+84031,Carpentras,Vaucluse,Provence-Alpes-Côte d'Azur,30769,38,Centres urbains intermédiaires,84200.0,https://fr.wikipedia.org/wiki/fr:Carpentras,44.059,5.061
+84035,Cavaillon,Vaucluse,Provence-Alpes-Côte d'Azur,25923,46,Centres urbains intermédiaires,84300.0,https://fr.wikipedia.org/wiki/fr:Cavaillon,43.851,5.036
+84087,Orange,Vaucluse,Provence-Alpes-Côte d'Azur,28949,74,Centres urbains intermédiaires,84100.0,https://fr.wikipedia.org/wiki/fr:Orange (Vaucluse),44.129,4.81
+84089,Pertuis,Vaucluse,Provence-Alpes-Côte d'Azur,20012,59,Centres urbains intermédiaires,84120.0,https://fr.wikipedia.org/wiki/fr:Pertuis (Vaucluse),43.687,5.52
+85047,Challans,Vendée,Pays de la Loire,22494,65,Petites villes,85300.0,https://fr.wikipedia.org/wiki/fr:Challans,46.835,-1.84
+85146,Montaigu-Vendée,Vendée,Pays de la Loire,20605,3,Petites villes,85600.0,https://fr.wikipedia.org/wiki/fr:Montaigu-Vendée,46.976,-1.314
+85191,La Roche-sur-Yon,Vendée,Pays de la Loire,54952,88,Centres urbains intermédiaires,85000.0,https://fr.wikipedia.org/wiki/fr:La Roche-sur-Yon,46.668,-1.408
+85194,Les Sables-d'Olonne,Vendée,Pays de la Loire,48402,9,Petites villes,85180.0,https://fr.wikipedia.org/wiki/fr:Les Sables-d'Olonne (commune nouvelle),46.501,-1.793
+86066,Châtellerault,Vienne,Nouvelle-Aquitaine,31284,52,Centres urbains intermédiaires,86100.0,https://fr.wikipedia.org/wiki/fr:Châtellerault,46.816,0.553
+86194,Poitiers,Vienne,Nouvelle-Aquitaine,90240,42,Grands centres urbains,86000.0,https://fr.wikipedia.org/wiki/fr:Poitiers,46.584,0.36
+87085,Limoges,Haute-Vienne,Nouvelle-Aquitaine,129760,80,Grands centres urbains,87100.0,https://fr.wikipedia.org/wiki/fr:Limoges,45.854,1.249
+88160,Épinal,Vosges,Grand Est,32285,59,Centres urbains intermédiaires,88000.0,https://fr.wikipedia.org/wiki/fr:Épinal,48.163,6.48
+89024,Auxerre,Yonne,Bourgogne-Franche-Comté,34778,50,Centres urbains intermédiaires,89000.0,https://fr.wikipedia.org/wiki/fr:Auxerre,47.794,3.582
+89387,Sens,Yonne,Bourgogne-Franche-Comté,27034,22,Centres urbains intermédiaires,89100.0,https://fr.wikipedia.org/wiki/fr:Sens (Yonne),48.196,3.298
+90010,Belfort,Territoire de Belfort,Bourgogne-Franche-Comté,45155,17,Grands centres urbains,90000.0,https://fr.wikipedia.org/wiki/fr:Belfort,47.647,6.845
+91027,Athis-Mons,Essonne,Île-de-France,36222,9,Grands centres urbains,91200.0,https://fr.wikipedia.org/wiki/fr:Athis-Mons,48.709,2.387
+91103,Brétigny-sur-Orge,Essonne,Île-de-France,27106,15,Grands centres urbains,91220.0,https://fr.wikipedia.org/wiki/fr:Brétigny-sur-Orge,48.602,2.302
+91114,Brunoy,Essonne,Île-de-France,25423,7,Grands centres urbains,91800.0,https://fr.wikipedia.org/wiki/fr:Brunoy,48.696,2.504
+91174,Corbeil-Essonnes,Essonne,Île-de-France,52683,11,Grands centres urbains,91100.0,https://fr.wikipedia.org/wiki/fr:Corbeil-Essonnes,48.604,2.469
+91201,Draveil,Essonne,Île-de-France,29173,16,Grands centres urbains,91210.0,https://fr.wikipedia.org/wiki/fr:Draveil,48.678,2.422
+91223,Étampes,Essonne,Île-de-France,26529,46,Centres urbains intermédiaires,91150.0,https://fr.wikipedia.org/wiki/fr:Étampes,48.421,2.138
+91228,Évry-Courcouronnes,Essonne,Île-de-France,66177,9,Grands centres urbains,91080.0,https://fr.wikipedia.org/wiki/fr:Évry-Courcouronnes,48.63,2.44
+91272,Gif-sur-Yvette,Essonne,Île-de-France,22352,12,Grands centres urbains,91190.0,https://fr.wikipedia.org/wiki/fr:Gif-sur-Yvette,48.699,2.128
+91286,Grigny,Essonne,Île-de-France,27257,5,Grands centres urbains,91350.0,https://fr.wikipedia.org/wiki/fr:Grigny (Essonne),48.657,2.388
+91345,Longjumeau,Essonne,Île-de-France,20620,5,Grands centres urbains,91160.0,https://fr.wikipedia.org/wiki/fr:Longjumeau,48.69,2.302
+91377,Massy,Essonne,Île-de-France,50962,9,Grands centres urbains,91300.0,https://fr.wikipedia.org/wiki/fr:Massy (Essonne),48.728,2.275
+91421,Montgeron,Essonne,Île-de-France,23800,11,Grands centres urbains,91230.0,https://fr.wikipedia.org/wiki/fr:Montgeron,48.695,2.462
+91434,Morsang-sur-Orge,Essonne,Île-de-France,20785,4,Grands centres urbains,91390.0,https://fr.wikipedia.org/wiki/fr:Morsang-sur-Orge,48.656,2.351
+91477,Palaiseau,Essonne,Île-de-France,34893,12,Grands centres urbains,91120.0,https://fr.wikipedia.org/wiki/fr:Palaiseau,48.715,2.229
+91521,Ris-Orangis,Essonne,Île-de-France,29825,8,Grands centres urbains,91130.0,https://fr.wikipedia.org/wiki/fr:Ris-Orangis,48.645,2.408
+91549,Sainte-Geneviève-des-Bois,Essonne,Île-de-France,35846,9,Grands centres urbains,91700.0,https://fr.wikipedia.org/wiki/fr:Sainte-Geneviève-des-Bois (Essonne),48.641,2.33
+91570,Saint-Michel-sur-Orge,Essonne,Île-de-France,21437,5,Grands centres urbains,91240.0,https://fr.wikipedia.org/wiki/fr:Saint-Michel-sur-Orge,48.632,2.312
+91589,Savigny-sur-Orge,Essonne,Île-de-France,37371,7,Grands centres urbains,91600.0,https://fr.wikipedia.org/wiki/fr:Savigny-sur-Orge,48.684,2.349
+91657,Vigneux-sur-Seine,Essonne,Île-de-France,31050,9,Grands centres urbains,91270.0,https://fr.wikipedia.org/wiki/fr:Vigneux-sur-Seine,48.704,2.428
+91687,Viry-Châtillon,Essonne,Île-de-France,31045,6,Grands centres urbains,91170.0,https://fr.wikipedia.org/wiki/fr:Viry-Châtillon,48.67,2.374
+91691,Yerres,Essonne,Île-de-France,28699,10,Grands centres urbains,91330.0,https://fr.wikipedia.org/wiki/fr:Yerres (Essonne),48.716,2.493
+91692,Les Ulis,Essonne,Île-de-France,25253,5,Grands centres urbains,91940.0,https://fr.wikipedia.org/wiki/fr:Les Ulis,48.68,2.185
+92002,Antony,Hauts-de-Seine,Île-de-France,63232,10,Grands centres urbains,92160.0,https://fr.wikipedia.org/wiki/fr:Antony,48.75,2.299
+92004,Asnières-sur-Seine,Hauts-de-Seine,Île-de-France,89662,5,Grands centres urbains,92600.0,https://fr.wikipedia.org/wiki/fr:Asnières-sur-Seine,48.915,2.288
+92007,Bagneux,Hauts-de-Seine,Île-de-France,43699,4,Grands centres urbains,92220.0,https://fr.wikipedia.org/wiki/fr:Bagneux (Hauts-de-Seine),48.798,2.31
+92009,Bois-Colombes,Hauts-de-Seine,Île-de-France,29765,2,Grands centres urbains,92270.0,https://fr.wikipedia.org/wiki/fr:Bois-Colombes,48.915,2.267
+92012,Boulogne-Billancourt,Hauts-de-Seine,Île-de-France,119808,6,Grands centres urbains,92100.0,https://fr.wikipedia.org/wiki/fr:Boulogne-Billancourt,48.837,2.239
+92014,Bourg-la-Reine,Hauts-de-Seine,Île-de-France,20810,2,Grands centres urbains,92340.0,https://fr.wikipedia.org/wiki/fr:Bourg-la-Reine,48.78,2.316
+92019,Châtenay-Malabry,Hauts-de-Seine,Île-de-France,34898,6,Grands centres urbains,92290.0,https://fr.wikipedia.org/wiki/fr:Châtenay-Malabry,48.768,2.263
+92020,Châtillon,Hauts-de-Seine,Île-de-France,36777,3,Grands centres urbains,92320.0,https://fr.wikipedia.org/wiki/fr:Châtillon (Hauts-de-Seine),48.803,2.288
+92023,Clamart,Hauts-de-Seine,Île-de-France,54491,9,Grands centres urbains,92140.0,https://fr.wikipedia.org/wiki/fr:Clamart,48.796,2.255
+92024,Clichy,Hauts-de-Seine,Île-de-France,64849,3,Grands centres urbains,92110.0,https://fr.wikipedia.org/wiki/fr:Clichy,48.904,2.306
+92025,Colombes,Hauts-de-Seine,Île-de-France,88870,8,Grands centres urbains,92700.0,https://fr.wikipedia.org/wiki/fr:Colombes,48.922,2.247
+92026,Courbevoie,Hauts-de-Seine,Île-de-France,81516,4,Grands centres urbains,92400.0,https://fr.wikipedia.org/wiki/fr:Courbevoie,48.898,2.256
+92032,Fontenay-aux-Roses,Hauts-de-Seine,Île-de-France,24772,3,Grands centres urbains,92260.0,https://fr.wikipedia.org/wiki/fr:Fontenay-aux-Roses,48.79,2.287
+92035,La Garenne-Colombes,Hauts-de-Seine,Île-de-France,29932,2,Grands centres urbains,92250.0,https://fr.wikipedia.org/wiki/fr:La Garenne-Colombes,48.907,2.245
+92036,Gennevilliers,Hauts-de-Seine,Île-de-France,49410,12,Grands centres urbains,92230.0,https://fr.wikipedia.org/wiki/fr:Gennevilliers,48.934,2.294
+92040,Issy-les-Moulineaux,Hauts-de-Seine,Île-de-France,68580,4,Grands centres urbains,92130.0,https://fr.wikipedia.org/wiki/fr:Issy-les-Moulineaux,48.824,2.264
+92044,Levallois-Perret,Hauts-de-Seine,Île-de-France,68009,2,Grands centres urbains,92300.0,https://fr.wikipedia.org/wiki/fr:Levallois-Perret,48.895,2.287
+92046,Malakoff,Hauts-de-Seine,Île-de-France,30292,2,Grands centres urbains,92240.0,https://fr.wikipedia.org/wiki/fr:Malakoff (Hauts-de-Seine),48.817,2.297
+92048,Meudon,Hauts-de-Seine,Île-de-France,46342,10,Grands centres urbains,92190.0,https://fr.wikipedia.org/wiki/fr:Meudon,48.804,2.227
+92049,Montrouge,Hauts-de-Seine,Île-de-France,47657,2,Grands centres urbains,92120.0,https://fr.wikipedia.org/wiki/fr:Montrouge,48.815,2.316
+92050,Nanterre,Hauts-de-Seine,Île-de-France,97351,12,Grands centres urbains,92000.0,https://fr.wikipedia.org/wiki/fr:Nanterre,48.896,2.207
+92051,Neuilly-sur-Seine,Hauts-de-Seine,Île-de-France,59267,4,Grands centres urbains,92200.0,https://fr.wikipedia.org/wiki/fr:Neuilly-sur-Seine,48.885,2.266
+92060,Le Plessis-Robinson,Hauts-de-Seine,Île-de-France,29228,3,Grands centres urbains,92350.0,https://fr.wikipedia.org/wiki/fr:Le Plessis-Robinson,48.78,2.261
+92062,Puteaux,Hauts-de-Seine,Île-de-France,43672,3,Grands centres urbains,92800.0,https://fr.wikipedia.org/wiki/fr:Puteaux,48.884,2.238
+92063,Rueil-Malmaison,Hauts-de-Seine,Île-de-France,78186,15,Grands centres urbains,92500.0,https://fr.wikipedia.org/wiki/fr:Rueil-Malmaison,48.869,2.177
+92064,Saint-Cloud,Hauts-de-Seine,Île-de-France,29727,8,Grands centres urbains,92210.0,https://fr.wikipedia.org/wiki/fr:Saint-Cloud,48.843,2.209
+92071,Sceaux,Hauts-de-Seine,Île-de-France,20488,4,Grands centres urbains,92330.0,https://fr.wikipedia.org/wiki/fr:Sceaux (Hauts-de-Seine),48.777,2.295
+92072,Sèvres,Hauts-de-Seine,Île-de-France,22618,4,Grands centres urbains,92310.0,https://fr.wikipedia.org/wiki/fr:Sèvres,48.822,2.21
+92073,Suresnes,Hauts-de-Seine,Île-de-France,49104,4,Grands centres urbains,92150.0,https://fr.wikipedia.org/wiki/fr:Suresnes,48.87,2.22
+92075,Vanves,Hauts-de-Seine,Île-de-France,28014,2,Grands centres urbains,92170.0,https://fr.wikipedia.org/wiki/fr:Vanves,48.822,2.287
+92078,Villeneuve-la-Garenne,Hauts-de-Seine,Île-de-France,25371,3,Grands centres urbains,92390.0,https://fr.wikipedia.org/wiki/fr:Villeneuve-la-Garenne,48.936,2.324
+93001,Aubervilliers,Seine-Saint-Denis,Île-de-France,90071,6,Grands centres urbains,93300.0,https://fr.wikipedia.org/wiki/fr:Aubervilliers,48.912,2.384
+93005,Aulnay-sous-Bois,Seine-Saint-Denis,Île-de-France,86135,16,Grands centres urbains,93600.0,https://fr.wikipedia.org/wiki/fr:Aulnay-sous-Bois,48.946,2.493
+93006,Bagnolet,Seine-Saint-Denis,Île-de-France,39366,3,Grands centres urbains,93170.0,https://fr.wikipedia.org/wiki/fr:Bagnolet,48.869,2.423
+93007,Le Blanc-Mesnil,Seine-Saint-Denis,Île-de-France,58257,8,Grands centres urbains,93150.0,https://fr.wikipedia.org/wiki/fr:Le Blanc-Mesnil,48.94,2.461
+93008,Bobigny,Seine-Saint-Denis,Île-de-France,55056,7,Grands centres urbains,93000.0,https://fr.wikipedia.org/wiki/fr:Bobigny,48.908,2.439
+93010,Bondy,Seine-Saint-Denis,Île-de-France,52905,5,Grands centres urbains,93140.0,https://fr.wikipedia.org/wiki/fr:Bondy,48.902,2.484
+93014,Clichy-sous-Bois,Seine-Saint-Denis,Île-de-France,29735,4,Grands centres urbains,93390.0,https://fr.wikipedia.org/wiki/fr:Clichy-sous-Bois,48.908,2.546
+93027,La Courneuve,Seine-Saint-Denis,Île-de-France,47160,8,Grands centres urbains,93120.0,https://fr.wikipedia.org/wiki/fr:La Courneuve,48.932,2.4
+93029,Drancy,Seine-Saint-Denis,Île-de-France,71363,8,Grands centres urbains,93700.0,https://fr.wikipedia.org/wiki/fr:Drancy,48.923,2.445
+93031,Épinay-sur-Seine,Seine-Saint-Denis,Île-de-France,53489,5,Grands centres urbains,93800.0,https://fr.wikipedia.org/wiki/fr:Épinay-sur-Seine,48.955,2.314
+93032,Gagny,Seine-Saint-Denis,Île-de-France,40189,7,Grands centres urbains,93220.0,https://fr.wikipedia.org/wiki/fr:Gagny,48.882,2.545
+93045,Les Lilas,Seine-Saint-Denis,Île-de-France,23469,1,Grands centres urbains,93260.0,https://fr.wikipedia.org/wiki/fr:Les Lilas,48.882,2.42
+93046,Livry-Gargan,Seine-Saint-Denis,Île-de-France,46028,7,Grands centres urbains,93190.0,https://fr.wikipedia.org/wiki/fr:Livry-Gargan,48.92,2.535
+93047,Montfermeil,Seine-Saint-Denis,Île-de-France,27980,5,Grands centres urbains,93370.0,https://fr.wikipedia.org/wiki/fr:Montfermeil,48.898,2.567
+93048,Montreuil,Seine-Saint-Denis,Île-de-France,111455,9,Grands centres urbains,93100.0,https://fr.wikipedia.org/wiki/fr:Montreuil (Seine-Saint-Denis),48.863,2.448
+93049,Neuilly-Plaisance,Seine-Saint-Denis,Île-de-France,21415,3,Grands centres urbains,93360.0,https://fr.wikipedia.org/wiki/fr:Neuilly-Plaisance,48.864,2.51
+93050,Neuilly-sur-Marne,Seine-Saint-Denis,Île-de-France,37531,7,Grands centres urbains,93330.0,https://fr.wikipedia.org/wiki/fr:Neuilly-sur-Marne,48.862,2.54
+93051,Noisy-le-Grand,Seine-Saint-Denis,Île-de-France,70374,13,Grands centres urbains,93160.0,https://fr.wikipedia.org/wiki/fr:Noisy-le-Grand,48.836,2.564
+93053,Noisy-le-Sec,Seine-Saint-Denis,Île-de-France,46094,5,Grands centres urbains,93130.0,https://fr.wikipedia.org/wiki/fr:Noisy-le-Sec,48.891,2.459
+93055,Pantin,Seine-Saint-Denis,Île-de-France,60800,5,Grands centres urbains,93500.0,https://fr.wikipedia.org/wiki/fr:Pantin,48.898,2.409
+93057,Les Pavillons-sous-Bois,Seine-Saint-Denis,Île-de-France,24165,3,Grands centres urbains,93320.0,https://fr.wikipedia.org/wiki/fr:Les Pavillons-sous-Bois,48.908,2.503
+93059,Pierrefitte-sur-Seine,Seine-Saint-Denis,Île-de-France,32379,3,Grands centres urbains,93380.0,https://fr.wikipedia.org/wiki/fr:Pierrefitte-sur-Seine,48.961,2.363
+93063,Romainville,Seine-Saint-Denis,Île-de-France,33266,3,Grands centres urbains,93230.0,https://fr.wikipedia.org/wiki/fr:Romainville,48.885,2.438
+93064,Rosny-sous-Bois,Seine-Saint-Denis,Île-de-France,45655,6,Grands centres urbains,93110.0,https://fr.wikipedia.org/wiki/fr:Rosny-sous-Bois,48.875,2.486
+93066,Saint-Denis,Seine-Saint-Denis,Île-de-France,113942,12,Grands centres urbains,93210.0,https://fr.wikipedia.org/wiki/fr:Saint-Denis (Seine-Saint-Denis),48.93,2.359
+93070,Saint-Ouen-sur-Seine,Seine-Saint-Denis,Île-de-France,53207,4,Grands centres urbains,93400.0,https://fr.wikipedia.org/wiki/fr:Saint-Ouen-sur-Seine,48.91,2.333
+93071,Sevran,Seine-Saint-Denis,Île-de-France,51845,7,Grands centres urbains,93270.0,https://fr.wikipedia.org/wiki/fr:Sevran,48.939,2.531
+93072,Stains,Seine-Saint-Denis,Île-de-France,40359,5,Grands centres urbains,93240.0,https://fr.wikipedia.org/wiki/fr:Stains,48.957,2.385
+93073,Tremblay-en-France,Seine-Saint-Denis,Île-de-France,37271,23,Grands centres urbains,93290.0,https://fr.wikipedia.org/wiki/fr:Tremblay-en-France,48.978,2.555
+93077,Villemomble,Seine-Saint-Denis,Île-de-France,30332,4,Grands centres urbains,93250.0,https://fr.wikipedia.org/wiki/fr:Villemomble,48.885,2.509
+93078,Villepinte,Seine-Saint-Denis,Île-de-France,38725,10,Grands centres urbains,93420.0,https://fr.wikipedia.org/wiki/fr:Villepinte (Seine-Saint-Denis),48.959,2.536
+94002,Alfortville,Val-de-Marne,Île-de-France,45046,4,Grands centres urbains,94140.0,https://fr.wikipedia.org/wiki/fr:Alfortville,48.796,2.421
+94003,Arcueil,Val-de-Marne,Île-de-France,21557,2,Grands centres urbains,94110.0,https://fr.wikipedia.org/wiki/fr:Arcueil,48.806,2.334
+94016,Cachan,Val-de-Marne,Île-de-France,30592,3,Grands centres urbains,94230.0,https://fr.wikipedia.org/wiki/fr:Cachan,48.792,2.332
+94017,Champigny-sur-Marne,Val-de-Marne,Île-de-France,77724,11,Grands centres urbains,94500.0,https://fr.wikipedia.org/wiki/fr:Champigny-sur-Marne,48.817,2.517
+94018,Charenton-le-Pont,Val-de-Marne,Île-de-France,29445,2,Grands centres urbains,94220.0,https://fr.wikipedia.org/wiki/fr:Charenton-le-Pont,48.823,2.408
+94021,Chevilly-Larue,Val-de-Marne,Île-de-France,20326,4,Grands centres urbains,94550.0,https://fr.wikipedia.org/wiki/fr:Chevilly-Larue,48.767,2.353
+94022,Choisy-le-Roi,Val-de-Marne,Île-de-France,46129,5,Grands centres urbains,94600.0,https://fr.wikipedia.org/wiki/fr:Choisy-le-Roi,48.764,2.417
+94028,Créteil,Val-de-Marne,Île-de-France,92989,11,Grands centres urbains,94000.0,https://fr.wikipedia.org/wiki/fr:Créteil,48.784,2.455
+94033,Fontenay-sous-Bois,Val-de-Marne,Île-de-France,51812,6,Grands centres urbains,94120.0,https://fr.wikipedia.org/wiki/fr:Fontenay-sous-Bois,48.851,2.474
+94034,Fresnes,Val-de-Marne,Île-de-France,28780,4,Grands centres urbains,94260.0,https://fr.wikipedia.org/wiki/fr:Fresnes (Val-de-Marne),48.757,2.326
+94038,L'Haÿ-les-Roses,Val-de-Marne,Île-de-France,31392,4,Grands centres urbains,94240.0,https://fr.wikipedia.org/wiki/fr:L'Haÿ-les-Roses,48.776,2.338
+94041,Ivry-sur-Seine,Val-de-Marne,Île-de-France,64001,6,Grands centres urbains,94200.0,https://fr.wikipedia.org/wiki/fr:Ivry-sur-Seine,48.813,2.388
+94042,Joinville-le-Pont,Val-de-Marne,Île-de-France,20413,2,Grands centres urbains,94340.0,https://fr.wikipedia.org/wiki/fr:Joinville-le-Pont,48.819,2.47
+94043,Le Kremlin-Bicêtre,Val-de-Marne,Île-de-France,24380,2,Grands centres urbains,94270.0,https://fr.wikipedia.org/wiki/fr:Le Kremlin-Bicêtre,48.809,2.357
+94044,Limeil-Brévannes,Val-de-Marne,Île-de-France,27999,7,Grands centres urbains,94450.0,https://fr.wikipedia.org/wiki/fr:Limeil-Brévannes,48.745,2.489
+94046,Maisons-Alfort,Val-de-Marne,Île-de-France,58068,5,Grands centres urbains,94700.0,https://fr.wikipedia.org/wiki/fr:Maisons-Alfort,48.806,2.438
+94052,Nogent-sur-Marne,Val-de-Marne,Île-de-France,33472,3,Grands centres urbains,94130.0,https://fr.wikipedia.org/wiki/fr:Nogent-sur-Marne,48.837,2.482
+94054,Orly,Val-de-Marne,Île-de-France,24482,7,Grands centres urbains,94310.0,https://fr.wikipedia.org/wiki/fr:Orly,48.743,2.395
+94058,Le Perreux-sur-Marne,Val-de-Marne,Île-de-France,34213,4,Grands centres urbains,94170.0,https://fr.wikipedia.org/wiki/fr:Le Perreux-sur-Marne,48.842,2.504
+94059,Le Plessis-Trévise,Val-de-Marne,Île-de-France,20218,4,Grands centres urbains,94420.0,https://fr.wikipedia.org/wiki/fr:Le Plessis-Trévise,48.806,2.576
+94067,Saint-Mandé,Val-de-Marne,Île-de-France,21195,1,Grands centres urbains,94160.0,https://fr.wikipedia.org/wiki/fr:Saint-Mandé,48.842,2.419
+94068,Saint-Maur-des-Fossés,Val-de-Marne,Île-de-France,75441,11,Grands centres urbains,94210.0,https://fr.wikipedia.org/wiki/fr:Saint-Maur-des-Fossés,48.799,2.494
+94071,Sucy-en-Brie,Val-de-Marne,Île-de-France,27622,10,Grands centres urbains,94370.0,https://fr.wikipedia.org/wiki/fr:Sucy-en-Brie,48.766,2.533
+94073,Thiais,Val-de-Marne,Île-de-France,31097,6,Grands centres urbains,94320.0,https://fr.wikipedia.org/wiki/fr:Thiais,48.761,2.385
+94076,Villejuif,Val-de-Marne,Île-de-France,57753,5,Grands centres urbains,94800.0,https://fr.wikipedia.org/wiki/fr:Villejuif,48.793,2.36
+94077,Villeneuve-le-Roi,Val-de-Marne,Île-de-France,21129,8,Grands centres urbains,94290.0,https://fr.wikipedia.org/wiki/fr:Villeneuve-le-Roi,48.732,2.41
+94078,Villeneuve-Saint-Georges,Val-de-Marne,Île-de-France,35492,8,Grands centres urbains,94190.0,https://fr.wikipedia.org/wiki/fr:Villeneuve-Saint-Georges,48.741,2.449
+94079,Villiers-sur-Marne,Val-de-Marne,Île-de-France,30669,4,Grands centres urbains,94350.0,https://fr.wikipedia.org/wiki/fr:Villiers-sur-Marne,48.826,2.545
+94080,Vincennes,Val-de-Marne,Île-de-France,48798,2,Grands centres urbains,94300.0,https://fr.wikipedia.org/wiki/fr:Vincennes,48.847,2.438
+94081,Vitry-sur-Seine,Val-de-Marne,Île-de-France,96205,12,Grands centres urbains,94400.0,https://fr.wikipedia.org/wiki/fr:Vitry-sur-Seine,48.788,2.394
+95018,Argenteuil,Val-d'Oise,Île-de-France,107221,17,Grands centres urbains,95100.0,https://fr.wikipedia.org/wiki/fr:Argenteuil (Val-d'Oise),48.951,2.241
+95063,Bezons,Val-d'Oise,Île-de-France,32017,4,Grands centres urbains,95870.0,https://fr.wikipedia.org/wiki/fr:Bezons,48.926,2.211
+95127,Cergy,Val-d'Oise,Île-de-France,68348,15,Grands centres urbains,95000.0,https://fr.wikipedia.org/wiki/fr:Cergy,49.04,2.051
+95176,Cormeilles-en-Parisis,Val-d'Oise,Île-de-France,26741,8,Grands centres urbains,95240.0,https://fr.wikipedia.org/wiki/fr:Cormeilles-en-Parisis,48.968,2.199
+95197,Deuil-la-Barre,Val-d'Oise,Île-de-France,22510,4,Grands centres urbains,95170.0,https://fr.wikipedia.org/wiki/fr:Deuil-la-Barre,48.971,2.326
+95203,Eaubonne,Val-d'Oise,Île-de-France,25373,4,Grands centres urbains,95600.0,https://fr.wikipedia.org/wiki/fr:Eaubonne,48.991,2.278
+95219,Ermont,Val-d'Oise,Île-de-France,28987,4,Grands centres urbains,95120.0,https://fr.wikipedia.org/wiki/fr:Ermont,48.988,2.257
+95252,Franconville,Val-d'Oise,Île-de-France,37520,6,Grands centres urbains,95130.0,https://fr.wikipedia.org/wiki/fr:Franconville (Val-d'Oise),48.988,2.224
+95268,Garges-lès-Gonesse,Val-d'Oise,Île-de-France,42841,5,Grands centres urbains,95140.0,https://fr.wikipedia.org/wiki/fr:Garges-lès-Gonesse,48.97,2.405
+95277,Gonesse,Val-d'Oise,Île-de-France,25963,20,Grands centres urbains,95500.0,https://fr.wikipedia.org/wiki/fr:Gonesse,48.986,2.457
+95280,Goussainville,Val-d'Oise,Île-de-France,30693,11,Centres urbains intermédiaires,95190.0,https://fr.wikipedia.org/wiki/fr:Goussainville (Val-d'Oise),49.024,2.466
+95306,Herblay-sur-Seine,Val-d'Oise,Île-de-France,31605,13,Grands centres urbains,95220.0,https://fr.wikipedia.org/wiki/fr:Herblay-sur-Seine,49.001,2.15
+95424,Montigny-lès-Cormeilles,Val-d'Oise,Île-de-France,22603,4,Grands centres urbains,95370.0,https://fr.wikipedia.org/wiki/fr:Montigny-lès-Cormeilles,48.994,2.194
+95428,Montmorency,Val-d'Oise,Île-de-France,21870,5,Grands centres urbains,95160.0,https://fr.wikipedia.org/wiki/fr:Montmorency (Val-d'Oise),48.992,2.321
+95500,Pontoise,Val-d'Oise,Île-de-France,31327,7,Grands centres urbains,95300.0,https://fr.wikipedia.org/wiki/fr:Pontoise,49.051,2.095
+95555,Saint-Gratien,Val-d'Oise,Île-de-France,20866,3,Grands centres urbains,95210.0,https://fr.wikipedia.org/wiki/fr:Saint-Gratien (Val-d'Oise),48.969,2.285
+95572,Saint-Ouen-l'Aumône,Val-d'Oise,Île-de-France,25023,14,Grands centres urbains,95310.0,https://fr.wikipedia.org/wiki/fr:Saint-Ouen-l'Aumône,49.044,2.129
+95582,Sannois,Val-d'Oise,Île-de-France,26768,5,Grands centres urbains,95110.0,https://fr.wikipedia.org/wiki/fr:Sannois,48.972,2.253
+95585,Sarcelles,Val-d'Oise,Île-de-France,58424,8,Grands centres urbains,95200.0,https://fr.wikipedia.org/wiki/fr:Sarcelles,48.99,2.382
+95607,Taverny,Val-d'Oise,Île-de-France,27025,10,Grands centres urbains,95150.0,https://fr.wikipedia.org/wiki/fr:Taverny,49.027,2.221
+95680,Villiers-le-Bel,Val-d'Oise,Île-de-France,28836,7,Grands centres urbains,95400.0,https://fr.wikipedia.org/wiki/fr:Villiers-le-Bel,49.008,2.404
+97101,Les Abymes,Guadeloupe,Guadeloupe,52118,70,Centres urbains intermédiaires,97142.0,https://fr.wikipedia.org/wiki/fr:Les Abymes,16.273,-61.502
+97103,Baie-Mahault,Guadeloupe,Guadeloupe,30909,47,Ceintures urbaines,97122.0,https://fr.wikipedia.org/wiki/fr:Baie-Mahault,16.251,-61.593
+97113,Le Gosier,Guadeloupe,Guadeloupe,27184,45,Ceintures urbaines,97190.0,https://fr.wikipedia.org/wiki/fr:Le Gosier,16.225,-61.47
+97117,Le Moule,Guadeloupe,Guadeloupe,22645,83,Petites villes,97160.0,https://fr.wikipedia.org/wiki/fr:Le Moule,16.32,-61.372
+97118,Petit-Bourg,Guadeloupe,Guadeloupe,24272,131,Ceintures urbaines,97170.0,https://fr.wikipedia.org/wiki/fr:Petit-Bourg,16.172,-61.657
+97128,Sainte-Anne,Guadeloupe,Guadeloupe,24281,81,Petites villes,97180.0,https://fr.wikipedia.org/wiki/fr:Sainte-Anne (Guadeloupe),16.257,-61.388
+97209,Fort-de-France,Martinique,Martinique,74921,44,Grands centres urbains,97200.0,https://fr.wikipedia.org/wiki/fr:Fort-de-France,14.641,-61.069
+97213,Le Lamentin,Martinique,Martinique,39641,68,Grands centres urbains,97232.0,https://fr.wikipedia.org/wiki/fr:Le Lamentin,14.625,-60.993
+97222,Le Robert,Martinique,Martinique,21305,46,Ceintures urbaines,97231.0,https://fr.wikipedia.org/wiki/fr:Le Robert,14.675,-60.943
+97302,Cayenne,Guyane,Guyane,63468,31,Grands centres urbains,97300.0,https://fr.wikipedia.org/wiki/fr:Cayenne,5.022,-52.501
+97304,Kourou,Guyane,Guyane,24612,2285,Centres urbains intermédiaires,97310.0,https://fr.wikipedia.org/wiki/fr:Kourou,4.934,-52.766
+97307,Matoury,Guyane,Guyane,34810,149,Ceintures urbaines,97351.0,https://fr.wikipedia.org/wiki/fr:Matoury,4.832,-52.344
+97309,Remire-Montjoly,Guyane,Guyane,27274,51,Ceintures urbaines,97354.0,https://fr.wikipedia.org/wiki/fr:Remire-Montjoly,4.884,-52.279
+97311,Saint-Laurent-du-Maroni,Guyane,Guyane,50250,4151,Centres urbains intermédiaires,97320.0,https://fr.wikipedia.org/wiki/fr:Saint-Laurent-du-Maroni,4.965,-53.983
+97407,Le Port,La Réunion,La Réunion,33336,16,Centres urbains intermédiaires,97420.0,https://fr.wikipedia.org/wiki/fr:Le Port (La Réunion),-20.945,55.305
+97408,La Possession,La Réunion,La Réunion,35245,119,Centres urbains intermédiaires,97419.0,https://fr.wikipedia.org/wiki/fr:La Possession,-20.994,55.398
+97409,Saint-André,La Réunion,La Réunion,57150,54,Centres urbains intermédiaires,97440.0,https://fr.wikipedia.org/wiki/fr:Saint-André (La Réunion),-20.963,55.643
+97410,Saint-Benoît,La Réunion,La Réunion,37023,230,Ceintures urbaines,97437.0,https://fr.wikipedia.org/wiki/fr:Saint-Benoît (La Réunion),-21.092,55.649
+97411,Saint-Denis,La Réunion,La Réunion,154765,142,Grands centres urbains,97400.0,https://fr.wikipedia.org/wiki/fr:Saint-Denis (La Réunion),-20.933,55.447
+97412,Saint-Joseph,La Réunion,La Réunion,38807,178,Ceintures urbaines,97480.0,https://fr.wikipedia.org/wiki/fr:Saint-Joseph (La Réunion),-21.306,55.642
+97413,Saint-Leu,La Réunion,La Réunion,34893,118,Ceintures urbaines,97416.0,https://fr.wikipedia.org/wiki/fr:Saint-Leu (La Réunion),-21.167,55.333
+97414,Saint-Louis,La Réunion,La Réunion,53935,99,Grands centres urbains,97421.0,https://fr.wikipedia.org/wiki/fr:Saint-Louis (La Réunion),-21.234,55.421
+97415,Saint-Paul,La Réunion,La Réunion,105240,240,Centres urbains intermédiaires,97411.0,https://fr.wikipedia.org/wiki/fr:Saint-Paul (La Réunion),-21.044,55.322
+97416,Saint-Pierre,La Réunion,La Réunion,84077,96,Centres urbains intermédiaires,97410.0,https://fr.wikipedia.org/wiki/fr:Saint-Pierre (La Réunion),-21.312,55.494
+97418,Sainte-Marie,La Réunion,La Réunion,34344,89,Ceintures urbaines,97438.0,https://fr.wikipedia.org/wiki/fr:Sainte-Marie (La Réunion),-20.947,55.53
+97420,Sainte-Suzanne,La Réunion,La Réunion,24293,58,Ceintures urbaines,97441.0,https://fr.wikipedia.org/wiki/fr:Sainte-Suzanne (La Réunion),-20.946,55.593
+97422,Le Tampon,La Réunion,La Réunion,81943,181,Centres urbains intermédiaires,97418.0,https://fr.wikipedia.org/wiki/fr:Le Tampon,-21.223,55.558
+97610,Koungou,Mayotte,Mayotte,32156,28,Centres urbains intermédiaires,97600.0,https://fr.wikipedia.org/wiki/fr:Koungou,-12.747,45.187
+97611,Mamoudzou,Mayotte,Mayotte,71437,42,Grands centres urbains,97600.0,https://fr.wikipedia.org/wiki/fr:Mamoudzou,-12.79,45.193
