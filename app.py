@@ -98,7 +98,7 @@ def get_wikipedia_thumbnail(title):
 def get_weather_forecast(insee_code):
     import requests
 
-    TOKEN = "53ed6fa76d3c503a4d2577a7d14909104244f231fdf3fc9cbd639b146073801b"
+    TOKEN = "3470179d59546380b4311d495d6be96833c5041f8eda9188f444f460bb60715a"
     url = f"https://api.meteo-concept.com/api/forecast/daily?token={TOKEN}&insee={insee_code}"
 
     weather_codes = {0: "Soleil", 1: "Peu nuageux", 2: "Ciel voilé", 3: "Nuageux", 4: "Très nuageux", 5: "Couvert",6: "Brouillard", 7: "Brouillard givrant", 10: "Pluie faible", 11: "Pluie modérée", 12: "Pluie forte",13: "Pluie faible verglaçante", 14: "Pluie modérée verglaçante", 15: "Pluie forte verglaçante",16: "Bruine", 20: "Neige faible", 21: "Neige modérée", 22: "Neige forte",
