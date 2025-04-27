@@ -96,9 +96,8 @@ def get_wikipedia_thumbnail(title):
 # 🌦️ Récupération de la météo prévisionnelle
 @st.cache_data
 def get_weather_forecast(insee_code):
-    import requests
 
-    TOKEN = "3470179d59546380b4311d495d6be96833c5041f8eda9188f444f460bb60715a"
+    TOKEN = "53ed6fa76d3c503a4d2577a7d14909104244f231fdf3fc9cbd639b146073801b"
     url = f"https://api.meteo-concept.com/api/forecast/daily?token={TOKEN}&insee={insee_code}"
 
     weather_codes = {0: "Soleil", 1: "Peu nuageux", 2: "Ciel voilé", 3: "Nuageux", 4: "Très nuageux", 5: "Couvert",6: "Brouillard", 7: "Brouillard givrant", 10: "Pluie faible", 11: "Pluie modérée", 12: "Pluie forte",13: "Pluie faible verglaçante", 14: "Pluie modérée verglaçante", 15: "Pluie forte verglaçante",16: "Bruine", 20: "Neige faible", 21: "Neige modérée", 22: "Neige forte",
@@ -150,7 +149,7 @@ def get_climate_data(latitude, longitude):
 
     conn = http.client.HTTPSConnection("meteostat.p.rapidapi.com")
     headers = {
-        'x-rapidapi-key': "d86ec0ac76msh7329992dd8cf6c5p189bcfjsn4291599cfb32",
+        'x-rapidapi-key': "a7fc9e231fmshc0a28b3edb37cc1p147917jsn848c388c60a8",
         'x-rapidapi-host': "meteostat.p.rapidapi.com"
     }
 
